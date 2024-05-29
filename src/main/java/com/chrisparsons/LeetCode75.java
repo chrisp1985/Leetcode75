@@ -1,6 +1,7 @@
 package com.chrisparsons;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -519,7 +520,8 @@ public class LeetCode75 {
      *     If the group's length is 1, append the character to s.
      *     Otherwise, append the character followed by the group's length.
      *
-     * The compressed string s should not be returned separately, but instead, be stored in the input character array chars. Note that group lengths that are 10 or longer will be split into multiple characters in chars.
+     * The compressed string s should not be returned separately, but instead, be stored in the input character array chars.
+     * Note that group lengths that are 10 or longer will be split into multiple characters in chars.
      *
      * After you are done modifying the input array, return the new length of the array.
      *
@@ -546,14 +548,6 @@ public class LeetCode75 {
      */
 
     public int compress(char[] chars) {
-
-        
-
-
-        return chars.length;
-    }
-
-    public int compressSeparate(char[] chars) { // compresses but not on the initial chars array
 
         char prevChar = 0;
         StringBuilder stringBuilder = new StringBuilder();
@@ -596,7 +590,70 @@ public class LeetCode75 {
             prevChar = chars[i];
         }
 
+        for(int i=0; i<stringBuilder.toString().length(); i++) {
+            chars[i] = stringBuilder.toString().charAt(i);
+        }
+
         // return count of characters in new file.
         return stringBuilder.toString().length();
     }
+
+    /**
+     *
+     * 283. Move Zeroes
+     *
+     *
+     * Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+     *
+     * Note that you must do this in-place without making a copy of the array.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [0,1,0,3,12]
+     * Output: [1,3,12,0,0]
+     *
+     * Example 2:
+     *
+     * Input: nums = [0]
+     * Output: [0]
+     */
+
+    public void moveZeroes(int[] nums) {
+        int index = 0;
+        for(int i = 0; i < nums.length; i++) {
+            if(nums[i] != 0) {
+                nums[index] = nums[i];
+                index++;
+            }
+        }
+
+        for(int j = index; j < nums.length; j++) {
+            nums[j] = 0;
+        }
+
+        System.out.println(Arrays.toString(nums));
+    }
+
+    public void moveZeroes2(int[] nums) {
+
+        if(nums.length == 0 || nums.length == 1) {
+            return;
+        }
+        for(int i=nums.length - 1; i>-1; i--) {
+            if(nums[i] == 0) {
+                int l = i;
+                while(l < nums.length - 1) {
+                    var tmp = nums[l+1];
+                    nums[l+1] = nums[l];
+                    nums[l] = tmp;
+                    l++;
+                }
+            }
+        }
+
+        System.out.println(Arrays.toString(nums));
+    }
+
 }

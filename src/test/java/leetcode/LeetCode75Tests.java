@@ -127,4 +127,16 @@ public class LeetCode75Tests {
         Assert.assertEquals(0, this.leetCode75.compress("".toCharArray()));
         Assert.assertEquals(1, this.leetCode75.compress("a".toCharArray()));
     }
+
+    @Test
+    public void moveZeroesTest() {
+        this.leetCode75.moveZeroes(new int[]{1, 0, 6, 9, 8, 0, 9, 11, 12});
+        this.leetCode75.moveZeroes(new int[]{0});
+        this.leetCode75.moveZeroes(new int[]{1, 0, 6, 9, 8, 0, 9, 0, 0});
+        this.leetCode75.moveZeroes(new int[]{0,1,0,3,12});
+        this.leetCode75.moveZeroes(new int[]{0,1,0,3,0});
+        this.leetCode75.moveZeroes(new int[]{0,1,0});
+        this.leetCode75.moveZeroes(new int[]{0,0,1});
+        this.leetCode75.moveZeroes(new int[]{0,0,0});
+    }
 }
