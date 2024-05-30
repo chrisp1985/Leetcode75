@@ -142,13 +142,28 @@ public class LeetCode75Tests {
 
     @Test
     public void isSubsequenceTest() {
-//        Assert.assertTrue(this.leetCode75.isSubsequence("abc", "ahbgdc"));
-//        Assert.assertFalse(this.leetCode75.isSubsequence("axc", "ahbgdc"));
-//        Assert.assertTrue(this.leetCode75.isSubsequence("bababababab", "babababababababababa"));
-//        Assert.assertTrue(this.leetCode75.isSubsequence("b", "ahbgdc"));
-//        Assert.assertTrue(this.leetCode75.isSubsequence("aaa", "ahbaaadc"));
-//        Assert.assertTrue(this.leetCode75.isSubsequence("bbb", "abhbgbdcb"));
+        Assert.assertTrue(this.leetCode75.isSubsequence("abc", "ahbgdc"));
+        Assert.assertFalse(this.leetCode75.isSubsequence("axc", "ahbgdc"));
+        Assert.assertTrue(this.leetCode75.isSubsequence("bababababab", "babababababababababa"));
+        Assert.assertTrue(this.leetCode75.isSubsequence("b", "ahbgdc"));
+        Assert.assertTrue(this.leetCode75.isSubsequence("aaa", "ahbaaadc"));
+        Assert.assertTrue(this.leetCode75.isSubsequence("bbb", "abhbgbdcb"));
         Assert.assertFalse(this.leetCode75.isSubsequence("", "abhbgbdcb"));
+    }
+
+    @Test
+    public void maxAreaTest() {
+        Assert.assertEquals(49, this.leetCode75.maxArea(new int[]{1,8,6,2,5,4,8,3,7}));
+        Assert.assertEquals(4, this.leetCode75.maxArea(new int[]{1,2,4,3}));
+        Assert.assertEquals(1, this.leetCode75.maxArea(new int[]{1,1}));
+        Assert.assertEquals(30, this.leetCode75.maxArea(new int[]{300, 20, 1, 4, 5, 6}));
+        Assert.assertEquals(200, this.leetCode75.maxArea(new int[]{300, 200, 1, 0, 1, 2}));
+    }
+
+    @Test
+    public void maxOperationsTest() {
+        Assert.assertEquals(2, this.leetCode75.maxOperations(new int[]{1,2,3,4}, 5));
+        Assert.assertEquals(1, this.leetCode75.maxOperations(new int[]{3,1,3,4,3}, 6));
     }
 
 }
