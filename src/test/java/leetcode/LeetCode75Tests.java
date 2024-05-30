@@ -139,4 +139,16 @@ public class LeetCode75Tests {
         this.leetCode75.moveZeroes(new int[]{0,0,1});
         this.leetCode75.moveZeroes(new int[]{0,0,0});
     }
+
+    @Test
+    public void isSubsequenceTest() {
+//        Assert.assertTrue(this.leetCode75.isSubsequence("abc", "ahbgdc"));
+//        Assert.assertFalse(this.leetCode75.isSubsequence("axc", "ahbgdc"));
+//        Assert.assertTrue(this.leetCode75.isSubsequence("bababababab", "babababababababababa"));
+//        Assert.assertTrue(this.leetCode75.isSubsequence("b", "ahbgdc"));
+//        Assert.assertTrue(this.leetCode75.isSubsequence("aaa", "ahbaaadc"));
+//        Assert.assertTrue(this.leetCode75.isSubsequence("bbb", "abhbgbdcb"));
+        Assert.assertFalse(this.leetCode75.isSubsequence("", "abhbgbdcb"));
+    }
+
 }
