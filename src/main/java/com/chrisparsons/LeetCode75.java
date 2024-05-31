@@ -896,7 +896,33 @@ public class LeetCode75 {
 
     public int maxVowels(String s, int k) {
 
+        int count = 0;
+        int maxSize = 0;
+        for(int i = 0; i < k; i++) {
+            if(isVowel(s.charAt(i))) {
+                count++;
+            }
+        }
 
-        return 0;
+        maxSize = Math.max(maxSize, count);
+
+        int index = 0;
+        for(int i=k; i<s.length(); i++) {
+            if(isVowel(s.charAt(index))) {
+                count = Math.max(0, count-1);
+            }
+            if(isVowel(s.charAt(i))) {
+                count = Math.min(k, count+1);
+            }
+
+            maxSize = Math.max(maxSize, count);
+            index++;
+        }
+
+        return maxSize;
+    }
+
+    public boolean isVowel(char ch){
+        return (ch=='a'|| ch=='e' || ch=='i' || ch=='o' || ch=='u')? true : false;
     }
 }
