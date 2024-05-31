@@ -169,7 +169,16 @@ public class LeetCode75Tests {
 
     @Test
     public void findMaxAverageTest() {
-        this.leetCode75.findMaxAverage(new int[]{1,2,3,4}, 5);
+        Assert.assertEquals(12.75, this.leetCode75.findMaxAverage(new int[]{1,12,-5,-6,50,3}, 4), 0.0001);
+        Assert.assertEquals(5.0, this.leetCode75.findMaxAverage(new int[]{5}, 1), 0.0001);
+        Assert.assertEquals(4.0, this.leetCode75.findMaxAverage(new int[]{0,4,0,3,2}, 1), 0.0001);
+    }
+
+    @Test
+    public void maxVowelsTest() { //TODO
+        Assert.assertEquals(3, this.leetCode75.maxVowels("abciiidef", 3));
+        Assert.assertEquals(2, this.leetCode75.maxVowels("aeiou", 2));
+        Assert.assertEquals(2, this.leetCode75.maxVowels("leetcode", 3));
     }
 
 }
