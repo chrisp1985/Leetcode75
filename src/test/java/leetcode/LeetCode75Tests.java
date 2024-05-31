@@ -164,6 +164,12 @@ public class LeetCode75Tests {
     public void maxOperationsTest() {
         Assert.assertEquals(2, this.leetCode75.maxOperations(new int[]{1,2,3,4}, 5));
         Assert.assertEquals(1, this.leetCode75.maxOperations(new int[]{3,1,3,4,3}, 6));
+        Assert.assertEquals(4, this.leetCode75.maxOperations(new int[]{2,5,4,4,1,3,4,4,1,4,4,1,2,1,2,2,3,2,4,2}, 3));
+    }
+
+    @Test
+    public void findMaxAverageTest() {
+        this.leetCode75.findMaxAverage(new int[]{1,2,3,4}, 5);
     }
 
 }

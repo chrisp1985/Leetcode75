@@ -1,9 +1,6 @@
 package com.chrisparsons;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class LeetCode75 {
 
@@ -429,13 +426,23 @@ public class LeetCode75 {
     public boolean increasingTriplet(int[] nums) {
         int min = Integer.MAX_VALUE;
         int secMin = Integer.MAX_VALUE;
+
         for (int num : nums) {
+
             if (num <= min) {
+
                 min = num;
-            } else if (num <= secMin) {
+
+            }
+            else if (num <= secMin) {
+
                 secMin = num;
-            } else if (num > secMin) {
+
+            }
+            else if (num > secMin) {
+
                 return true;
+
             }
         }
         return false;
@@ -788,7 +795,55 @@ public class LeetCode75 {
 
     public int maxOperations(int[] nums, int k) {
 
+        Arrays.sort(nums);
+        int count = 0;
 
-        return 0;
+        int l = 0, r = nums.length -1;
+
+        while(l < r) {
+            if(k - nums[r] < nums[l] ) {
+                r--;
+            }
+            else if(k - nums[r] > nums[l]) {
+                l++;
+            }
+            else {
+                count++;
+                l++;
+                r--;
+            }
+        }
+
+        return  count;
+    }
+
+
+    /**
+     *
+     * 643. Maximum Average Subarray I
+     *
+     * You are given an integer array nums consisting of n elements, and an integer k.
+     *
+     * Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will be accepted.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [1,12,-5,-6,50,3], k = 4
+     * Output: 12.75000
+     * Explanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75
+     *
+     * Example 2:
+     *
+     * Input: nums = [5], k = 1
+     * Output: 5.00000
+     *
+     */
+
+    public double findMaxAverage(int[] nums, int k) {
+
+
+        return 0.0;
     }
 }
