@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class LeetCode75Tests {
 
@@ -175,10 +176,60 @@ public class LeetCode75Tests {
     }
 
     @Test
-    public void maxVowelsTest() { //TODO
+    public void maxVowelsTest() {
         Assert.assertEquals(3, this.leetCode75.maxVowels("abciiidef", 3));
         Assert.assertEquals(2, this.leetCode75.maxVowels("aeiou", 2));
         Assert.assertEquals(2, this.leetCode75.maxVowels("leetcode", 3));
+    }
+
+    @Test
+    public void longestOnesTest() {
+        Assert.assertEquals(6, this.leetCode75.longestOnes(new int[]{1,1,1,0,0,0,1,1,1,1,0}, 2));
+        Assert.assertEquals(10, this.leetCode75.longestOnes(new int[]{0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1}, 3));
+        Assert.assertEquals(10, this.leetCode75.longestOnes(new int[]{1,1,1,1,1,1,1,1,1,1}, 3));
+        Assert.assertEquals(3, this.leetCode75.longestOnes(new int[]{0,0,0,0,0,0,0,0,0,0}, 3));
+    }
+
+    @Test
+    public void longestSubarrayTest() {
+        Assert.assertEquals(3, this.leetCode75.longestSubarray(new int[]{1,1,0,1}));
+        Assert.assertEquals(5, this.leetCode75.longestSubarray(new int[]{0,1,1,1,0,1,1,0,1}));
+        Assert.assertEquals(2, this.leetCode75.longestSubarray(new int[]{1,1,1}));
+    }
+
+    @Test
+    public void largestAltitudeTest() {
+        Assert.assertEquals(1, this.leetCode75.largestAltitude(new int[]{-5,1,5,0,-7}));
+        Assert.assertEquals(0, this.leetCode75.largestAltitude(new int[]{-4,-3,-2,-1,4,3,2}));
+    }
+
+    @Test
+    public void pivotIndexTest() {
+        Assert.assertEquals(3, this.leetCode75.pivotIndex(new int[]{1,7,3,6,5,6}));
+        Assert.assertEquals(-1, this.leetCode75.pivotIndex(new int[]{1,2,3}));
+        Assert.assertEquals(0, this.leetCode75.pivotIndex(new int[]{2,1,-1}));
+        Assert.assertEquals(0, this.leetCode75.pivotIndex(new int[]{1}));
+        Assert.assertEquals(0, this.leetCode75.pivotIndex(new int[]{0,0}));
+    }
+
+    @Test
+    public void findDifferenceTest() {
+        Assert.assertEquals(List.of(List.of(1,3), List.of(4,6)), this.leetCode75.findDifference(new int[]{1,2,3}, new int[]{2,4,6}));
+        Assert.assertEquals(List.of(List.of(3), List.of()), this.leetCode75.findDifference(new int[]{1,2,3,3}, new int[]{1,1,2,2}));
+    }
+
+    @Test
+    public void uniqueOccurrencesTest() {
+        Assert.assertTrue(this.leetCode75.uniqueOccurrences(new int[]{1,2,2,1,1,3}));
+        Assert.assertFalse(this.leetCode75.uniqueOccurrences(new int[]{1,2}));
+        Assert.assertTrue(this.leetCode75.uniqueOccurrences(new int[]{-3,0,1,-3,1,1,1,-3,10,0}));
+    }
+
+    @Test
+    public void closeStringsTest() { //TODO
+        Assert.assertTrue(this.leetCode75.closeStrings("abc", "bca"));
+        Assert.assertFalse(this.leetCode75.closeStrings("a", "aa"));
+        Assert.assertFalse(this.leetCode75.closeStrings("cabbba", "abbccc"));
     }
 
 }

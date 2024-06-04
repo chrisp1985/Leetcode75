@@ -925,4 +925,445 @@ public class LeetCode75 {
     public boolean isVowel(char ch){
         return (ch=='a'|| ch=='e' || ch=='i' || ch=='o' || ch=='u')? true : false;
     }
+
+    /**
+     *
+     * 1004. Max Consecutive Ones III
+     *
+     *
+     * Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
+     * Output: 6
+     * Explanation: [1,1,1,0,0,1,1,1,1,1,1]
+     * Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.
+     *
+     * Example 2:
+     *
+     * Input: nums = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], k = 3
+     * Output: 10
+     * Explanation: [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1]
+     * Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.
+     *
+     */
+
+    public int longestOnes(int[] nums, int k) {
+
+        int iterator = 0;
+        int leftIndex = 0;
+        while(iterator < nums.length){
+            if(nums[iterator] == 0) {
+                k--;
+            }
+
+            if(k < 0) {
+                if(nums[leftIndex] == 0) {
+                    /**
+                     * If the start of the window was a 0, it's not anymore because we need to shift the window right, so we
+                     * can give back a 0 to the pool.
+                     */
+                    k++;
+                }
+
+                /**
+                 * We now shift the left index to the right to keep in line with the iterator, which is effectively
+                 * setting the maximum found window as iterator - leftIndex.
+                 *
+                 * If we're not out of 0s to use, the left index just stays still which the iterator keeps increasing.
+                 */
+                leftIndex++;
+            }
+            iterator++;
+        }
+        return iterator-leftIndex;
+    }
+
+
+    /**
+     *
+     * 1493. Longest Subarray of 1's After Deleting One Element
+     *
+     *
+     * Given a binary array nums, you should delete one element from it.
+     *
+     * Return the size of the longest non-empty subarray containing only 1's in the resulting array. Return 0 if there is no such subarray.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [1,1,0,1]
+     * Output: 3
+     * Explanation: After deleting the number in position 2, [1,1,1] contains 3 numbers with value of 1's.
+     *
+     * Example 2:
+     *
+     * Input: nums = [0,1,1,1,0,1,1,0,1]
+     * Output: 5
+     * Explanation: After deleting the number in position 4, [0,1,1,1,1,1,0,1] longest subarray with value of 1's is [1,1,1,1,1].
+     *
+     * Example 3:
+     *
+     * Input: nums = [1,1,1]
+     * Output: 2
+     * Explanation: You must delete one element.
+     *
+     *
+     */
+
+    public int longestSubarray(int[] nums) {
+
+        int k = 1;
+        int iterator = 0;
+        int leftIndex = 0;
+        while(iterator < nums.length){
+            if(nums[iterator] == 0) {
+                k--;
+            }
+
+            if(k < 0) {
+                if(nums[leftIndex] == 0) {
+                    /**
+                     * If the start of the window was a 0, it's not anymore because we need to shift the window right, so we
+                     * can give back a 0 to the pool.
+                     */
+                    k++;
+                }
+
+                /**
+                 * We now shift the left index to the right to keep in line with the iterator, which is effectively
+                 * setting the maximum found window as iterator - leftIndex.
+                 *
+                 * If we're not out of 0s to use, the left index just stays still which the iterator keeps increasing.
+                 */
+                leftIndex++;
+            }
+            iterator++;
+        }
+        return iterator-leftIndex - 1;
+    }
+
+    /**
+     *
+     * 1732. Find the Highest Altitude
+     *
+     *
+     * There is a biker going on a road trip. The road trip consists of n + 1 points at different altitudes. The biker starts his trip on point 0 with altitude equal 0.
+     *
+     * You are given an integer array gain of length n where gain[i] is the net gain in altitude between points i​​​​​​ and i + 1 for all (0 <= i < n). Return the highest altitude of a point.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: gain = [-5,1,5,0,-7]
+     * Output: 1
+     * Explanation: The altitudes are [0,-5,-4,1,1,-6]. The highest is 1.
+     *
+     * Example 2:
+     *
+     * Input: gain = [-4,-3,-2,-1,4,3,2]
+     * Output: 0
+     * Explanation: The altitudes are [0,-4,-7,-9,-10,-6,-3,-1]. The highest is 0.
+     *
+     */
+
+    public int largestAltitude(int[] gain) {
+
+        int total = 0;
+        int maxAltitude = 0;
+
+        for(int gainValue : gain) {
+
+            total += gainValue;
+
+            maxAltitude = Math.max(maxAltitude, total);
+
+        }
+
+        return maxAltitude;
+
+    }
+
+    /**
+     *
+     * 724. Find Pivot Index
+     *
+     *
+     * Given an array of integers nums, calculate the pivot index of this array.
+     *
+     * The pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right.
+     *
+     * If the index is on the left edge of the array, then the left sum is 0 because there are no elements to the left. This also applies to the right edge of the array.
+     *
+     * Return the leftmost pivot index. If no such index exists, return -1.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [1,7,3,6,5,6]
+     * Output: 3
+     * Explanation:
+     * The pivot index is 3.
+     * Left sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11
+     * Right sum = nums[4] + nums[5] = 5 + 6 = 11
+     *
+     * Example 2:
+     *
+     * Input: nums = [1,2,3]
+     * Output: -1
+     * Explanation:
+     * There is no index that satisfies the conditions in the problem statement.
+     *
+     * Example 3:
+     *
+     * Input: nums = [2,1,-1]
+     * Output: 0
+     * Explanation:
+     * The pivot index is 0.
+     * Left sum = 0 (no elements to the left of index 0)
+     * Right sum = nums[1] + nums[2] = 1 + -1 = 0
+     *
+     */
+
+    public int pivotIndex(int[] nums) {
+
+        int[] numsRight = new int[nums.length];
+        int iterSum = 0;
+
+        for(int i=nums.length -1; i > -1; i--) {
+
+            numsRight[i] = i == nums.length -1 ? 0 : iterSum;
+            iterSum += nums[i];
+
+        }
+
+        int[] numsLeft = new int[nums.length];
+        iterSum = 0;
+
+        for(int i=0; i < nums.length; i++) {
+
+            numsLeft[i] = i == 0 ? 0 : iterSum;
+            iterSum += nums[i];
+
+        }
+
+        for(int i=0; i < nums.length; i++) {
+
+            if(numsLeft[i] == numsRight[i]) {
+                return i;
+            }
+
+        }
+
+        return -1;
+
+    }
+
+    /**
+     *
+     * 2215. Find the Difference of Two Arrays
+     *
+     * Given two 0-indexed integer arrays nums1 and nums2, return a list answer of size 2 where:
+     *
+     *     answer[0] is a list of all distinct integers in nums1 which are not present in nums2.
+     *     answer[1] is a list of all distinct integers in nums2 which are not present in nums1.
+     *
+     * Note that the integers in the lists may be returned in any order.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums1 = [1,2,3], nums2 = [2,4,6]
+     * Output: [[1,3],[4,6]]
+     * Explanation:
+     * For nums1, nums1[1] = 2 is present at index 0 of nums2, whereas nums1[0] = 1 and nums1[2] = 3 are not present in nums2. Therefore, answer[0] = [1,3].
+     * For nums2, nums2[0] = 2 is present at index 1 of nums1, whereas nums2[1] = 4 and nums2[2] = 6 are not present in nums2. Therefore, answer[1] = [4,6].
+     *
+     * Example 2:
+     *
+     * Input: nums1 = [1,2,3,3], nums2 = [1,1,2,2]
+     * Output: [[3],[]]
+     * Explanation:
+     * For nums1, nums1[2] and nums1[3] are not present in nums2. Since nums1[2] == nums1[3], their value is only included once and answer[0] = [3].
+     * Every integer in nums2 is present in nums1. Therefore, answer[1] = [].
+     */
+
+    public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>();
+
+        Set<Integer> list1 = new HashSet<>();
+        Set<Integer> list2 = new HashSet<>();
+
+        for(int i = 0; i < nums1.length; i++) {
+
+            set1.add(nums1[i]);
+
+        }
+
+        for(int i = 0; i < nums2.length; i++) {
+
+            set2.add(nums2[i]);
+
+        }
+
+        for(int i = 0; i < nums1.length; i++) {
+
+            if(!set2.contains(nums1[i])) {
+
+                list1.add(nums1[i]);
+
+            }
+
+        }
+
+        for(int i = 0; i < nums2.length; i++) {
+
+            if(!set1.contains(nums2[i])) {
+
+                list2.add(nums2[i]);
+
+            }
+
+        }
+
+        return List.of(list1.stream().toList(), list2.stream().toList());
+    }
+
+    public List<List<Integer>> findDifferencePoorPerformance(int[] nums1, int[] nums2) {
+
+        HashSet<Integer> nums1list = new HashSet<>();
+        HashSet<Integer> nums2list = new HashSet<>();
+
+        for(Integer num1 : nums1) {
+            boolean found = false;
+            for(Integer num2 : nums2) {
+
+                if(Objects.equals(num1, num2)) {
+                    found = true;
+                }
+            }
+            if(!found) {
+                nums1list.add(num1);
+            }
+        }
+        for(Integer num2 : nums2) {
+            boolean found = false;
+            for(Integer num1 : nums1) {
+
+                if(Objects.equals(num2, num1)) {
+                    found = true;
+                }
+            }
+            if(!found) {
+                nums2list.add(num2);
+            }
+        }
+
+        return List.of(nums1list.stream().toList(), nums2list.stream().toList());
+    }
+
+
+    /**
+     *
+     * 1207. Unique Number of Occurrences
+     *
+     *
+     * Given an array of integers arr, return true if the number of occurrences of each value in the array is unique or
+     * false otherwise.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: arr = [1,2,2,1,1,3]
+     * Output: true
+     * Explanation: The value 1 has 3 occurrences, 2 has 2 and 3 has 1. No two values have the same number of occurrences.
+     *
+     * Example 2:
+     *
+     * Input: arr = [1,2]
+     * Output: false
+     *
+     * Example 3:
+     *
+     * Input: arr = [-3,0,1,-3,1,1,1,-3,10,0]
+     * Output: true
+     */
+
+    public boolean uniqueOccurrences(int[] arr) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for(int num : arr) {
+            int count = map.get(num) == null ? 0 : map.get(num) + 1;
+            map.put(num, count);
+        }
+
+        Set<Integer> entries = new HashSet<>();
+
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if(!entries.add(entry.getValue())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     *
+     * 1657. Determine if Two Strings Are Close
+     *
+     *
+     * Two strings are considered close if you can attain one from the other using the following operations:
+     *
+     *     Operation 1: Swap any two existing characters.
+     *         For example, abcde -> aecdb
+     *     Operation 2: Transform every occurrence of one existing character into another existing character,
+     *     and do the same with the other character.
+     *         For example, aacabb -> bbcbaa (all a's turn into b's, and all b's turn into a's)
+     *
+     * You can use the operations on either string as many times as necessary.
+     *
+     * Given two strings, word1 and word2, return true if word1 and word2 are close, and false otherwise.
+     *
+     *
+     * Example 1:
+     *
+     * Input: word1 = "abc", word2 = "bca"
+     * Output: true
+     * Explanation: You can attain word2 from word1 in 2 operations.
+     * Apply Operation 1: "abc" -> "acb"
+     * Apply Operation 1: "acb" -> "bca"
+     *
+     * Example 2:
+     *
+     * Input: word1 = "a", word2 = "aa"
+     * Output: false
+     * Explanation: It is impossible to attain word2 from word1, or vice versa, in any number of operations.
+     *
+     * Example 3:
+     *
+     * Input: word1 = "cabbba", word2 = "abbccc"
+     * Output: true
+     * Explanation: You can attain word2 from word1 in 3 operations.
+     * Apply Operation 1: "cabbba" -> "caabbb"
+     * Apply Operation 2: "caabbb" -> "baaccc"
+     * Apply Operation 2: "baaccc" -> "abbccc"
+     *
+     */
+
+    public boolean closeStrings(String word1, String word2) {
+
+
+
+        return false;
+    }
 }
