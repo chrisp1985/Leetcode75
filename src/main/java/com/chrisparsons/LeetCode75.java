@@ -1361,9 +1361,215 @@ public class LeetCode75 {
      */
 
     public boolean closeStrings(String word1, String word2) {
+        if (word1.length() != word2.length()) {
+            return false;
+        }
 
+        int[] freqs1 = new int[26];
+        int[] freqs2 = new int[26];
 
+        /**
+         *
+         *
+         *
+         *
+         */
+        for (int i = 0; i < word1.length(); i++) {
+            freqs1[word1.charAt(i) - 'a']++;
+            freqs2[word2.charAt(i) - 'a']++;
+        }
 
-        return false;
+        for (int i = 0; i < 26; i++) {
+            if (freqs1[i] > 0 ^ freqs2[i] > 0) {
+                return false;
+            }
+        }
+
+        Arrays.sort(freqs1);
+        Arrays.sort(freqs2);
+
+        for (int i = 25; i >= 0; i--) {
+            if (freqs1[i] == 0) {
+                break;
+            }
+
+            if (freqs1[i] != freqs2[i]) {
+                return false;
+            }
+        }
+
+        return true;
     }
+
+    public boolean closeStrings2(String word1, String word2) {
+
+        if(word1.length() != word2.length()) {
+            return false;
+        }
+
+        char[] word1array = word1.toCharArray();
+        char[] word2array = word2.toCharArray();
+
+        HashMap<Character, Integer> word1map = new HashMap();
+        HashMap<Character, Integer> word2map = new HashMap();
+
+        Set<Character> charSet1 = new HashSet<>();
+        Set<Character> charSet2 = new HashSet<>();
+
+
+        for(char charFound : word1array) {
+            int count = word1map.get(charFound) == null ? 1 : word1map.get(charFound) + 1;
+            word1map.put(charFound, count);
+            charSet1.add(charFound);
+        }
+
+        for(char charFound : word2array) {
+            int count = word2map.get(charFound) == null ? 1 : word2map.get(charFound) + 1;
+            word2map.put(charFound, count);
+            charSet2.add(charFound);
+        }
+
+        if(word2map.size() != word1map.size()) {
+            return false;
+        }
+
+        List<Character> chars1 = charSet1.stream().sorted().toList();
+        List<Character> chars2 = charSet2.stream().sorted().toList();
+
+        // Check for unique characters
+        int loop = 0;
+
+
+
+        while(loop < chars1.size()) {
+            if(!chars1.get(loop).equals(chars2.get(loop))) {
+                return false;
+            }
+            loop++;
+        }
+
+        int[] countArray1 = new int[charSet1.size()];
+        int[] countArray2 = new int[charSet2.size()];
+
+        int index1 = 0;
+        int index2 = 0;
+        // Check the quantities are equal.
+        for(Map.Entry <Character, Integer> mapentry : word1map.entrySet()) {
+            countArray1[index1] = mapentry.getValue();
+            index1++;
+        }
+        for(Map.Entry <Character, Integer> mapentry : word2map.entrySet()) {
+            countArray2[index2] = mapentry.getValue();
+            index2++;
+        }
+
+        Arrays.sort(countArray1);
+        Arrays.sort(countArray2);
+
+        for(int i=0; i < countArray1.length; i++) {
+            if(countArray1[i] != countArray2[i]) {
+                return false;
+            }
+        }
+
+
+        return true;
+    }
+
+
+    /**
+     *
+     * 2352. Equal Row and Column Pairs
+     *
+     *
+     * Given a 0-indexed n x n integer matrix grid, return the number of pairs (ri, cj)
+     * such that row ri and column cj are equal.
+     *
+     * A row and column pair is considered equal if they contain the same elements
+     * in the same order (i.e., an equal array).
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: grid = [[3,2,1],[1,7,6],[2,7,7]]
+     * Output: 1
+     * Explanation: There is 1 equal row and column pair:
+     * - (Row 2, Column 1): [2,7,7]
+     *
+     * Example 2:
+     *
+     * Input: grid = [[3,1,2,2],[1,4,4,5],[2,4,2,2],[2,4,2,2]]
+     * Output: 3
+     * Explanation: There are 3 equal row and column pairs:
+     * - (Row 0, Column 0): [3,1,2,2]
+     * - (Row 2, Column 2): [2,4,2,2]
+     * - (Row 3, Column 2): [2,4,2,2]
+     *
+     *
+     */
+
+    public int equalPairs(int[][] grid) {
+
+        //TODO
+
+        return 0;
+    }
+
+
+
+
+
+
+
+
+    /**
+     *
+     * 1137. N-th Tribonacci Number
+     *
+     *
+     * The Tribonacci sequence Tn is defined as follows:
+     *
+     * T0 = 0, T1 = 1, T2 = 1, and Tn+3 = Tn + Tn+1 + Tn+2 for n >= 0.
+     *
+     * Given n, return the value of Tn.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: n = 4
+     * Output: 4
+     * Explanation:
+     * T_3 = 0 + 1 + 1 = 2
+     * T_4 = 1 + 1 + 2 = 4
+     *
+     * Example 2:
+     *
+     * Input: n = 25
+     * Output: 1389537
+     */
+
+    public int tribonacci(int n) {
+
+        return trib(n, new HashMap<>());
+
+    }
+
+    private int trib(int n, HashMap<Integer, Integer> memo) {
+        if(memo.get(n) != null) {
+            return memo.get(n);
+        }
+
+        if(n == 0) {
+            return 0;
+        }
+        else if(n == 1 || n == 2 ) {
+            return 1;
+        }
+
+        memo.put(n, trib(n-1, memo) + trib (n-2, memo) + trib (n-3, memo));
+        return memo.get(n);
+    }
+
 }

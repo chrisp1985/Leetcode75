@@ -226,10 +226,27 @@ public class LeetCode75Tests {
     }
 
     @Test
-    public void closeStringsTest() { //TODO
+    public void closeStringsTest() {
         Assert.assertTrue(this.leetCode75.closeStrings("abc", "bca"));
         Assert.assertFalse(this.leetCode75.closeStrings("a", "aa"));
-        Assert.assertFalse(this.leetCode75.closeStrings("cabbba", "abbccc"));
+        Assert.assertTrue(this.leetCode75.closeStrings("cabbba", "abbccc"));
+        Assert.assertFalse(this.leetCode75.closeStrings("mkmczky", "cckcmmy"));
+        Assert.assertFalse(this.leetCode75.closeStrings("uau", "ssx"));
+    }
+
+    @Test
+    public void equalPairsTest() { //TODO
+        Assert.assertEquals(0, this.leetCode75.equalPairs(new int[][]{ {1, 2, 3, 4}, {5, 6, 7} }));
+    }
+
+
+
+
+
+    @Test
+    public void tribonacciTest() {
+        Assert.assertEquals(1389537, this.leetCode75.tribonacci(25));
+        Assert.assertEquals(4, this.leetCode75.tribonacci(4));
     }
 
 }
