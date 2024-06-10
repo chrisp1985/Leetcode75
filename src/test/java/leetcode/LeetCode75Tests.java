@@ -235,8 +235,15 @@ public class LeetCode75Tests {
     }
 
     @Test
-    public void equalPairsTest() { //TODO
-        Assert.assertEquals(0, this.leetCode75.equalPairs(new int[][]{ {1, 2, 3, 4}, {5, 6, 7} }));
+    public void equalPairsTest() {
+        Assert.assertEquals(1, this.leetCode75.equalPairs(new int[][]{  {3,2,1},
+                                                                                {1,7,6},
+                                                                                {2,7,7} }));
+
+        Assert.assertEquals(3, this.leetCode75.equalPairs(new int[][]{  {3,1,2,2},
+                                                                                {1,4,4,5},
+                                                                                {2,4,2,2},
+                                                                                {2,4,2,2} }));
     }
 
 

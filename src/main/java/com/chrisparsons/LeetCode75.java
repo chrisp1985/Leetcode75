@@ -63,8 +63,10 @@ public class LeetCode75 {
     /**
      * 1071. Greatest Common Divisor of Strings
      *
-     * For two strings s and t, we say "t divides s" if and only if s = t + t + t + ... + t + t (i.e., t is concatenated with itself one or more times).
-     * Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.
+     * For two strings s and t, we say "t divides s" if and only if
+     * s = t + t + t + ... + t + t (i.e., t is concatenated with itself one or more times).
+     * Given two strings str1 and str2, return the largest string x such that x divides
+     * both str1 and str2.
      *
      * Example 1:
      *
@@ -82,6 +84,18 @@ public class LeetCode75 {
      * Output: ""
      */
     public String gcdOfStrings(String str1, String str2) {
+
+        if(str1.length() % str2.length() > 0) {
+            return "";
+        }
+
+
+        return "";
+    }
+
+
+
+    public String gcdOfStrings2(String str1, String str2) {
         List<String> strLis = new ArrayList<>();
 
         for( char character : str2.toCharArray()) {
@@ -1511,14 +1525,76 @@ public class LeetCode75 {
 
     public int equalPairs(int[][] grid) {
 
-        //TODO
+        HashMap<Integer, int[]> columns = new HashMap<>();
+        int index = 0;
 
-        return 0;
+        // Get columns
+        for(int j=0; j < grid.length; j++) {
+
+            for(int i=0; i < grid[j].length; i++) {
+                int[] foundList = columns.get(i) == null ? new int[grid.length] : columns.get(i);
+                foundList[index] = grid[j][i];
+                columns.put(i, foundList);
+            }
+            index++;
+        }
+
+        int count = 0;
+        for(Map.Entry<Integer, int[]> entry : columns.entrySet()) {
+            for(int j=0; j < grid.length; j++) {
+                if(Arrays.equals(grid[j], entry.getValue())) {
+                    count ++;
+                }
+            }
+        }
+
+        return count;
     }
 
 
+    /**
+     *
+     *
+     * 2390. Removing Stars From a String
+     *
+     *
+     * You are given a string s, which contains stars *.
+     *
+     * In one operation, you can:
+     *
+     *     Choose a star in s.
+     *     Remove the closest non-star character to its left, as well as remove the star itself.
+     *
+     * Return the string after all stars have been removed.
+     *
+     * Note:
+     *
+     *     The input will be generated such that the operation is always possible.
+     *     It can be shown that the resulting string will always be unique.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: s = "leet**cod*e"
+     * Output: "lecoe"
+     * Explanation: Performing the removals from left to right:
+     * - The closest character to the 1st star is 't' in "leet**cod*e". s becomes "lee*cod*e".
+     * - The closest character to the 2nd star is 'e' in "lee*cod*e". s becomes "lecod*e".
+     * - The closest character to the 3rd star is 'd' in "lecod*e". s becomes "lecoe".
+     * There are no more stars, so we return "lecoe".
+     *
+     * Example 2:
+     *
+     * Input: s = "erase*****"
+     * Output: ""
+     * Explanation: The entire string is removed, so we return an empty string.
+     *
+     */
 
+    public String removeStars(String s) {
 
+    }
 
 
 
