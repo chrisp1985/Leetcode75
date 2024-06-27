@@ -1,4 +1,6 @@
-package com.chrisparsons;
+package com.chrisparsons.leetcode75;
+
+import com.chrisparsons.leetcode75.helpers.ListNode;
 
 import java.util.*;
 
@@ -88,6 +90,14 @@ public class LeetCode75 {
         if(str1.length() % str2.length() > 0) {
             return "";
         }
+
+        if(str1 + str2 != str2 + str1) {
+            String toCheck = str1.length() > str2.length() ? str1 : str2;
+            Set<String> stringSet = new HashSet<>();
+            System.out.println("PRINT");
+        }
+
+
 
 
         return "";
@@ -1594,10 +1604,289 @@ public class LeetCode75 {
 
     public String removeStars(String s) {
 
+        char[] chars = s.toCharArray();
+
+        int index = 0;
+        for(int i = 0; i < chars.length; i++) {
+
+            if(chars[i] == '*') {
+                if(i > 0) {
+                    index -=2;
+                }
+            }
+            else {
+                chars[index] = chars[i];
+            }
+            index++;
+
+        }
+
+        for(int j = index; j < chars.length; j++) {
+            chars[j] = ' ';
+        }
+
+        return String.valueOf(chars).replaceAll("\\s+","");
+    }
+
+    public String removeStarsBackwards(String s) {
+
+        int count = 0;
+
+        char[] charArray = s.toCharArray();
+
+        for(int i = charArray.length-1; i > -1; i--) {
+
+            if(charArray[i] == '*') {
+                charArray[i] = ' ';
+                count++;
+
+            }
+
+            else if(count > 0) {
+
+                charArray[i] = ' ';
+                count--;
+
+            }
+
+        }
+
+        return String.valueOf(charArray).replaceAll("\\s+","");
+
     }
 
 
+    /**
+     *
+     * 735. Asteroid Collision
+     *
+     *
+     * We are given an array asteroids of integers representing asteroids in a row.
+     *
+     * For each asteroid, the absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). Each asteroid moves at the same speed.
+     *
+     * Find out the state of the asteroids after all collisions. If two asteroids meet, the smaller one will explode. If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: asteroids = [5,10,-5]
+     * Output: [5,10]
+     * Explanation: The 10 and -5 collide resulting in 10. The 5 and 10 never collide.
+     *
+     * Example 2:
+     *
+     * Input: asteroids = [8,-8]
+     * Output: []
+     * Explanation: The 8 and -8 collide exploding each other.
+     *
+     * Example 3:
+     *
+     * Input: asteroids = [10,2,-5]
+     * Output: [10]
+     * Explanation: The 2 and -5 collide resulting in -5. The 10 and -5 collide resulting in 10.
+     *
+     */
 
+    public int[] asteroidCollision(int[] asteroids) {
+        Stack<Integer> stack = new Stack<>();
+
+        for(int i = 0; i < asteroids.length; i++) {
+
+            if(stack.isEmpty() || asteroids[i] > 0) {
+                stack.push(asteroids[i]);
+            }
+            else {
+                while(!stack.isEmpty() && stack.peek() > 0 && stack.peek() < asteroids[i] * -1) {
+                    stack.pop();
+                }
+
+                if(!stack.isEmpty() && stack.peek() == asteroids[i] * -1) {
+                    stack.pop();
+                }
+                else {
+                    if(stack.isEmpty()  || stack.peek() < 0) {
+                        stack.push(asteroids[i]);
+                    }
+                }
+            }
+
+        }
+        int[] myArray = new int[stack.size()];
+
+        int stackSize = stack.size();
+
+        for(int i = 0; i < stackSize; i++) {
+
+            myArray[i] = stack.get(i);
+
+        }
+
+        return myArray;
+
+    }
+
+    /**
+     *
+     * 394. Decode String
+     *
+     *
+     * Given an encoded string, return its decoded string.
+     *
+     * The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is being
+     * repeated exactly k times. Note that k is guaranteed to be a positive integer.
+     *
+     * You may assume that the input string is always valid; there are no extra white spaces, square brackets
+     * are well-formed, etc. Furthermore, you may assume that the original data does not contain any digits and
+     * that digits are only for those repeat numbers, k. For example, there will not be input like 3a or 2[4].
+     *
+     * The test cases are generated so that the length of the output will never exceed 105.
+     *
+     * Example 1:
+     *
+     * Input: s = "3[a]2[bc]"
+     * Output: "aaabcbc"
+     *
+     * Example 2:
+     *
+     * Input: s = "3[a2[c]]"
+     * Output: "accaccacc"
+     *
+     * Example 3:
+     *
+     * Input: s = "2[abc]3[cd]ef"
+     * Output: "abcabccdcdcdef"
+     *
+     *
+     */
+
+    public String decodeString(String s) {
+
+        return s;
+    }
+
+    /**
+     *
+     *
+     *
+     *
+     *
+     * In the world of Dota2, there are two parties: the Radiant and the Dire.
+     *
+     * The Dota2 senate consists of senators coming from two parties. Now the Senate wants to decide on a change in the
+     * Dota2 game. The voting for this change is a round-based procedure. In each round, each senator can exercise one of
+     * the two rights:
+     *
+     *     Ban one senator's right: A senator can make another senator lose all his rights in this and all the following
+     *     rounds.
+     *     Announce the victory: If this senator found the senators who still have rights to vote are all from the same
+     *     party, he can announce the victory and decide on the change in the game.
+     *
+     * Given a string senate representing each senator's party belonging. The character 'R' and 'D' represent the Radiant
+     * party and the Dire party. Then if there are n senators, the size of the given string will be n.
+     *
+     * The round-based procedure starts from the first senator to the last senator in the given order. This procedure will
+     * last until the end of voting. All the senators who have lost their rights will be skipped during the procedure.
+     *
+     * Suppose every senator is smart enough and will play the best strategy for his own party. Predict which party will
+     * finally announce the victory and change the Dota2 game. The output should be "Radiant" or "Dire".
+     *
+     *
+     * Example 1:
+     *
+     * Input: senate = "RD"
+     * Output: "Radiant"
+     * Explanation:
+     * The first senator comes from Radiant and he can just ban the next senator's right in round 1.
+     * And the second senator can't exercise any rights anymore since his right has been banned.
+     * And in round 2, the first senator can just announce the victory since he is the only guy in the senate who can vote.
+     *
+     * Example 2:
+     *
+     * Input: senate = "RDD"
+     * Output: "Dire"
+     * Explanation:
+     * The first senator comes from Radiant and he can just ban the next senator's right in round 1.
+     * And the second senator can't exercise any rights anymore since his right has been banned.
+     * And the third senator comes from Dire and he can ban the first senator's right in round 1.
+     * And in round 2, the third senator can just announce the victory since he is the only guy in the senate who can vote.
+     *
+     *
+     */
+
+    public String predictPartyVictory(String senate) {
+        // r_stack
+        // d_stack
+
+        // if right != left, pop stack
+    }
+
+    public String predictPartyVictory2(String senate) {
+
+        char[] senateArray = senate.toCharArray();
+
+        int radiantCount = 0;
+        int direCount = 0;
+
+        // if left is different to right, remove right.
+        // if right is different to left, remove left.
+
+        for(int i = 0; i < senateArray.length; i++) {
+
+            if(i==0) {
+                if(senateArray[i] == 'R') {
+                    radiantCount++;
+                }
+                else {
+                    direCount++;
+                }
+            }
+            else if(senateArray[i] != senateArray[i-1]) {
+                radiantCount++;
+                direCount = Math.max(0, direCount-1);
+            }
+            else {
+                direCount++;
+                radiantCount = Math.max(0, radiantCount-1);
+            }
+        }
+
+        return direCount > radiantCount ? "Dire" : "Radiant";
+
+    }
+
+
+    /**
+     *
+     * 206. Reverse Linked List
+     *
+     * Given the head of a singly linked list, reverse the list, and return the reversed list.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: head = [1,2,3,4,5]
+     * Output: [5,4,3,2,1]
+     *
+     * Example 2:
+     *
+     * Input: head = [1,2]
+     * Output: [2,1]
+     *
+     * Example 3:
+     *
+     * Input: head = []
+     * Output: []
+     */
+
+    public ListNode reverseList(ListNode head) {
+
+        int index = 0;
+
+        return head;
+    }
 
     /**
      *

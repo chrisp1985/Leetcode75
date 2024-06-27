@@ -1,6 +1,8 @@
 package leetcode;
 
-import com.chrisparsons.LeetCode75;
+import com.chrisparsons.leetcode75.LeetCode75;
+import com.chrisparsons.leetcode75.RecentCounter;
+import com.chrisparsons.leetcode75.helpers.ListNode;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,9 +12,11 @@ import java.util.List;
 public class LeetCode75Tests {
 
     LeetCode75 leetCode75;
+    RecentCounter recentCounter;
 
     public LeetCode75Tests() {
         this.leetCode75 = new LeetCode75();
+        this.recentCounter = new RecentCounter();
     }
 
     @Test
@@ -25,7 +29,7 @@ public class LeetCode75Tests {
     }
 
     @Test
-    public void gcdOfStringsTest() {
+    public void gcdOfStringsTest() { // TODO
         System.out.println(this.leetCode75.gcdOfStrings("hahhaha", "haha"));
         System.out.println(this.leetCode75.gcdOfStrings("piece", "cake"));
         System.out.println(this.leetCode75.gcdOfStrings("ABCABC", "ABC"));
@@ -246,8 +250,48 @@ public class LeetCode75Tests {
                                                                                 {2,4,2,2} }));
     }
 
+    @Test
+    public void removeStarsTest() {
+        Assert.assertEquals("abdgh", this.leetCode75.removeStars("abc*def**ghi*"));
+        Assert.assertEquals("lecoe", this.leetCode75.removeStars("leet**cod*e"));
+        Assert.assertEquals("", this.leetCode75.removeStars("erase*****"));
+    }
+
+    @Test
+    public void asteroidCollisionTest() {
+        Assert.assertArrayEquals(new int[]{10}, this.leetCode75.asteroidCollision(new int[]{10, 2, 2, 1, -5, -8}));
+        Assert.assertArrayEquals(new int[]{5, 10}, this.leetCode75.asteroidCollision(new int[]{5, 10, -5}));
+        Assert.assertArrayEquals(new int[]{}, this.leetCode75.asteroidCollision(new int[]{8, -8}));
+        Assert.assertArrayEquals(new int[]{10}, this.leetCode75.asteroidCollision(new int[]{10, 2, -5}));
+        Assert.assertArrayEquals(new int[]{-2, -1, 1, 2}, this.leetCode75.asteroidCollision(new int[]{-2, -1, 1, 2}));
+        Assert.assertArrayEquals(new int[]{-2, -2, -2}, this.leetCode75.asteroidCollision(new int[]{-2, -2, 1, -2}));
+        Assert.assertArrayEquals(new int[]{-2, -2, -2}, this.leetCode75.asteroidCollision(new int[]{1, -2, -2, -2}));
+    }
+
+    @Test
+    public void decodeStringTest() {
+        //TODO
+    }
+
+    @Test
+    public void listNodeTest() {
+        //TODO
+    }
+
+    @Test
+    public void predictPartyVictoryTest() {
+        this.leetCode75.predictPartyVictory("RDDRDDRR");
+    }
 
 
+    @Test
+    public void recentCounterTest() {
+        RecentCounter obj = new RecentCounter();
+        System.out.println(obj.ping(1));
+        System.out.println(obj.ping(100));
+        System.out.println(obj.ping(3001));
+        System.out.println(obj.ping(3002));
+    }
 
 
     @Test

@@ -27,4 +27,11 @@ public class LeetcodeTests {
         Assert.assertFalse(this.leetcode.isPalindrome(-6000006));
         Assert.assertTrue(this.leetcode.isPalindrome(6987896));
     }
+
+    @Test
+    public void minMovesToSeatTest() {
+        Assert.assertEquals(4, this.leetcode.minMovesToSeat(new int[] {3,1,5}, new int[] {2,7,4}));
+        Assert.assertEquals(7, this.leetcode.minMovesToSeat(new int[] {4,1,5,9}, new int[] {1,3,2,6}));
+        Assert.assertEquals(4, this.leetcode.minMovesToSeat(new int[] {2,2,6,6}, new int[] {1,3,2,6}));
+    }
 }
