@@ -281,7 +281,13 @@ public class LeetCode75Tests {
     @Test
     public void predictPartyVictoryTest() {
         this.leetCode75.predictPartyVictory("RDDRDDRR");
+        this.leetCode75.predictPartyVictory("RDD");
     }
+
+
+
+    @Test
+    public void
 
 
     @Test
