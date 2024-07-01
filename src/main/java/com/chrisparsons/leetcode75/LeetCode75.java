@@ -86,21 +86,23 @@ public class LeetCode75 {
      * Output: ""
      */
     public String gcdOfStrings(String str1, String str2) {
-
-        if(str1.length() % str2.length() > 0) {
+        String a = str1 + str2;
+        String b = str2 + str1;
+        if(!a.equals(b)) {
             return "";
         }
 
-        if(str1 + str2 != str2 + str1) {
-            String toCheck = str1.length() > str2.length() ? str1 : str2;
-            Set<String> stringSet = new HashSet<>();
-            System.out.println("PRINT");
+        if(str1.length() % str2.length() > 0) {
+            int div = gcd(str1.length(), str2.length());
+            str1 = str1.substring(0, div);
         }
 
+        return str1.length() > str2.length() ? str2 : str1;
+    }
 
-
-
-        return "";
+    public int gcd(int a, int b) {
+        if (b==0) return a;
+        return gcd(b,a%b);
     }
 
 
@@ -1763,6 +1765,9 @@ public class LeetCode75 {
 
     public String decodeString(String s) {
 
+        //TODO
+
+
         return s;
     }
 
@@ -1930,20 +1935,93 @@ public class LeetCode75 {
 
     public ListNode deleteMiddle(ListNode head) {
 
+        if(head.next == null) {
+            return null;
+        }
 
-        return new ListNode();
+        ListNode slowCount = head;
+        ListNode fastCount = head;
+
+        boolean notMiddle = true;
+
+        while(notMiddle) {
+
+            fastCount = fastCount.next.next;
+            if(fastCount == null || fastCount.next == null) {
+                slowCount.next = slowCount.next.next;
+                notMiddle = false;
+            }
+            else {
+                slowCount = slowCount.next;
+            }
+
+        }
+
+        return head;
     }
 
+    /**
+     *
+     * 328. Odd Even Linked List
+     *
+     *
+     * Given the head of a singly linked list, group all the nodes with odd indices together followed by the nodes with even indices,
+     * and return the reordered list.
+     *
+     * The first node is considered odd, and the second node is even, and so on.
+     *
+     * Note that the relative order inside both the even and odd groups should remain as it was in the input.
+     *
+     * You must solve the problem in O(1) extra space complexity and O(n) time complexity.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: head = [1,2,3,4,5]
+     * Output: [1,3,5,2,4]
+     *
+     * Example 2:
+     *
+     * Input: head = [2,1,3,5,6,4,7]
+     * Output: [2,3,6,7,1,5,4]
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     The number of nodes in the linked list is in the range [0, 104].
+     *     -106 <= Node.val <= 106
+     *
+     *
+     *
+     */
 
+    public ListNode oddEvenList(ListNode head) {
 
+        if(head==null) {
 
+            return head;
 
+        }
 
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenHead = even;
 
+        while(even!=null && even.next!=null) {
 
+            odd.next = odd.next.next;
+            even.next = even.next.next;
+            odd = odd.next;
+            even = even.next;
 
+        }
 
+        odd.next = evenHead;
 
+        return head;
+    }
 
 
 
@@ -1973,10 +2051,90 @@ public class LeetCode75 {
 
     public ListNode reverseList(ListNode head) {
 
-        int index = 0;
+        if(head == null || head.next == null) {
+            return head;
+        }
 
-        return head;
+        ListNode node = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return node;
     }
+
+
+    /**
+     *
+     * 215. Kth Largest Element in an Array
+     *
+     *
+     * Given an integer array nums and an integer k, return the kth largest element in the array.
+     *
+     * Note that it is the kth largest element in the sorted order, not the kth distinct element.
+     *
+     * Can you solve it without sorting?
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [3,2,1,5,6,4], k = 2
+     * Output: 5
+     *
+     * Example 2:
+     *
+     * Input: nums = [3,2,3,1,2,4,5,5,6], k = 4
+     * Output: 4
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= k <= nums.length <= 105
+     *     -104 <= nums[i] <= 104
+     *
+     *
+     *
+     */
+
+    public int findKthLargest(int[] nums, int k) {
+
+      PriorityQueue<Integer> queue = new PriorityQueue<>();
+
+      for(int i = 0; i < k; i++) {
+
+          queue.offer(nums[i]);
+
+      }
+
+      for(int j = k; j < nums.length; j++) {
+
+        if(nums[j] > queue.peek()) {
+
+            queue.remove();
+
+            queue.offer(nums[j]);
+
+        }
+
+      }
+
+      return queue.remove();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      *

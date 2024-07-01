@@ -30,10 +30,10 @@ public class LeetCode75Tests {
 
     @Test
     public void gcdOfStringsTest() { // TODO
-        System.out.println(this.leetCode75.gcdOfStrings("hahhaha", "haha"));
-        System.out.println(this.leetCode75.gcdOfStrings("piece", "cake"));
-        System.out.println(this.leetCode75.gcdOfStrings("ABCABC", "ABC"));
-        System.out.println(this.leetCode75.gcdOfStrings("ABCDEF", "ABC"));
+//        System.out.println(this.leetCode75.gcdOfStrings("hahhaha", "haha"));
+//        System.out.println(this.leetCode75.gcdOfStrings("piece", "cake"));
+//        System.out.println(this.leetCode75.gcdOfStrings("ABCABC", "ABC"));
+//        System.out.println(this.leetCode75.gcdOfStrings("ABCDEF", "ABC"));
         System.out.println(this.leetCode75.gcdOfStrings("TAUXXTAUXXTAUXXTAUXXTAUXX", "TAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXX"));
         System.out.println(this.leetCode75.gcdOfStrings("ABABABAB", "ABAB"));
     }
@@ -270,12 +270,9 @@ public class LeetCode75Tests {
 
     @Test
     public void decodeStringTest() {
-        //TODO
-    }
-
-    @Test
-    public void listNodeTest() {
-        //TODO
+        Assert.assertEquals("aaabcbc", this.leetCode75.decodeString("3[a]2[bc]"));
+        Assert.assertEquals("accaccacc", this.leetCode75.decodeString("3[a2[c]]"));
+        Assert.assertEquals("abcabccdcdcdef", this.leetCode75.decodeString("2[abc]3[cd]ef"));
     }
 
     @Test
@@ -284,11 +281,44 @@ public class LeetCode75Tests {
         this.leetCode75.predictPartyVictory("RDD");
     }
 
-
+    @Test
+    public void deleteMiddleTest() {
+        ListNode node7 = new ListNode(6);
+        ListNode node6 = new ListNode(2, node7);
+        ListNode node5 = new ListNode(1, node6);
+        ListNode node4 = new ListNode(7, node5);
+        ListNode node3 = new ListNode(4, node4);
+        ListNode node2 = new ListNode(3, node3);
+        ListNode nodeHead = new ListNode(1, node2);
+        this.leetCode75.deleteMiddle(nodeHead);
+//
+//        ListNode node4 = new ListNode(4);
+//        ListNode node3 = new ListNode(3, node4);
+//        ListNode node2 = new ListNode(2, node3);
+//        ListNode nodeHead = new ListNode(1, node2);
+//        this.leetCode75.deleteMiddle(nodeHead);
+    }
 
     @Test
-    public void
+    public void oddEvenListTest() {
+        ListNode node5 = new ListNode(5);
+        ListNode node4 = new ListNode(4, node5);
+        ListNode node3 = new ListNode(3, node4);
+        ListNode node2 = new ListNode(2, node3);
+        ListNode nodeHead = new ListNode(1, node2);
+        this.leetCode75.oddEvenList(nodeHead);
+    }
 
+    @Test
+    public void reverseList() {
+        ListNode node5 = new ListNode(5);
+        ListNode node4 = new ListNode(4, node5);
+        ListNode node3 = new ListNode(3, node4);
+        ListNode node2 = new ListNode(2, node3);
+        ListNode nodeHead = new ListNode(1, node2);
+        ListNode node = this.leetCode75.reverseList(nodeHead);
+        System.out.printf("");
+    }
 
     @Test
     public void recentCounterTest() {
@@ -298,6 +328,25 @@ public class LeetCode75Tests {
         System.out.println(obj.ping(3001));
         System.out.println(obj.ping(3002));
     }
+
+    @Test
+    public void findKthLargestTest() {
+        this.leetCode75.findKthLargest(new int[]{3,2,1,5,6,4}, 2);
+        this.leetCode75.findKthLargest(new int[]{3,2,3,1,2,4,5,5,6}, 4);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @Test
