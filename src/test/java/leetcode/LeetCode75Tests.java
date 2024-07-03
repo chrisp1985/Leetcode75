@@ -321,6 +321,37 @@ public class LeetCode75Tests {
     }
 
     @Test
+    public void pairSumTest() {
+        ListNode node6 = new ListNode(6);
+        ListNode node5 = new ListNode(5, node6);
+        ListNode node4 = new ListNode(4, node5);
+        ListNode node3 = new ListNode(3, node4);
+        ListNode node2 = new ListNode(2, node3);
+        ListNode nodeHead = new ListNode(1, node2);
+        this.leetCode75.pairSum(nodeHead);
+    }
+
+    @Test
+    public void pairSumTest2() {
+        ListNode node6 = new ListNode(9);
+        ListNode node5 = new ListNode(3, node6);
+        ListNode node4 = new ListNode(2, node5);
+        ListNode node3 = new ListNode(8, node4);
+        ListNode node2 = new ListNode(6, node3);
+        ListNode nodeHead = new ListNode(1, node2);
+        this.leetCode75.pairSum(nodeHead);
+    }
+
+    @Test
+    public void pairSumTest3() {
+        ListNode node4 = new ListNode(3);
+        ListNode node3 = new ListNode(2, node4);
+        ListNode node2 = new ListNode(2, node3);
+        ListNode nodeHead = new ListNode(4, node2);
+        this.leetCode75.pairSum(nodeHead);
+    }
+
+    @Test
     public void recentCounterTest() {
         RecentCounter obj = new RecentCounter();
         System.out.println(obj.ping(1));
