@@ -3,6 +3,7 @@ package leetcode;
 import com.chrisparsons.leetcode75.LeetCode75;
 import com.chrisparsons.leetcode75.RecentCounter;
 import com.chrisparsons.leetcode75.helpers.ListNode;
+import com.chrisparsons.leetcode75.helpers.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -349,6 +350,18 @@ public class LeetCode75Tests {
         ListNode node2 = new ListNode(2, node3);
         ListNode nodeHead = new ListNode(4, node2);
         this.leetCode75.pairSum(nodeHead);
+    }
+
+    @Test
+    public void maxDepthTest() {
+        TreeNode nodeLeft3 = new TreeNode(4); // Level 4
+        TreeNode nodeRight3 = new TreeNode(12); // Level 4
+        TreeNode nodeLeft2 = new TreeNode(14, nodeLeft3, nodeRight3); // Level 3
+        TreeNode nodeRight2 = new TreeNode(12); // Level 3
+        TreeNode nodeLeft = new TreeNode(10, nodeLeft2, nodeRight2); // Level 2
+        TreeNode nodeRight = new TreeNode(9); // Level 2
+        TreeNode nodeHead = new TreeNode(8, nodeLeft, nodeRight); // Level 1
+        Assert.assertEquals(4, this.leetCode75.maxDepth(nodeHead));
     }
 
     @Test
