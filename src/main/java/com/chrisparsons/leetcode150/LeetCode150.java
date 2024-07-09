@@ -154,4 +154,98 @@ public class LeetCode150 {
 
         return sum + difference;
     }
+
+
+    /**
+     *
+     * 4. Median of Two Sorted Arrays
+     *
+     *
+     * Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
+     *
+     * The overall run time complexity should be O(log (m+n)).
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums1 = [1,3], nums2 = [2]
+     * Output: 2.00000
+     * Explanation: merged array = [1,2,3] and median is 2.
+     *
+     * Example 2:
+     *
+     * Input: nums1 = [1,2], nums2 = [3,4]
+     * Output: 2.50000
+     * Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     nums1.length == m
+     *     nums2.length == n
+     *     0 <= m <= 1000
+     *     0 <= n <= 1000
+     *     1 <= m + n <= 2000
+     *     -106 <= nums1[i], nums2[i] <= 106
+     */
+
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+
+        int[] mergedArrays = mergeArrays(nums1, nums2);
+
+        int l = 0;
+        int r = mergedArrays.length -1;
+
+        while(l < r) {
+
+            l++;
+            r--;
+
+        }
+
+        return (double) (mergedArrays[l] + mergedArrays[r]) / 2;
+
+    }
+
+    private int[] mergeArrays(int[] nums1, int[] nums2) {
+
+        int[] mergedArray = new int[nums1.length + nums2.length];
+        int mergedindex = 0;
+        int nums1index = 0;
+        int nums2index = 0;
+
+        while(nums1index <= nums1.length - 1 && nums2index <= nums2.length -1) {
+
+            if(nums1[nums1index] < nums2[nums2index]) {
+                mergedArray[mergedindex] = nums1[nums1index];
+                nums1index++;
+            }
+            else {
+                mergedArray[mergedindex] = nums2[nums2index];
+                nums2index++;
+            }
+            mergedindex++;
+
+        }
+
+        while(nums2index <= nums2.length - 1 && mergedindex <= mergedArray.length - 1) {
+
+            mergedArray[mergedindex] = nums2[nums2index];
+            nums2index++;
+            mergedindex++;
+
+        }
+
+        while(nums1index <= nums1.length - 1 && mergedindex <= mergedArray.length - 1) {
+
+            mergedArray[mergedindex] = nums1[nums1index];
+            nums1index++;
+            mergedindex++;
+
+        }
+
+        return mergedArray;
+    }
 }
