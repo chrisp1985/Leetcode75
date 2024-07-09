@@ -365,6 +365,30 @@ public class LeetCode75Tests {
     }
 
     @Test
+    public void leafSimilarTest() {
+        TreeNode nodeLeft3 = new TreeNode(4); // Level 4
+        TreeNode nodeRight3 = new TreeNode(12); // Level 4
+        TreeNode nodeLeft2 = new TreeNode(14, nodeLeft3, nodeRight3); // Level 3
+        TreeNode nodeRight2 = new TreeNode(12); // Level 3
+        TreeNode nodeLeft = new TreeNode(10, nodeLeft2, nodeRight2); // Level 2
+        TreeNode nodeRight = new TreeNode(9); // Level 2
+        TreeNode nodeHead = new TreeNode(8, nodeLeft, nodeRight); // Level 1
+
+
+        TreeNode nodeLeft3_2 = new TreeNode(4); // Level 4
+        TreeNode nodeRight3_2 = new TreeNode(12); // Level 4
+        TreeNode nodeLeft2_2 = new TreeNode(14, nodeLeft3_2, nodeRight3_2); // Level 3
+        TreeNode nodeRight2_2 = new TreeNode(12); // Level 3
+        TreeNode nodeLeft_2 = new TreeNode(10, nodeLeft2_2, nodeRight2_2); // Level 2
+        TreeNode nodeRight_2 = new TreeNode(9); // Level 2
+        TreeNode nodeHead_2 = new TreeNode(8, nodeLeft_2, nodeRight_2); // Level 1
+
+        Assert.assertTrue(this.leetCode75.leafSimilar(nodeHead, nodeHead_2));
+
+    }
+
+
+    @Test
     public void recentCounterTest() {
         RecentCounter obj = new RecentCounter();
         System.out.println(obj.ping(1));

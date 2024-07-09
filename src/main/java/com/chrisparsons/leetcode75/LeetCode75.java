@@ -10,6 +10,14 @@ public class LeetCode75 {
 
     /**
      *
+     * ########################################################################################
+     * #################################    ARRAY / STRING    #################################
+     * ########################################################################################
+     *
+     */
+
+    /**
+     *
      * 1768. Merge Strings Alternately
      *
      * You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1.
@@ -633,6 +641,17 @@ public class LeetCode75 {
         return stringBuilder.toString().length();
     }
 
+
+    /**
+     *
+     * ######################################################################################
+     * #################################    TWO POINTERS    #################################
+     * ######################################################################################
+     *
+     */
+
+
+
     /**
      *
      * 283. Move Zeroes
@@ -845,6 +864,14 @@ public class LeetCode75 {
         return  count;
     }
 
+
+    /**
+     *
+     * ########################################################################################
+     * #################################    SLIDING WINDOW    #################################
+     * ########################################################################################
+     *
+     */
 
     /**
      *
@@ -1074,6 +1101,15 @@ public class LeetCode75 {
         return iterator-leftIndex - 1;
     }
 
+
+    /**
+     *
+     * ####################################################################################
+     * #################################    PREFIX SUM    #################################
+     * ####################################################################################
+     *
+     */
+
     /**
      *
      * 1732. Find the Highest Altitude
@@ -1191,6 +1227,15 @@ public class LeetCode75 {
         return -1;
 
     }
+
+
+    /**
+     *
+     * ########################################################################################
+     * #################################    HASHMAP / SET    ##################################
+     * ########################################################################################
+     *
+     */
 
     /**
      *
@@ -1568,6 +1613,15 @@ public class LeetCode75 {
 
     /**
      *
+     * ########################################################################################
+     * #####################################    STACK    ######################################
+     * ########################################################################################
+     *
+     */
+
+
+    /**
+     *
      *
      * 2390. Removing Stars From a String
      *
@@ -1775,8 +1829,15 @@ public class LeetCode75 {
 
     /**
      *
+     * ###############################################################################
+     * #################################    QUEUE    #################################
+     * ###############################################################################
      *
+     */
+
+    /**
      *
+     * 649. Dota2 Senate
      *
      *
      * In the world of Dota2, there are two parties: the Radiant and the Dire.
@@ -1886,6 +1947,14 @@ public class LeetCode75 {
         return direCount > radiantCount ? "Dire" : "Radiant";
 
     }
+
+    /**
+     *
+     * #####################################################################################
+     * #################################    LINKED LIST    #################################
+     * #####################################################################################
+     *
+     */
 
     /**
      *
@@ -2144,6 +2213,15 @@ public class LeetCode75 {
 
     /**
      *
+     * ###########################################################################################
+     * #################################    BINARY TREE / DFS    #################################
+     * ###########################################################################################
+     *
+     */
+
+
+    /**
+     *
      * 104. Maximum Depth of Binary Tree
      *
      *
@@ -2175,7 +2253,7 @@ public class LeetCode75 {
 
 
     // Recursive DFS
-    public int maxDepthRecursiveDFS(TreeNode root) {
+    public int maxDepth(TreeNode root) {
 
         if(root == null) {
             return 0;
@@ -2185,11 +2263,34 @@ public class LeetCode75 {
 
     }
 
+
     // Iterative DFS
+    public int maxDepthIterDFS(TreeNode root) {
+
+        if(root == null) {
+            return 0;
+        }
+
+        Stack<Map<TreeNode, Integer>> stack = new Stack<Map<TreeNode, Integer>>() {{
+            push(Map.of(root, 1));
+        }};
+
+        while(stack != null) {
+
+            Map<TreeNode, Integer> nodeMap = stack.pop();
+
+
+        }
+
+
+        return 0; //TODO
+
+
+    }
 
 
     // Iterative BFS
-    public int maxDepth(TreeNode root) {
+    public int maxDepthBFS(TreeNode root) {
 
         if(root == null) {
             return 0;
@@ -2221,8 +2322,85 @@ public class LeetCode75 {
     }
 
 
+    /**
+     *
+     * 872. Leaf-Similar Trees
+     *
+     *
+     * Consider all the leaves of a binary tree, from left to right order, the values of those leaves form a leaf value sequence.
+     *
+     * For example, in the given tree above, the leaf value sequence is (6, 7, 4, 9, 8).
+     *
+     * Two binary trees are considered leaf-similar if their leaf value sequence is the same.
+     *
+     * Return true if and only if the two given trees with head nodes root1 and root2 are leaf-similar.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: root1 = [3,5,1,6,2,9,8,null,null,7,4], root2 = [3,5,1,6,7,4,2,null,null,null,null,null,null,9,8]
+     * Output: true
+     *
+     * Example 2:
+     *
+     * Input: root1 = [1,2,3], root2 = [1,3,2]
+     * Output: false
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     The number of nodes in each tree will be in the range [1, 200].
+     *     Both of the given trees will have values in the range [0, 200].
+     *
+     */
+
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+
+        List<Integer> root1Leaves = getTreeLeaves(root1);
+        List<Integer> root2Leaves = getTreeLeaves(root2);
+
+        return root1Leaves.equals(root2Leaves);
+
+    }
+
+    private List<Integer> getTreeLeaves(TreeNode root) {
+
+        Stack<TreeNode> nodeStack = new Stack<>();
+        nodeStack.push(root);
+
+        List<Integer> leavesFound = new ArrayList<>();
 
 
+        while(!nodeStack.isEmpty()) {
+
+            TreeNode node = nodeStack.pop();
+
+            if(node.left != null) {
+
+                nodeStack.push(node.left);
+
+            }
+
+            if(node.right != null) {
+
+                nodeStack.push(node.right);
+
+            }
+
+            if(node.left == null && node.right == null) {
+
+                leavesFound.add(node.val);
+
+            }
+
+
+        }
+
+        return leavesFound;
+
+    }
 
 
 
