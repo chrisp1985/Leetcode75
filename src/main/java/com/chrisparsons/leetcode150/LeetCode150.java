@@ -661,4 +661,154 @@ public class LeetCode150 {
 
         return String.join(" ", stringsSplit).trim();
     }
+
+    /**
+     *
+     *
+     * 6. Zigzag Conversion
+     *
+     *
+     * The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+     *
+     * P   A   H   N
+     * A P L S I I G
+     * Y   I   R
+     *
+     * And then read line by line: "PAHNAPLSIIGYIR"
+     *
+     * Write the code that will take a string and make this conversion given a number of rows:
+     *
+     * string convert(string s, int numRows);
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: s = "PAYPALISHIRING", numRows = 3
+     * Output: "PAHNAPLSIIGYIR"
+     *
+     * Example 2:
+     *
+     * Input: s = "PAYPALISHIRING", numRows = 4
+     * Output: "PINALSIGYAHRPI"
+     * Explanation:
+     * P     I    N
+     * A   L S  I G
+     * Y A   H R
+     * P     I
+     *
+     * Example 3:
+     *
+     * Input: s = "A", numRows = 1
+     * Output: "A"
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= s.length <= 1000
+     *     s consists of English letters (lower-case and upper-case), ',' and '.'.
+     *     1 <= numRows <= 1000
+     */
+
+    public String convert(String s, int numRows) {
+
+        char[] s_arr = s.toCharArray();
+        int counter = 0;
+        boolean inversed = false;
+
+        HashMap<Integer, String> map = new HashMap<>();
+
+        for(int i = 0; i < s_arr.length; i++) {
+
+            if(counter == 0) {
+                inversed = false;
+            }
+            else if (counter == numRows - 1) {
+                inversed = true;
+            }
+
+            String existing = map.get(counter) == null ? "" : map.get(counter);
+            existing += s_arr[i];
+            map.put(counter, existing);
+
+            if(!inversed) {
+                counter++;
+            }
+            else {
+                counter--;
+            }
+        }
+
+        StringBuilder returnString = new StringBuilder();
+
+        for(Map.Entry<Integer,String> entry : map.entrySet()) {
+            returnString.append(entry.getValue());
+        }
+        return returnString.toString();
+    }
+
+    /**
+     *
+     * 14. Longest Common Prefix
+     *
+     *
+     * Write a function to find the longest common prefix string amongst an array of strings.
+     *
+     * If there is no common prefix, return an empty string "".
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: strs = ["flower","flow","flight"]
+     * Output: "fl"
+     *
+     * Example 2:
+     *
+     * Input: strs = ["dog","racecar","car"]
+     * Output: ""
+     * Explanation: There is no common prefix among the input strings.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= strs.length <= 200
+     *     0 <= strs[i].length <= 200
+     *     strs[i] consists of only lowercase English letters.
+     *
+     */
+    public String longestCommonPrefix(String[] strs) {
+
+        StringBuilder res = new StringBuilder();
+        int loop = 0;
+
+        if(strs.length == 0) {
+            return "";
+        }
+
+        while(true) {
+            StringBuilder stringToMatch = new StringBuilder();
+            for(String stringInput : strs) {
+
+                if(loop == stringInput.length() || stringInput.isEmpty()) {
+                    return res.toString();
+                }
+
+                if(stringToMatch.toString().isEmpty()) {
+                    stringToMatch.append(stringInput.charAt(loop));
+                }
+                else {
+                    if(!(stringInput.charAt(loop) == stringToMatch.charAt(0))) {
+                        return res.toString();
+                    }
+                }
+            }
+
+            loop++;
+            res.append(stringToMatch);
+
+        }
+    }
 }

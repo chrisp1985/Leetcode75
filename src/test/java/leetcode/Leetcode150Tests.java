@@ -92,4 +92,19 @@ public class Leetcode150Tests {
         Assert.assertEquals("world hello", this.leetCode150.reverseWords("  hello world  "));
         Assert.assertEquals("example good a", this.leetCode150.reverseWords("a good   example"));
     }
+
+    @Test
+    public void convertTest() {
+        Assert.assertEquals("PAHNAPLSIIGYIR", this.leetCode150.convert("PAYPALISHIRING", 3));
+        Assert.assertEquals("PINALSIGYAHRPI", this.leetCode150.convert("PAYPALISHIRING", 4));
+        Assert.assertEquals("A", this.leetCode150.convert("A", 1));
+    }
+
+    @Test
+    public void longestCommonPrefixTest() {
+//        Assert.assertEquals("fl", this.leetCode150.longestCommonPrefix(new String[]{"flower","flow","flight"}));
+//        Assert.assertEquals("", this.leetCode150.longestCommonPrefix(new String[]{"dog","racecar","car"}));
+//        Assert.assertEquals("", this.leetCode150.longestCommonPrefix(new String[]{""}));
+        Assert.assertEquals("a", this.leetCode150.longestCommonPrefix(new String[]{"a"}));
+    }
 }
