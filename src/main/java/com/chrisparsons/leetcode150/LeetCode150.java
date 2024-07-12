@@ -1,5 +1,7 @@
 package com.chrisparsons.leetcode150;
 
+import java.util.*;
+
 public class LeetCode150 {
 
     // NOTE: Only includes the extras not already includied in the Leetcode 75.
@@ -247,5 +249,345 @@ public class LeetCode150 {
         }
 
         return mergedArray;
+    }
+
+    /**
+     *
+     * 3110. Score of a String
+     *
+     *
+     * You are given a string s. The score of a string is defined as the sum of the absolute difference between the ASCII values of adjacent characters.
+     *
+     * Return the score of s.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: s = "hello"
+     *
+     * Output: 13
+     *
+     * Explanation:
+     *
+     * The ASCII values of the characters in s are: 'h' = 104, 'e' = 101, 'l' = 108, 'o' = 111. So, the score of s would be |104 - 101| + |101 - 108| + |108 - 108| + |108 - 111| = 3 + 7 + 0 + 3 = 13.
+     *
+     * Example 2:
+     *
+     * Input: s = "zaz"
+     *
+     * Output: 50
+     *
+     * Explanation:
+     *
+     * The ASCII values of the characters in s are: 'z' = 122, 'a' = 97. So, the score of s would be |122 - 97| + |97 - 122| = 25 + 25 = 50.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     2 <= s.length <= 100
+     *     s consists only of lowercase English letters.
+     *
+     *
+     */
+
+    public int scoreOfString(String s) {
+
+        char[] stringArray = s.toCharArray();
+
+        int sum = 0;
+        int lastKnown = stringArray[0];
+
+        for(int i = 1; i < s.length(); i++) {
+            sum += Math.max(lastKnown - stringArray[i], stringArray[i] - lastKnown);
+            lastKnown = stringArray[i];
+        }
+
+        return sum ;
+
+    }
+
+    /**
+     *
+     * 55. Jump Game
+     *
+     * You are given an integer array nums. You are initially positioned at the array's first index,
+     * and each element in the array represents your maximum jump length at that position.
+     *
+     * Return true if you can reach the last index, or false otherwise.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [2,3,1,1,4]
+     * Output: true
+     * Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+     *
+     * Example 2:
+     *
+     * Input: nums = [3,2,1,0,4]
+     * Output: false
+     * Explanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= nums.length <= 104
+     *     0 <= nums[i] <= 105
+     */
+
+    public boolean canJump2(int[] nums) {
+
+        if(nums.length == 1) {
+            return true;
+        }
+
+        int stash = nums[0] -1;
+        int index = 0;
+
+        while(stash > 0 && index < nums.length) {
+
+            stash = Math.max(nums[index], stash);
+            index++;
+            stash--;
+        }
+
+        return index >= nums.length -1;
+
+    }
+
+    public boolean canJump(int[] nums) {
+
+        if(nums.length == 1) {
+            return true;
+        }
+
+        if(nums[0] == 0) {
+            return false;
+        }
+
+        int count = nums[0] -1;
+
+        for(int i = 1; i < nums.length -1; i++) {
+
+            count = Math.max(count, nums[i]);
+
+            if(count == 0) {
+
+                return false;
+
+            }
+
+            count --;
+
+        }
+
+        return true;
+    }
+
+
+    /**
+     *
+     * 45. Jump Game II
+     *
+     *
+     * You are given a 0-indexed array of integers nums of length n. You are initially positioned at nums[0].
+     *
+     * Each element nums[i] represents the maximum length of a forward jump from index i. In other words, if you are at nums[i], you can jump to any nums[i + j] where:
+     *
+     *     0 <= j <= nums[i] and
+     *     i + j < n
+     *
+     * Return the minimum number of jumps to reach nums[n - 1]. The test cases are generated such that you can reach nums[n - 1].
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [2,3,1,1,4]
+     * Output: 2
+     * Explanation: The minimum number of jumps to reach the last index is 2. Jump 1 step from index 0 to 1, then 3 steps to the last index.
+     *
+     * Example 2:
+     *
+     * Input: nums = [2,3,0,1,4]
+     * Output: 2
+     *
+     *
+     *
+     */
+
+    public int jump(int[] nums) {
+
+        return 0;
+    }
+
+    /**
+     *
+     *
+     * 125. Valid Palindrome
+     *
+     *
+     *
+     * A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+     *
+     * Given a string s, return true if it is a palindrome, or false otherwise.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: s = "A man, a plan, a canal: Panama"
+     * Output: true
+     * Explanation: "amanaplanacanalpanama" is a palindrome.
+     *
+     * Example 2:
+     *
+     * Input: s = "race a car"
+     * Output: false
+     * Explanation: "raceacar" is not a palindrome.
+     *
+     * Example 3:
+     *
+     * Input: s = " "
+     * Output: true
+     * Explanation: s is an empty string "" after removing non-alphanumeric characters.
+     * Since an empty string reads the same forward and backward, it is a palindrome.
+     *
+     */
+
+    public boolean isPalindrome(String s) {
+
+        char[] stringArray = s
+                .replaceAll("[^A-Za-z0-9]", "")
+                .strip()
+                .trim()
+                .toLowerCase()
+                .toCharArray();
+
+        int l = 0;
+        int r = stringArray.length - 1;
+
+        while(l < r) {
+            if(stringArray[l] != stringArray[r]) {
+                return false;
+            }
+            l++;
+            r--;
+        }
+
+        return true;
+
+    }
+
+    /**
+     *
+     * 392. Is Subsequence
+     *
+     *
+     * Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+     *
+     * A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: s = "abc", t = "ahbgdc"
+     * Output: true
+     *
+     * Example 2:
+     *
+     * Input: s = "axc", t = "ahbgdc"
+     * Output: false
+     *
+     */
+
+    public boolean isSubsequence(String s, String t) {
+
+        char[] t_arr = t.toCharArray();
+        char[] s_arr = s.toCharArray();
+
+        int counter = 0;
+
+        if(s.isEmpty()) {
+            return true;
+        }
+
+        for(int i=0; i < t_arr.length; i++) {
+
+            if(t_arr[i] == s_arr[counter]) {
+                counter++;
+            }
+
+            if(counter == s.length()) {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
+    /**
+     *
+     *
+     * 70. Climbing Stairs
+     *
+     *
+     * You are climbing a staircase. It takes n steps to reach the top.
+     *
+     * Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: n = 2
+     * Output: 2
+     * Explanation: There are two ways to climb to the top.
+     * 1. 1 step + 1 step
+     * 2. 2 steps
+     *
+     * Example 2:
+     *
+     * Input: n = 3
+     * Output: 3
+     * Explanation: There are three ways to climb to the top.
+     * 1. 1 step + 1 step + 1 step
+     * 2. 1 step + 2 steps
+     * 3. 2 steps + 1 step
+     *
+     */
+
+    public int climbStairs(int n) {
+
+        return climbStairs(new HashMap<Integer, Integer>(), n);
+
+    }
+
+    private int climbStairs(HashMap<Integer, Integer> memo, int n) {
+
+        if(memo.get(n) !=null) {
+            return memo.get(n);
+        }
+
+        if(n == 0) {
+            return 0;
+        }
+
+        if (n == 1) {
+            return 1;
+        }
+
+        if(n == 2) {
+            return 2;
+        }
+
+        memo.put(n, climbStairs(memo, n - 1) + climbStairs(memo, n -2));
+        return memo.get(n);
     }
 }
