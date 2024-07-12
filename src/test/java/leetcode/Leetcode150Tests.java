@@ -85,4 +85,11 @@ public class Leetcode150Tests {
         Assert.assertEquals(55, this.leetCode150.climbStairs(9));
         Assert.assertEquals(89, this.leetCode150.climbStairs(10));
     }
+
+    @Test
+    public void reverseWordsTest() {
+        Assert.assertEquals("blue is sky the", this.leetCode150.reverseWords("the sky is blue"));
+        Assert.assertEquals("world hello", this.leetCode150.reverseWords("  hello world  "));
+        Assert.assertEquals("example good a", this.leetCode150.reverseWords("a good   example"));
+    }
 }
