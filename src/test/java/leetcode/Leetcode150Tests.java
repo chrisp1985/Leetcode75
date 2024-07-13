@@ -107,4 +107,10 @@ public class Leetcode150Tests {
 //        Assert.assertEquals("", this.leetCode150.longestCommonPrefix(new String[]{""}));
         Assert.assertEquals("a", this.leetCode150.longestCommonPrefix(new String[]{"a"}));
     }
+
+    @Test
+    public void intToRomanTest() {
+        Assert.assertEquals("MMI", this.leetCode150.intToRoman(2001));
+        Assert.assertEquals("XVIII", this.leetCode150.intToRoman(18));
+    }
 }
