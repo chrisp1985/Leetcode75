@@ -416,14 +416,334 @@ public class LeetCode150 {
      * Input: nums = [2,3,0,1,4]
      * Output: 2
      *
+     * Constraints:
      *
+     *     1 <= nums.length <= 104
+     *     0 <= nums[i] <= 1000
+     *     It's guaranteed that you can reach nums[n - 1].
      *
      */
 
-    public int jump(int[] nums) {
+    public int jump(int[] nums) { //TODO
 
-        return 0;
+        if(nums.length == 1) {
+
+            return 0;
+
+        }
+
+        int count = 0;
+        int maxJump = 0;
+
+        // [2,3,0,1,4] = 2
+        for(int i=0; i < nums.length; i++) {
+            if(i + maxJump >= nums.length) {
+
+                return count++;
+
+            }
+
+            if(maxJump < nums[i]) {
+
+                count++;
+                maxJump = nums[i];
+
+            }
+
+            maxJump--;
+
+        }
+
+        return count;
     }
+
+    /**
+     *
+     * 242. Valid Anagram
+     *
+     *
+     * Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+     *
+     * An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: s = "anagram", t = "nagaram"
+     * Output: true
+     *
+     * Example 2:
+     *
+     * Input: s = "rat", t = "car"
+     * Output: false
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= s.length, t.length <= 5 * 104
+     *     s and t consist of lowercase English letters.
+     */
+
+    public boolean isAnagram(String s, String t) {
+
+        char[] t1_arr = t.toCharArray();
+        char[] s1_arr = s.toCharArray();
+
+        if(t1_arr.length != s1_arr.length) {
+
+            return false;
+
+        }
+
+        Arrays.sort(t1_arr);
+        Arrays.sort(s1_arr);
+
+        for(int i = 0; i < t1_arr.length; i++) {
+
+            if(t1_arr[i] != s1_arr[i]) {
+
+                return false;
+
+            }
+
+        }
+
+        return true;
+
+    }
+
+
+    /**
+     *
+     * 49. Group Anagrams
+     *
+     *
+     * Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+     *
+     * An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: strs = ["eat","tea","tan","ate","nat","bat"]
+     * Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+     *
+     * Example 2:
+     *
+     * Input: strs = [""]
+     * Output: [[""]]
+     *
+     * Example 3:
+     *
+     * Input: strs = ["a"]
+     * Output: [["a"]]
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= strs.length <= 104
+     *     0 <= strs[i].length <= 100
+     *     strs[i] consists of lowercase English letters.
+     */
+
+    public List<List<String>> groupAnagrams(String[] strs) {
+
+
+        return List.of(List.of(""));
+    }
+
+
+    /**
+     *
+     * 128. Longest Consecutive Sequence
+     *
+     *
+     * Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+     *
+     * You must write an algorithm that runs in O(n) time.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [100,4,200,1,3,2]
+     * Output: 4
+     * Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+     *
+     * Example 2:
+     *
+     * Input: nums = [0,3,7,2,5,8,4,6,0,1]
+     * Output: 9
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     0 <= nums.length <= 105
+     *     -109 <= nums[i] <= 109
+     */
+
+    public int longestConsecutive(int[] nums) {
+
+
+        int res = 0;
+        Set<Integer> foundNums = new HashSet<>();
+
+        for(Integer num : nums) {
+            foundNums.add(num);
+        }
+
+        for(int i = 0; i < nums.length; i++) {
+
+            if(!foundNums.contains(nums[i]-1)) {
+                int counter = 0;
+                while(counter != nums.length && foundNums.contains(nums[i] + counter)) {
+                    foundNums.remove(nums[i] + counter);
+                    counter++;
+
+                }
+                res = Math.max(res, counter);
+            }
+
+        }
+
+        return res;
+    }
+
+
+    /**
+     *
+     * 202. Happy Number
+     *
+     *
+     * Write an algorithm to determine if a number n is happy.
+     *
+     * A happy number is a number defined by the following process:
+     *
+     *     Starting with any positive integer, replace the number by the sum of the squares of its digits.
+     *     Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+     *     Those numbers for which this process ends in 1 are happy.
+     *
+     * Return true if n is a happy number, and false if not.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: n = 19
+     * Output: true
+     * Explanation:
+     * 12 + 92 = 82
+     * 82 + 22 = 68
+     * 62 + 82 = 100
+     * 12 + 02 + 02 = 1
+     *
+     * Example 2:
+     *
+     * Input: n = 2
+     * Output: false
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= n <= 231 - 1
+     */
+
+    public boolean isHappy(int n) {
+
+        return isHappy(new HashSet<>(), n);
+
+    }
+
+    private boolean isHappy(HashSet<Integer> memo, int n) {
+
+        if(n == 1) {
+            return true;
+        }
+
+        if(n < 0) {
+            return false;
+        }
+
+        String n_str = String.valueOf(n);
+
+        char[] n_arr = n_str.toCharArray();
+
+        int sum = 0;
+        for(char n_char : n_arr) {
+
+            Integer n_dig = Integer.valueOf(String.valueOf(n_char));
+            sum += n_dig * n_dig;
+
+        }
+
+
+        if(memo.contains(sum)) {
+            return false;
+        }
+
+        memo.add(sum);
+        return isHappy(memo, sum);
+
+    }
+
+
+    /**
+     *
+     *
+     * 15. 3Sum
+     *
+     *
+     * Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+     *
+     * Notice that the solution set must not contain duplicate triplets.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [-1,0,1,2,-1,-4]
+     * Output: [[-1,-1,2],[-1,0,1]]
+     * Explanation:
+     * nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
+     * nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
+     * nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
+     * The distinct triplets are [-1,0,1] and [-1,-1,2].
+     * Notice that the order of the output and the order of the triplets does not matter.
+     *
+     * Example 2:
+     *
+     * Input: nums = [0,1,1]
+     * Output: []
+     * Explanation: The only possible triplet does not sum up to 0.
+     *
+     * Example 3:
+     *
+     * Input: nums = [0,0,0]
+     * Output: [[0,0,0]]
+     * Explanation: The only possible triplet sums up to 0.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     3 <= nums.length <= 3000
+     *     -105 <= nums[i] <= 105
+     */
+
+    public List<List<Integer>> threeSum(int[] nums) {
+
+        
+
+        return List.of(List.of(0));
+    }
+
+
 
     /**
      *
@@ -910,5 +1230,71 @@ public class LeetCode150 {
         }
 
         return res.toString();
+    }
+
+    /**
+     *
+     * 3. Longest Substring Without Repeating Characters
+     *
+     *
+     * Given a string s, find the length of the longest
+     * substring
+     * without repeating characters.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: s = "abcabcbb"
+     * Output: 3
+     * Explanation: The answer is "abc", with the length of 3.
+     *
+     * Example 2:
+     *
+     * Input: s = "bbbbb"
+     * Output: 1
+     * Explanation: The answer is "b", with the length of 1.
+     *
+     * Example 3:
+     *
+     * Input: s = "pwwkew"
+     * Output: 3
+     * Explanation: The answer is "wke", with the length of 3.
+     * Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     0 <= s.length <= 5 * 104
+     *     s consists of English letters, digits, symbols and spaces.
+     */
+
+    public int lengthOfLongestSubstring(String s) {
+
+        if(s.length() == 1) {
+            return 1;
+        }
+
+        int sum = 0;
+        int leftPointer = 0;
+        char[] s_arr = s.toCharArray();
+        Set<Character> map = new HashSet<>();
+
+        for (int i = 0; i < s.length(); i++) {
+
+            while(map.contains(s_arr[i])) {
+                map.remove(s_arr[leftPointer]);
+                leftPointer++;
+            }
+
+            map.add(s_arr[i]);
+
+            sum = Math.max(sum, map.size());
+
+        }
+
+        return sum;
+
     }
 }

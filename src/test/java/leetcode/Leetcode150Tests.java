@@ -5,6 +5,8 @@ import com.chrisparsons.leetcode75.RecentCounter;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 public class Leetcode150Tests {
 
 
@@ -51,17 +53,63 @@ public class Leetcode150Tests {
     }
 
     @Test
-    public void jumpTest() {
+    public void jumpTest() { //TODO
         Assert.assertEquals(2, this.leetCode150.jump(new int[]{2,3,1,1,4}));
-        Assert.assertEquals(0, this.leetCode150.jump(new int[]{2,3,1,1,4}));
-        Assert.assertEquals(0, this.leetCode150.jump(new int[]{3,2,1,4}));
+        Assert.assertEquals(1, this.leetCode150.jump(new int[]{3,2,1,4}));
         Assert.assertEquals(2, this.leetCode150.jump(new int[]{2,5,0,0}));
+        Assert.assertEquals(5, this.leetCode150.jump(new int[]{2,5,0,0,1,2,0,3,2,1,1,5}));
+        Assert.assertEquals(4, this.leetCode150.jump(new int[]{2,3,1,1,1,4,1,0,0}));
+        Assert.assertEquals(1, this.leetCode150.jump(new int[]{2,3,1}));
+        Assert.assertEquals(3, this.leetCode150.jump(new int[]{1,1,1,1}));
+    }
+
+    @Test
+    public void groupAnagramsTest() {
+        Assert.assertEquals(List.of(
+                List.of("bat"),
+                List.of("nat","tan"),
+                List.of("ate","eat","tea")),
+                this.leetCode150.groupAnagrams(new String[]{"eat","tea","tan","ate","nat","bat"}));
+
+        Assert.assertEquals(List.of(
+                List.of("")),
+                this.leetCode150.groupAnagrams(new String[]{""}));
+
+        Assert.assertEquals(List.of(
+                        List.of("a")),
+                this.leetCode150.groupAnagrams(new String[]{"a"}));
+    }
+
+    @Test
+    public void longestConsecutiveTest() {
+        Assert.assertEquals(9, this.leetCode150.longestConsecutive(new int[]{0,3,7,2,5,8,4,6,0,1}));
+        Assert.assertEquals(4, this.leetCode150.longestConsecutive(new int[]{100,4,200,1,3,2}));
+        Assert.assertEquals(6, this.leetCode150.longestConsecutive(new int[]{12,100,4,7,10,200,1,3,2,8,11,9}));
+    }
+
+    @Test
+    public void isHappyTest() {
+        Assert.assertTrue(this.leetCode150.isHappy(1));
+        Assert.assertFalse(this.leetCode150.isHappy(2));
+        Assert.assertFalse(this.leetCode150.isHappy(3));
+        Assert.assertFalse(this.leetCode150.isHappy(4));
+        Assert.assertFalse(this.leetCode150.isHappy(5));
+        Assert.assertFalse(this.leetCode150.isHappy(6));
+        Assert.assertTrue(this.leetCode150.isHappy(7));
+        Assert.assertFalse(this.leetCode150.isHappy(8));
+        Assert.assertFalse(this.leetCode150.isHappy(9));
+        Assert.assertTrue(this.leetCode150.isHappy(10));
+        Assert.assertFalse(this.leetCode150.isHappy(11));
+        Assert.assertFalse(this.leetCode150.isHappy(12));
+        Assert.assertTrue(this.leetCode150.isHappy(13));
+        Assert.assertFalse(this.leetCode150.isHappy(14));
+        Assert.assertTrue(this.leetCode150.isHappy(19));
     }
 
     @Test
     public void isPalindromeTest() {
-//        Assert.assertTrue(this.leetCode150.isPalindrome("A man, a plan, a canal: Panama"));
-//        Assert.assertFalse(this.leetCode150.isPalindrome("race a car"));
+        Assert.assertTrue(this.leetCode150.isPalindrome("A man, a plan, a canal: Panama"));
+        Assert.assertFalse(this.leetCode150.isPalindrome("race a car"));
         Assert.assertTrue(this.leetCode150.isPalindrome(" "));
     }
 
@@ -75,8 +123,8 @@ public class Leetcode150Tests {
 
     @Test
     public void climbStairsTest() {
-//        Assert.assertEquals(2, this.leetCode150.climbStairs(2));
-//        Assert.assertEquals(3, this.leetCode150.climbStairs(3));
+        Assert.assertEquals(2, this.leetCode150.climbStairs(2));
+        Assert.assertEquals(3, this.leetCode150.climbStairs(3));
         Assert.assertEquals(5, this.leetCode150.climbStairs(4));
         Assert.assertEquals(8, this.leetCode150.climbStairs(5));
         Assert.assertEquals(13, this.leetCode150.climbStairs(6));
@@ -112,5 +160,14 @@ public class Leetcode150Tests {
     public void intToRomanTest() {
         Assert.assertEquals("MMI", this.leetCode150.intToRoman(2001));
         Assert.assertEquals("XVIII", this.leetCode150.intToRoman(18));
+    }
+
+    @Test
+    public void lengthOfLongestSubstringTest() {
+        Assert.assertEquals(5, this.leetCode150.lengthOfLongestSubstring("abcbfkjbc"));
+        Assert.assertEquals(1, this.leetCode150.lengthOfLongestSubstring("bbbbbbbb"));
+        Assert.assertEquals(4, this.leetCode150.lengthOfLongestSubstring("abcabcabl"));
+        Assert.assertEquals(1, this.leetCode150.lengthOfLongestSubstring(" "));
+        Assert.assertEquals(2, this.leetCode150.lengthOfLongestSubstring("au"));
     }
 }

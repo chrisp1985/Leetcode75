@@ -34,4 +34,12 @@ public class LeetcodeTests {
         Assert.assertEquals(7, this.leetcode.minMovesToSeat(new int[] {4,1,5,9}, new int[] {1,3,2,6}));
         Assert.assertEquals(4, this.leetcode.minMovesToSeat(new int[] {2,2,6,6}, new int[] {1,3,2,6}));
     }
+
+    @Test
+    public void reverseTest() {
+        Assert.assertEquals(345, this.leetcode.reverse(543));
+        Assert.assertEquals(-52, this.leetcode.reverse(-250));
+        Assert.assertEquals(1981, this.leetcode.reverse(1891));
+        Assert.assertEquals(1981, this.leetcode.reverse(9646324351));
+    }
 }
