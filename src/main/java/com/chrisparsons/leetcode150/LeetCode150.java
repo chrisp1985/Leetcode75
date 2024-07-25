@@ -1,5 +1,7 @@
 package com.chrisparsons.leetcode150;
 
+import com.chrisparsons.leetcode150.helpers.TreeNode;
+
 import java.util.*;
 
 public class LeetCode150 {
@@ -424,7 +426,9 @@ public class LeetCode150 {
      *
      */
 
-    public int jump(int[] nums) { //TODO
+    public int jump(int[] nums) {
+
+        //TODO
 
         if(nums.length == 1) {
 
@@ -552,10 +556,95 @@ public class LeetCode150 {
 
     public List<List<String>> groupAnagrams(String[] strs) {
 
+        List<List<String>> res = new ArrayList<>();
+        HashMap<String, List<String>> map = new HashMap<>();
 
-        return List.of(List.of(""));
+        for(String string : strs) {
+            char[] char_arr = string.toCharArray();
+            Arrays.sort(char_arr);
+            String sortedString = String.valueOf(char_arr);
+
+            if(map.containsKey(sortedString)) {
+                List<String> strings = map.get(sortedString);
+                List<String> newStrings = new ArrayList<>();
+                newStrings.addAll(strings);
+                newStrings.add(string);
+                map.put(sortedString, newStrings);
+            }
+            else {
+                map.put(sortedString, List.of(string));
+            }
+        }
+
+        for(Map.Entry<String, List<String>> entry : map.entrySet()) {
+            res.add(entry.getValue());
+        }
+
+        return res;
     }
 
+
+    /**
+     *
+     * 205. Isomorphic Strings
+     *
+     *
+     * Given two strings s and t, determine if they are isomorphic.
+     *
+     * Two strings s and t are isomorphic if the characters in s can be replaced to get t.
+     *
+     * All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: s = "egg", t = "add"
+     * Output: true
+     *
+     * Example 2:
+     *
+     * Input: s = "foo", t = "bar"
+     * Output: false
+     *
+     * Example 3:
+     *
+     * Input: s = "paper", t = "title"
+     * Output: true
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= s.length <= 5 * 104
+     *     t.length == s.length
+     *     s and t consist of any valid ascii character.
+     */
+
+    public boolean isIsomorphic(String s, String t) {
+
+        //TODO
+
+        HashMap<Character, Character> map = new HashMap<>();
+
+        char[] s_arr = s.toCharArray();
+        char[] t_arr = t.toCharArray();
+
+        for(int i = 0; i < s_arr.length; i++) {
+
+            if(map.get(s_arr[i]) == null && map.get(s_arr[i]) == null) {
+                map.put(s_arr[i], t_arr[i]);
+                map.put(t_arr[i], s_arr[i]);
+            }
+            else {
+                if(map.get(s_arr[i]) != t_arr[i]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+
+    }
 
     /**
      *
@@ -1230,6 +1319,348 @@ public class LeetCode150 {
         }
 
         return res.toString();
+    }
+
+
+    /**
+     *
+     * 134. Gas Station
+     *
+     *
+     * There are n gas stations along a circular route, where the amount of gas at the ith station is gas[i].
+     *
+     * You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from the ith station to its next (i + 1)th station. You begin the journey with an empty tank at one of the gas stations.
+     *
+     * Given two integer arrays gas and cost, return the starting gas station's index if you can travel around the circuit once in the clockwise direction, otherwise return -1. If there exists a solution, it is guaranteed to be unique
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: gas = [1,2,3,4,5], cost = [3,4,5,1,2]
+     * Output: 3
+     * Explanation:
+     * Start at station 3 (index 3) and fill up with 4 unit of gas. Your tank = 0 + 4 = 4
+     * Travel to station 4. Your tank = 4 - 1 + 5 = 8
+     * Travel to station 0. Your tank = 8 - 2 + 1 = 7
+     * Travel to station 1. Your tank = 7 - 3 + 2 = 6
+     * Travel to station 2. Your tank = 6 - 4 + 3 = 5
+     * Travel to station 3. The cost is 5. Your gas is just enough to travel back to station 3.
+     * Therefore, return 3 as the starting index.
+     *
+     * Example 2:
+     *
+     * Input: gas = [2,3,4], cost = [3,4,3]
+     * Output: -1
+     * Explanation:
+     * You can't start at station 0 or 1, as there is not enough gas to travel to the next station.
+     * Let's start at station 2 and fill up with 4 unit of gas. Your tank = 0 + 4 = 4
+     * Travel to station 0. Your tank = 4 - 3 + 2 = 3
+     * Travel to station 1. Your tank = 3 - 3 + 3 = 3
+     * You cannot travel back to station 2, as it requires 4 unit of gas but you only have 3.
+     * Therefore, you can't travel around the circuit once no matter where you start.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     n == gas.length == cost.length
+     *     1 <= n <= 105
+     *     0 <= gas[i], cost[i] <= 104
+     */
+
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+
+        int totalGas = 0;
+        int index = -1;
+        int totalSum = 0;
+
+        if(gas.length == 1) {
+            return gas[0] - cost[0] > -1 ? 0 : -1;
+        }
+
+        for(int i = 0; i < gas.length; i++) {
+            totalSum += gas[i] - cost[i];
+            totalGas = Math.max(0, totalGas + gas[i] - cost[i]);
+
+            if(gas[i] - cost[i] > 0) {
+
+                if(index < 0) {
+                    index = i;
+                }
+
+            }
+
+            if(totalGas==0 && i < cost.length -1) {
+
+                index = -1;
+
+            }
+
+        }
+
+        return totalSum >= 0 ? index : -1;
+
+    }
+
+    /**
+     *
+     *
+     * 100. Same Tree
+     *
+     * Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+     *
+     * Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: p = [1,2,3], q = [1,2,3]
+     * Output: true
+     *
+     * Example 2:
+     *
+     * Input: p = [1,2], q = [1,null,2]
+     * Output: false
+     *
+     * Example 3:
+     *
+     * Input: p = [1,2,1], q = [1,1,2]
+     * Output: false
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     The number of nodes in both trees is in the range [0, 100].
+     *     -104 <= Node.val <= 104
+     *
+     *
+     *
+     */
+
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+
+        if(p == null && q == null) {
+            return true;
+        }
+
+        if(p == null || q == null || p.val != q.val) {
+            return false;
+        }
+
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+
+    }
+
+    /**
+     *
+     * 28. Find the Index of the First Occurrence in a String
+     *
+     *
+     * Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: haystack = "sadbutsad", needle = "sad"
+     * Output: 0
+     * Explanation: "sad" occurs at index 0 and 6.
+     * The first occurrence is at index 0, so we return 0.
+     *
+     * Example 2:
+     *
+     * Input: haystack = "leetcode", needle = "leeto"
+     * Output: -1
+     * Explanation: "leeto" did not occur in "leetcode", so we return -1.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= haystack.length, needle.length <= 104
+     *     haystack and needle consist of only lowercase English characters.
+     */
+
+    public int strStr(String haystack, String needle) {
+
+        if(needle.length() > haystack.length()) {
+            return -1;
+        }
+
+        int counter = 0;
+        for(int i = 0; i < haystack.length(); i++) {
+            if(haystack.charAt(i) == needle.charAt(counter)) {
+                counter++;
+            }
+            else {
+                i = i - counter;
+                counter=0;
+            }
+            if(needle.length() == counter) {
+                return i - needle.length() + 1;
+            }
+
+        }
+
+        return -1;
+
+    }
+
+
+    /**
+     *
+     *
+     * 167. Two Sum II - Input Array Is Sorted
+     *
+     *
+     * Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number. Let these two numbers be numbers[index1] and numbers[index2] where 1 <= index1 < index2 <= numbers.length.
+     *
+     * Return the indices of the two numbers, index1 and index2, added by one as an integer array [index1, index2] of length 2.
+     *
+     * The tests are generated such that there is exactly one solution. You may not use the same element twice.
+     *
+     * Your solution must use only constant extra space.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: numbers = [2,7,11,15], target = 9
+     * Output: [1,2]
+     * Explanation: The sum of 2 and 7 is 9. Therefore, index1 = 1, index2 = 2. We return [1, 2].
+     *
+     * Example 2:
+     *
+     * Input: numbers = [2,3,4], target = 6
+     * Output: [1,3]
+     * Explanation: The sum of 2 and 4 is 6. Therefore index1 = 1, index2 = 3. We return [1, 3].
+     *
+     * Example 3:
+     *
+     * Input: numbers = [-1,0], target = -1
+     * Output: [1,2]
+     * Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     2 <= numbers.length <= 3 * 104
+     *     -1000 <= numbers[i] <= 1000
+     *     numbers is sorted in non-decreasing order.
+     *     -1000 <= target <= 1000
+     *     The tests are generated such that there is exactly one solution.
+     */
+
+    public int[] twoSum(int[] numbers, int target) {
+
+        int l = 0;
+        int r = numbers.length -1;
+
+        while(numbers[l] + numbers[r] != target) {
+
+            if(numbers[l] + numbers[r] > target) {
+                r--;
+            }
+            if(numbers[l] + numbers[r] < target) {
+                l++;
+            }
+        }
+
+        return new int[]{l +1 , r +1};
+
+    }
+
+
+    /**
+     *
+     * 209. Minimum Size Subarray Sum
+     *
+     *
+     * Given an array of positive integers nums and a positive integer target, return the minimal length of a
+     * subarray
+     * whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: target = 7, nums = [2,3,1,2,4,3]
+     * Output: 2
+     * Explanation: The subarray [4,3] has the minimal length under the problem constraint.
+     *
+     * Example 2:
+     *
+     * Input: target = 4, nums = [1,4,4]
+     * Output: 1
+     *
+     * Example 3:
+     *
+     * Input: target = 11, nums = [1,1,1,1,1,1,1,1]
+     * Output: 0
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= target <= 109
+     *     1 <= nums.length <= 105
+     *     1 <= nums[i] <= 104
+     *
+     *
+     */
+
+    public int minSubArrayLen(int target, int[] nums) {
+
+        int l = 0;
+        int sum = 0;
+        int res = Integer.MAX_VALUE;
+        for(int i = 0; i < nums.length; i++) {
+
+            sum += nums[i];
+            while(sum >= target) {
+                res = Math.min(i-l + 1, res);
+                sum = sum - nums[l];
+                l++;
+            }
+
+        }
+
+        return res == Integer.MAX_VALUE ? 0 : res;
+
+    }
+
+    public boolean wordPattern(String pattern, String s) {
+
+        HashMap<Character, String> map = new HashMap<>();
+
+        String[] splitGroups = s.split("\\s+");
+        char[] patter_arr = pattern.toCharArray();
+
+        if(splitGroups.length != pattern.length()) {
+            return false;
+        }
+
+        for(int i = 0; i < pattern.length(); i++) {
+
+            if(map.get(patter_arr[i]) == null) {
+                if(map.containsValue(splitGroups[i])) {
+                    return false;
+                }
+                map.put(patter_arr[i], splitGroups[i]);
+            }
+            else {
+                if(!map.get(patter_arr[i]).equals(splitGroups[i])) {
+                    return false;
+                }
+            }
+
+        }
+        return true;
+
     }
 
     /**

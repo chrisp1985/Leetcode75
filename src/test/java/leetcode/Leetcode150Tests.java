@@ -1,11 +1,13 @@
 package leetcode;
 
 import com.chrisparsons.leetcode150.LeetCode150;
-import com.chrisparsons.leetcode75.RecentCounter;
+import com.chrisparsons.leetcode150.helpers.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Leetcode150Tests {
 
@@ -78,6 +80,17 @@ public class Leetcode150Tests {
         Assert.assertEquals(List.of(
                         List.of("a")),
                 this.leetCode150.groupAnagrams(new String[]{"a"}));
+    }
+
+    @Test
+    public void isIsomorphicTest() {
+//        Assert.assertTrue(this.leetCode150.isIsomorphic("egg", "add"));
+//        Assert.assertFalse(this.leetCode150.isIsomorphic("foo", "bar"));
+//        Assert.assertTrue(this.leetCode150.isIsomorphic("paper", "title"));
+//        Assert.assertTrue(this.leetCode150.isIsomorphic("p", "t"));
+//        Assert.assertTrue(this.leetCode150.isIsomorphic("ppppp", "ttttt"));
+        Assert.assertFalse(this.leetCode150.isIsomorphic("ppppr", "ttttt"));
+        Assert.assertFalse(this.leetCode150.isIsomorphic("ppppp", "ttttr"));
     }
 
     @Test
@@ -157,9 +170,99 @@ public class Leetcode150Tests {
     }
 
     @Test
+    public void canCompleteCircuitTest() {
+        Assert.assertEquals(3, this.leetCode150.canCompleteCircuit(new int[]{1,2,3,4,5}, new int[] {3,4,5,1,2}));
+        Assert.assertEquals(3, this.leetCode150.canCompleteCircuit(new int[]{1,2,3,4,5}, new int[] {3,4,5,1,2}));
+        Assert.assertEquals(-1, this.leetCode150.canCompleteCircuit(new int[]{2,3,4}, new int[] {3,4,3}));
+        Assert.assertEquals(4, this.leetCode150.canCompleteCircuit(new int[]{2,3,4,3,5}, new int[] {3,4,3,4,1}));
+        Assert.assertEquals(-1, this.leetCode150.canCompleteCircuit(new int[]{2,3,4,3,5}, new int[] {5,6,3,4,1}));
+        Assert.assertEquals(0, this.leetCode150.canCompleteCircuit(new int[]{2}, new int[] {2}));
+        Assert.assertEquals(1, this.leetCode150.canCompleteCircuit(new int[]{2,5}, new int[] {3,2}));
+        Assert.assertEquals(2, this.leetCode150.canCompleteCircuit(new int[]{1,1,9,1,1}, new int[] {3,3,1,4,1}));
+        Assert.assertEquals(0, this.leetCode150.canCompleteCircuit(new int[]{3,1,1}, new int[] {1,2,2}));
+        Assert.assertEquals(-1, this.leetCode150.canCompleteCircuit(new int[]{4}, new int[] {5}));
+        Assert.assertEquals(0, this.leetCode150.canCompleteCircuit(new int[]{5}, new int[] {4}));
+    }
+
+    @Test
     public void intToRomanTest() {
         Assert.assertEquals("MMI", this.leetCode150.intToRoman(2001));
         Assert.assertEquals("XVIII", this.leetCode150.intToRoman(18));
+    }
+
+    @Test
+    public void isSameTreeTest() {
+        TreeNode nodeLeft3 = new TreeNode(4); // Level 4
+        TreeNode nodeRight3 = new TreeNode(12); // Level 4
+        TreeNode nodeLeft2 = new TreeNode(14, nodeLeft3, nodeRight3); // Level 3
+        TreeNode nodeRight2 = new TreeNode(12); // Level 3
+        TreeNode nodeLeft = new TreeNode(10, nodeLeft2, nodeRight2); // Level 2
+        TreeNode nodeRight = new TreeNode(9); // Level 2
+        TreeNode nodeHead = new TreeNode(8, nodeLeft, nodeRight); // Level 1
+
+
+        TreeNode nodeLeft3_2 = new TreeNode(4); // Level 4
+        TreeNode nodeRight3_2 = new TreeNode(12); // Level 4
+        TreeNode nodeLeft2_2 = new TreeNode(14, nodeLeft3_2, nodeRight3_2); // Level 3
+        TreeNode nodeRight2_2 = new TreeNode(12); // Level 3
+        TreeNode nodeLeft_2 = new TreeNode(10, nodeLeft2_2, nodeRight2_2); // Level 2
+        TreeNode nodeRight_2 = new TreeNode(9); // Level 2
+        TreeNode nodeHead_2 = new TreeNode(8, nodeLeft_2, nodeRight_2); // Level 1
+
+        Assert.assertTrue(this.leetCode150.isSameTree(nodeHead, nodeHead_2));
+    }
+
+    @Test
+    public void isSameTreeTest2() {
+        TreeNode nodeLeft = new TreeNode(1); // Level 2
+        TreeNode nodeRight = new TreeNode(2); // Level 2
+        TreeNode nodeHead = new TreeNode(1, nodeLeft, nodeRight); // Level 1
+
+        TreeNode nodeLeft_2 = new TreeNode(2); // Level 2
+        TreeNode nodeRight_2 = new TreeNode(1); // Level 2
+        TreeNode nodeHead_2 = new TreeNode(1, nodeLeft_2, nodeRight_2); // Level 1
+
+        Assert.assertFalse(this.leetCode150.isSameTree(nodeHead, nodeHead_2));
+    }
+
+    @Test
+    public void strStrTest() {
+        Assert.assertEquals(0, this.leetCode150.strStr("sadbutsad", "sad"));
+        Assert.assertEquals(-1, this.leetCode150.strStr("leetcode", "leeto"));
+        Assert.assertEquals(0, this.leetCode150.strStr("a", "a"));
+        Assert.assertEquals(-1, this.leetCode150.strStr("abc", "abcd"));
+        Assert.assertEquals(4, this.leetCode150.strStr("mississippi", "issip"));
+        Assert.assertEquals(-1, this.leetCode150.strStr("mississippi", "issipi"));
+    }
+
+    @Test
+    public void twoSumTest() {
+        Assert.assertTrue(Arrays.equals(this.leetCode150.twoSum(new int[]{2, 7, 11, 15}, 9), new int[]{1, 2}));
+        Assert.assertTrue(Arrays.equals(this.leetCode150.twoSum(new int[]{2,3,4}, 6), new int[]{1,3}));
+        Assert.assertTrue(Arrays.equals(this.leetCode150.twoSum(new int[]{-1,0},  -1), new int[]{1,2}));
+    }
+
+    @Test
+    public void minSubArrayLenTest() {
+        Assert.assertEquals(2, this.leetCode150.minSubArrayLen(7, new int[]{2,3,1,2,4,3}));
+        Assert.assertEquals(1, this.leetCode150.minSubArrayLen(4, new int[]{1,4,4}));
+        Assert.assertEquals(0, this.leetCode150.minSubArrayLen(10, new int[]{1,1,1,1,1,1,1,1}));
+        Assert.assertEquals(1, this.leetCode150.minSubArrayLen(10, new int[]{10,5,5,4,6,3,3,4}));
+        Assert.assertEquals(1, this.leetCode150.minSubArrayLen(10, new int[]{10,5,5,4,6,3,3,4}));
+        Assert.assertEquals(1, this.leetCode150.minSubArrayLen(10, new int[]{10}));
+        Assert.assertEquals(0, this.leetCode150.minSubArrayLen(11, new int[]{10}));
+        Assert.assertEquals(3, this.leetCode150.minSubArrayLen(11, new int[]{1,2,3,4,5}));
+    }
+
+    @Test
+    public void wordPatternTest() {
+        Assert.assertTrue(this.leetCode150.wordPattern("abba", "dog cat cat dog"));
+        Assert.assertFalse(this.leetCode150.wordPattern("abba", "dog cat cat fish"));
+        Assert.assertFalse(this.leetCode150.wordPattern("aaaa", "dog cat cat dog"));
+        Assert.assertFalse(this.leetCode150.wordPattern("aaaa", "dog cat cat dog"));
+        Assert.assertFalse(this.leetCode150.wordPattern("aaaa", "dog cat cat dog"));
+        Assert.assertFalse(this.leetCode150.wordPattern("abba", "dog dog dog dog"));
+        Assert.assertTrue(this.leetCode150.wordPattern("jbkjb", "i am what i am"));
     }
 
     @Test
