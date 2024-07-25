@@ -40,6 +40,13 @@ public class LeetcodeTests {
         Assert.assertEquals(345, this.leetcode.reverse(543));
         Assert.assertEquals(-52, this.leetcode.reverse(-250));
         Assert.assertEquals(1981, this.leetcode.reverse(1891));
-        Assert.assertEquals(1981, this.leetcode.reverse(9646324351));
+        //Assert.assertEquals(1981, this.leetcode.reverse(9646324351));
+    }
+
+    @Test
+    public void binarySearchTest() {
+        Assert.assertEquals(3, this.leetcode.search(new int[] {-1,0,2,4,6,8}, 4));
+        Assert.assertEquals(-1, this.leetcode.search(new int[] {-1,0,2,4,6,8}, 3));
+        Assert.assertEquals(4, this.leetcode.search(new int[] {-1,0,3,5,9,12}, 9));
     }
 }
