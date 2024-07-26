@@ -145,6 +145,35 @@ public class Leetcode150Tests {
     }
 
     @Test
+    public void letterCombinationsTest() {
+        Assert.assertEquals(List.of("ad","ae","af","bd","be","bf","cd","ce","cf"), this.leetCode150.letterCombinations("23"));
+    }
+
+    @Test
+    public void combineTest() {
+        Assert.assertEquals(List.of(
+                List.of(1,2),
+                List.of(1,3),
+                List.of(1,4),
+                List.of(2,3),
+                List.of(2,4),
+                List.of(3,4)),
+                this.leetCode150.combine(4, 2));
+    }
+
+    @Test
+    public void permuteTest() {
+        Assert.assertEquals(List.of(
+                List.of(1,2,3),
+                List.of(1,3,2),
+                List.of(2,1,3),
+                List.of(2,3,1),
+                List.of(3,1,2),
+                List.of(3,2,1)),
+                this.leetCode150.permute(new int[] {1,2,3}));
+    }
+
+    @Test
     public void longestConsecutiveTest() {
         Assert.assertEquals(9, this.leetCode150.longestConsecutive(new int[]{0,3,7,2,5,8,4,6,0,1}));
         Assert.assertEquals(4, this.leetCode150.longestConsecutive(new int[]{100,4,200,1,3,2}));

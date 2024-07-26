@@ -1,5 +1,7 @@
 package com.chrisparsons;
 
+import com.chrisparsons.leetcode150.helpers.TreeNode;
+
 import java.util.*;
 
 public class Leetcode {
@@ -187,6 +189,57 @@ public class Leetcode {
 
     }
 
+
+    /**
+     *
+     * 257. Binary Tree Paths
+     *
+     *
+     * Given the root of a binary tree, return all root-to-leaf paths in any order.
+     *
+     * A leaf is a node with no children.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: root = [1,2,3,null,5]
+     * Output: ["1->2->5","1->3"]
+     *
+     * Example 2:
+     *
+     * Input: root = [1]
+     * Output: ["1"]
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     The number of nodes in the tree is in the range [1, 100].
+     *     -100 <= Node.val <= 100
+     *
+     */
+
+    public List<String> binaryTreePaths(TreeNode root) {
+
+        List<String> res = new ArrayList<>();
+        binaryTreePathsBackTrack(root.right, res, String.valueOf(root.val));
+        binaryTreePathsBackTrack(root.left, res, String.valueOf(root.val));
+        return res;
+    }
+
+    private void binaryTreePathsBackTrack(TreeNode root, List<String> res, String tmpString) {
+        tmpString = String.join("->", tmpString, String.valueOf(root.val));
+        if(root.left == null && root.right == null) {
+            res.add(tmpString);
+        }
+        else if(root.left == null) {
+            binaryTreePathsBackTrack(root.right, res, tmpString);
+        }
+        else {
+            binaryTreePathsBackTrack(root.left, res, tmpString);
+        }
+    }
 
     /**
      *

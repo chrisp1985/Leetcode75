@@ -1179,6 +1179,200 @@ public class LeetCode150 {
     /**
      *
      *
+     * 17. Letter Combinations of a Phone Number
+     *
+     *
+     * Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+     *
+     * A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: digits = "23"
+     * Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+     *
+     * Example 2:
+     *
+     * Input: digits = ""
+     * Output: []
+     *
+     * Example 3:
+     *
+     * Input: digits = "2"
+     * Output: ["a","b","c"]
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     0 <= digits.length <= 4
+     *     digits[i] is a digit in the range ['2', '9'].
+     *
+     *
+     */
+
+    public List<String> letterCombinations(String digits) {
+
+        List<String> res = new ArrayList<>();
+
+        if(!digits.isEmpty()) {
+            backtrackLetterCombinations(0, "", digits, res);
+        }
+
+        return res;
+
+    }
+
+    private void backtrackLetterCombinations(int index, String currentString, String digits, List<String> res) {
+        Map<Integer, String> map = Map.of(
+                2, "abc",
+                3, "def",
+                4, "ghi",
+                5, "jkl",
+                6, "mno",
+                7, "pqrs",
+                8, "tuv",
+                9, "wxyz");
+
+        if(digits.length() == currentString.length()) {
+            res.add(currentString);
+        }
+        else {
+            char[] chars = map.get(Integer.valueOf(String.valueOf(digits.charAt(index)))).toCharArray();
+            for (Character character : chars) {
+
+                backtrackLetterCombinations(index + 1, currentString + character, digits, res);
+
+            }
+        }
+
+    }
+
+
+    /**
+     *
+     * 46. Permutations
+     *
+     *
+     * Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [1,2,3]
+     * Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+     *
+     * Example 2:
+     *
+     * Input: nums = [0,1]
+     * Output: [[0,1],[1,0]]
+     *
+     * Example 3:
+     *
+     * Input: nums = [1]
+     * Output: [[1]]
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= nums.length <= 6
+     *     -10 <= nums[i] <= 10
+     *     All the integers of nums are unique.
+     *
+     *
+     *
+     */
+
+    public List<List<Integer>> permute(int[] nums) {
+        //TODO
+
+        List<List<Integer>> res = new ArrayList<>();
+
+        permuteBacktrack(res, new ArrayList<>(), nums, 0);
+
+        return res;
+
+    }
+
+    private void permuteBacktrack(List<List<Integer>> res, List<Integer> integerList, int[] nums, int index) {
+
+        if(index == nums.length) {
+            res.add(integerList);
+        }
+
+        else {
+            for(int i = index; i < nums.length; i++) {
+                integerList.add(nums[i]);
+                permuteBacktrack(res, integerList, nums, index+1);
+                integerList.remove(integerList.size() -1);
+            }
+        }
+
+    }
+
+    /**
+     *
+     * 77. Combinations
+     *
+     *
+     * Given two integers n and k, return all possible combinations of k numbers chosen from the range [1, n].
+     *
+     * You may return the answer in any order.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: n = 4, k = 2
+     * Output: [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
+     * Explanation: There are 4 choose 2 = 6 total combinations.
+     * Note that combinations are unordered, i.e., [1,2] and [2,1] are considered to be the same combination.
+     *
+     * Example 2:
+     *
+     * Input: n = 1, k = 1
+     * Output: [[1]]
+     * Explanation: There is 1 choose 1 = 1 total combination.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= n <= 20
+     *     1 <= k <= n
+     *
+     */
+
+    public List<List<Integer>> combine(int n, int k) {
+
+        List<List<Integer>> res = new ArrayList<>();
+        combineBacktrack(1, new ArrayList<>(), k, res, n);
+        return res;
+
+        //TODO
+
+    }
+
+    private void combineBacktrack(int index, List<Integer> currentList, int k, List<List<Integer>> res, int n) {
+        currentList.add(index);
+        if(currentList.size() == k) {
+            res.add(currentList);
+        }
+        else {
+            for(int i = index; i < n; i++) {
+                combineBacktrack(index+1, currentList, k, res, n);
+            }
+        }
+
+    }
+
+    /**
+     *
+     *
      * 15. 3Sum
      *
      *

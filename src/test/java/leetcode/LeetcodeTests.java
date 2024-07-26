@@ -1,11 +1,13 @@
 package leetcode;
 
 import com.chrisparsons.Leetcode;
+import com.chrisparsons.leetcode150.helpers.TreeNode;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class LeetcodeTests {
 
@@ -43,6 +45,15 @@ public class LeetcodeTests {
         Assert.assertEquals(-52, this.leetcode.reverse(-250));
         Assert.assertEquals(1981, this.leetcode.reverse(1891));
         //Assert.assertEquals(1981, this.leetcode.reverse(9646324351));
+    }
+
+    @Test
+    public void binaryTreePathsTest() {
+        TreeNode nodeRight2_2 = new TreeNode(5); // Level 3
+        TreeNode nodeLeft_2 = new TreeNode(2, null, nodeRight2_2); // Level 2
+        TreeNode nodeRight_2 = new TreeNode(3); // Level 2
+        TreeNode nodeHead_2 = new TreeNode(1, nodeLeft_2, nodeRight_2); // Level 1
+        Assert.assertEquals(List.of("1->2->5","1->3"), this.leetcode.binaryTreePaths(nodeHead_2));
     }
 
     @Test
