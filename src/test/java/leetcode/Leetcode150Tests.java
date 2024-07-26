@@ -84,11 +84,11 @@ public class Leetcode150Tests {
 
     @Test
     public void isIsomorphicTest() {
-//        Assert.assertTrue(this.leetCode150.isIsomorphic("egg", "add"));
-//        Assert.assertFalse(this.leetCode150.isIsomorphic("foo", "bar"));
-//        Assert.assertTrue(this.leetCode150.isIsomorphic("paper", "title"));
-//        Assert.assertTrue(this.leetCode150.isIsomorphic("p", "t"));
-//        Assert.assertTrue(this.leetCode150.isIsomorphic("ppppp", "ttttt"));
+        Assert.assertTrue(this.leetCode150.isIsomorphic("egg", "add"));
+        Assert.assertFalse(this.leetCode150.isIsomorphic("foo", "bar"));
+        Assert.assertTrue(this.leetCode150.isIsomorphic("paper", "title"));
+        Assert.assertTrue(this.leetCode150.isIsomorphic("p", "t"));
+        Assert.assertTrue(this.leetCode150.isIsomorphic("ppppp", "ttttt"));
         Assert.assertFalse(this.leetCode150.isIsomorphic("ppppr", "ttttt"));
         Assert.assertFalse(this.leetCode150.isIsomorphic("ppppp", "ttttr"));
     }
@@ -99,6 +99,13 @@ public class Leetcode150Tests {
         Assert.assertEquals(new int[][]{{1,18}}, this.leetCode150.merge(new int[][]{{1,18}, {2,6},{8,10},{15,18}}));
         Assert.assertEquals(new int[][]{{1,18}}, this.leetCode150.merge(new int[][]{{1,4}, {2,6},{8,10},{1,18}}));
         Assert.assertEquals(new int[][]{{1,18}}, this.leetCode150.merge(new int[][]{{1,4}, {2,6},{8,10},{1,18}}));
+    }
+
+    @Test
+    public void canConstructTest() { // TODO
+        Assert.assertTrue(this.leetCode150.canConstruct("aa", "aab"));
+        Assert.assertFalse(this.leetCode150.canConstruct("aa", "ab"));
+        Assert.assertTrue(this.leetCode150.canConstruct("aabbccl", "caabblc"));
     }
 
     @Test
@@ -123,13 +130,18 @@ public class Leetcode150Tests {
 
     @Test
     public void evalRPNTest() {
-//        Assert.assertEquals(9, this.leetCode150.evalRPN(new String[]{"2","1","+","3","*"}));
-//        Assert.assertEquals(6, this.leetCode150.evalRPN(new String[]{"4","13","5","/","+"}));
-//        Assert.assertEquals(22, this.leetCode150.evalRPN(new String[]{"10","6","9","3","+","-11","*","/","*","17","+","5","+"}));
-//        Assert.assertEquals(20, this.leetCode150.evalRPN(new String[]{"4","6","+","4","6","+","+"}));
-//        Assert.assertEquals(18, this.leetCode150.evalRPN(new String[]{"18"}));
+        Assert.assertEquals(9, this.leetCode150.evalRPN(new String[]{"2","1","+","3","*"}));
+        Assert.assertEquals(6, this.leetCode150.evalRPN(new String[]{"4","13","5","/","+"}));
+        Assert.assertEquals(22, this.leetCode150.evalRPN(new String[]{"10","6","9","3","+","-11","*","/","*","17","+","5","+"}));
+        Assert.assertEquals(20, this.leetCode150.evalRPN(new String[]{"4","6","+","4","6","+","+"}));
+        Assert.assertEquals(18, this.leetCode150.evalRPN(new String[]{"18"}));
         Assert.assertEquals(9, this.leetCode150.evalRPN(new String[]{"3","11","+","5","-"}));
         Assert.assertEquals(-13, this.leetCode150.evalRPN(new String[]{"3","11","5","+","-"}));
+    }
+
+    @Test
+    public void threeSumTest() {
+        this.leetCode150.threeSum(new int[]{-1,0,1,2,-1,-4});
     }
 
     @Test

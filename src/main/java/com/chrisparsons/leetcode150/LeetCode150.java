@@ -625,25 +625,44 @@ public class LeetCode150 {
 
         //TODO
 
-        HashMap<Character, Character> map = new HashMap<>();
+        HashMap<Character, Character> mapA = new HashMap<>();
+        HashMap<Character, Character> mapB = new HashMap<>();
 
         char[] s_arr = s.toCharArray();
         char[] t_arr = t.toCharArray();
 
         for(int i = 0; i < s_arr.length; i++) {
 
-            if(map.get(s_arr[i]) == null && map.get(s_arr[i]) == null) {
-                map.put(s_arr[i], t_arr[i]);
-                map.put(t_arr[i], s_arr[i]);
+            if(mapA.get(s_arr[i]) == null && mapB.get(t_arr[i]) == null) {
+                mapA.put(s_arr[i], t_arr[i]);
+                mapB.put(t_arr[i], s_arr[i]);
             }
             else {
-                if(map.get(s_arr[i]) != t_arr[i]) {
+                if(mapA.get(s_arr[i]) == null || mapB.get(t_arr[i]) == null || mapA.get(s_arr[i]) != t_arr[i] || mapB.get(t_arr[i]) != s_arr[i]) {
                     return false;
                 }
             }
         }
         return true;
 
+    }
+
+    public boolean canConstruct(String ransomNote, String magazine) {
+
+        int[] alphabetArray = new int[122];
+
+        for(int i=0; i < magazine.length(); i++) {
+            alphabetArray[magazine.charAt(i)]++;
+        }
+
+        for(int i=0; i < ransomNote.length(); i++) {
+            alphabetArray[ransomNote.charAt(i)]--;
+            if(alphabetArray[ransomNote.charAt(i)] < 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -1018,6 +1037,8 @@ public class LeetCode150 {
 
         // TODO
 
+        return 0;
+
     }
 
 
@@ -1200,11 +1221,50 @@ public class LeetCode150 {
      *     -105 <= nums[i] <= 105
      */
 
-    public List<List<Integer>> threeSum(int[] nums) {
+    public List<List<Integer>> threeSum(int[] nums) { // TODO
 
-        
+        int target = 0;
 
-        return List.of(List.of(0));
+        List<List<Integer>> res = new ArrayList<>();
+        Arrays.sort(nums);
+
+        for(int i = 0; i < nums.length; i++) {
+            int l = 0;
+            int r = nums.length -1;
+
+            if(i > 0 && nums[i] == nums[i-1]) {
+                continue;
+            }
+            while(l < r) {
+
+                if(nums[i] + nums[l] + nums[r] == target) {
+
+                    List<Integer> found = List.of(nums[i], nums[l], nums[r]);
+                    res.add(found);
+                    l++;
+                    while(nums[l] == nums[l-1]) {
+                        l++;
+                    }
+
+                }
+
+                if(nums[i] + nums[l] + nums[r] > target) {
+
+                    r--;
+
+                }
+
+                if(nums[i] + nums[l] + nums[r] < target) {
+
+                    l++;
+
+                }
+
+            }
+
+        }
+
+        return res;
     }
 
 
