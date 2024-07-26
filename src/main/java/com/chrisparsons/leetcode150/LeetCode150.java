@@ -648,6 +648,381 @@ public class LeetCode150 {
 
     /**
      *
+     * 56. Merge Intervals
+     *
+     *
+     * Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+     * Output: [[1,6],[8,10],[15,18]]
+     * Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
+     *
+     * Example 2:
+     *
+     * Input: intervals = [[1,4],[4,5]]
+     * Output: [[1,5]]
+     * Explanation: Intervals [1,4] and [4,5] are considered overlapping.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= intervals.length <= 104
+     *     intervals[i].length == 2
+     *     0 <= starti <= endi <= 104
+     *
+     */
+
+    public int[][] merge(int[][] intervals) {
+
+        List<int[]> listOfIntervals = new ArrayList<>();
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+        listOfIntervals.add(intervals[0]);
+
+        for(int i = 1; i < intervals.length; i++) {
+
+            if(listOfIntervals.get(listOfIntervals.size()-1)[1] >= intervals[i][0]) {
+                int start = Math.min(listOfIntervals.get(listOfIntervals.size()-1)[0], intervals[i][0]);
+                int end = Math.max(listOfIntervals.get(listOfIntervals.size()-1)[1], intervals[i][1]);
+
+                listOfIntervals.remove(listOfIntervals.get(listOfIntervals.size()-1));
+                listOfIntervals.add(new int[]{start, end});
+
+            }
+
+            else {
+                listOfIntervals.add(intervals[i]);
+            }
+
+        }
+
+
+        return listOfIntervals.toArray(new int[0][]);
+
+    }
+
+    /**
+     *
+     *
+     * 20. Valid Parentheses
+     *
+     *
+     * Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+     *
+     * An input string is valid if:
+     *
+     *     Open brackets must be closed by the same type of brackets.
+     *     Open brackets must be closed in the correct order.
+     *     Every close bracket has a corresponding open bracket of the same type.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: s = "()"
+     * Output: true
+     *
+     * Example 2:
+     *
+     * Input: s = "()[]{}"
+     * Output: true
+     *
+     * Example 3:
+     *
+     * Input: s = "(]"
+     * Output: false
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= s.length <= 104
+     *     s consists of parentheses only '()[]{}'.
+     *
+     *
+     */
+
+    public boolean isValid(String s) {
+
+        char[] charArr = s.toCharArray();
+        Stack<Character> char_stack = new Stack<>();
+        Map<Character, Character> map = Map.of(
+                '}', '{',
+                ')', '(' ,
+                ']', '[');
+
+        char_stack.push(charArr[0]);
+        for(int i = 1; i < charArr.length; i++) {
+            if(!char_stack.isEmpty() && map.get(charArr[i]) == char_stack.peek()) {
+                char_stack.pop();
+            }
+            else {
+                char_stack.push(charArr[i]);
+            }
+        }
+
+        return char_stack.isEmpty();
+
+    }
+
+    /**
+     *
+     * 71. Simplify Path
+     *
+     *
+     * Given an absolute path for a Unix-style file system, which begins with a slash '/', transform this path into its simplified canonical path.
+     *
+     * In Unix-style file system context, a single period '.' signifies the current directory, a double period ".." denotes moving up one directory level, and multiple slashes such as "//" are interpreted as a single slash. In this problem, treat sequences of periods not covered by the previous rules (like "...") as valid names for files or directories.
+     *
+     * The simplified canonical path should adhere to the following rules:
+     *
+     *     It must start with a single slash '/'.
+     *     Directories within the path should be separated by only one slash '/'.
+     *     It should not end with a slash '/', unless it's the root directory.
+     *     It should exclude any single or double periods used to denote current or parent directories.
+     *
+     * Return the new path.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: path = "/home/"
+     *
+     * Output: "/home"
+     *
+     * Explanation:
+     *
+     * The trailing slash should be removed.
+     *
+     *
+     * Example 2:
+     *
+     * Input: path = "/home//foo/"
+     *
+     * Output: "/home/foo"
+     *
+     * Explanation:
+     *
+     * Multiple consecutive slashes are replaced by a single one.
+     *
+     * Example 3:
+     *
+     * Input: path = "/home/user/Documents/../Pictures"
+     *
+     * Output: "/home/user/Pictures"
+     *
+     * Explanation:
+     *
+     * A double period ".." refers to the directory up a level.
+     *
+     * Example 4:
+     *
+     * Input: path = "/../"
+     *
+     * Output: "/"
+     *
+     * Explanation:
+     *
+     * Going one level up from the root directory is not possible.
+     *
+     * Example 5:
+     *
+     * Input: path = "/.../a/../b/c/../d/./"
+     *
+     * Output: "/.../b/d"
+     *
+     * Explanation:
+     *
+     * "..." is a valid name for a directory in this problem.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= path.length <= 3000
+     *     path consists of English letters, digits, period '.', slash '/' or '_'.
+     *     path is a valid absolute Unix path.
+     *
+     *
+     *
+     *
+     */
+
+    public String simplifyPath(String path) {
+
+        Stack<String> stack = new Stack<>();
+
+        String[] groupedPath = path.split("\\/");
+
+        if(groupedPath.length == 0) {
+            return "/";
+        }
+
+        stack.push(groupedPath[0]);
+
+        for(int i = 1; i < groupedPath.length; i++) {
+
+            if(groupedPath[i].equals("..")) {
+                if(!stack.isEmpty()) {
+                    stack.pop();
+                }
+
+            }
+            else if(groupedPath[i].equals("//")) {
+                stack.push("/");
+            }
+            else if(groupedPath[i].equals(".")) {
+                // Do nothing.
+            }
+            else if(!groupedPath[i].isEmpty()) {
+                stack.push(groupedPath[i]);
+            }
+
+        }
+
+        String res = String.join("/", stack);
+        String resFormatted = res.startsWith("/") ? res : "/" + res;
+        return resFormatted;
+    }
+
+
+    /**
+     *
+     * 150. Evaluate Reverse Polish Notation
+     *
+     *
+     * You are given an array of strings tokens that represents an arithmetic expression in a Reverse Polish Notation.
+     *
+     * Evaluate the expression. Return an integer that represents the value of the expression.
+     *
+     * Note that:
+     *
+     *     The valid operators are '+', '-', '*', and '/'.
+     *     Each operand may be an integer or another expression.
+     *     The division between two integers always truncates toward zero.
+     *     There will not be any division by zero.
+     *     The input represents a valid arithmetic expression in a reverse polish notation.
+     *     The answer and all the intermediate calculations can be represented in a 32-bit integer.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: tokens = ["2","1","+","3","*"]
+     * Output: 9
+     * Explanation: ((2 + 1) * 3) = 9
+     *
+     * Example 2:
+     *
+     * Input: tokens = ["4","13","5","/","+"]
+     * Output: 6
+     * Explanation: (4 + (13 / 5)) = 6
+     *
+     * Example 3:
+     *
+     * Input: tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
+     * Output: 22
+     * Explanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
+     * = ((10 * (6 / (12 * -11))) + 17) + 5
+     * = ((10 * (6 / -132)) + 17) + 5
+     * = ((10 * 0) + 17) + 5
+     * = (0 + 17) + 5
+     * = 17 + 5
+     * = 22
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= tokens.length <= 104
+     *     tokens[i] is either an operator: "+", "-", "*", or "/", or an integer in the range [-200, 200].
+     */
+
+    public int evalRPN(String[] tokens) {
+        if(tokens.length ==1) {
+            return Integer.parseInt(tokens[0]);
+        }
+        Stack<Integer> numbers = new Stack<>();
+
+        for(String token : tokens) {
+            if(token.equals("+")) {
+                numbers.push(numbers.pop() + numbers.pop());
+            }
+            else if(token.equals("-")) {
+                int b = numbers.pop();
+                int a = numbers.pop();
+                numbers.push(a - b);
+            }
+            else if(token.equals("*")) {
+                numbers.push(numbers.pop() * numbers.pop());
+            }
+            else if(token.equals("/")) {
+                int b = numbers.pop();
+                int a = numbers.pop();
+                numbers.push(a / b);
+            }
+            else {
+                numbers.push(Integer.valueOf(token));
+            }
+        }
+
+        return numbers.pop();
+
+    }
+
+
+    /**
+     * 224. Basic Calculator
+     *
+     *
+     * Given a string s representing a valid expression, implement a basic calculator to evaluate it, and return the result of the evaluation.
+     *
+     * Note: You are not allowed to use any built-in function which evaluates strings as mathematical expressions, such as eval().
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: s = "1 + 1"
+     * Output: 2
+     *
+     * Example 2:
+     *
+     * Input: s = " 2-1 + 2 "
+     * Output: 3
+     *
+     * Example 3:
+     *
+     * Input: s = "(1+(4+5+2)-3)+(6+8)"
+     * Output: 23
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= s.length <= 3 * 105
+     *     s consists of digits, '+', '-', '(', ')', and ' '.
+     *     s represents a valid expression.
+     *     '+' is not used as a unary operation (i.e., "+1" and "+(2 + 3)" is invalid).
+     *     '-' could be used as a unary operation (i.e., "-1" and "-(2 + 3)" is valid).
+     *     There will be no two consecutive operators in the input.
+     *     Every number and running calculation will fit in a signed 32-bit integer.
+     */
+
+    public int calculate(String s) {
+
+        // TODO
+
+    }
+
+
+    /**
+     *
      * 128. Longest Consecutive Sequence
      *
      *

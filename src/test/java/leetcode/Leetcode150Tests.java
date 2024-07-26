@@ -94,6 +94,45 @@ public class Leetcode150Tests {
     }
 
     @Test
+    public void mergeTest() {
+        Assert.assertEquals(new int[][]{{1,6}, {8,10}, {15,18}}, this.leetCode150.merge(new int[][]{{1,3}, {2,6},{8,10},{15,18}}));
+        Assert.assertEquals(new int[][]{{1,18}}, this.leetCode150.merge(new int[][]{{1,18}, {2,6},{8,10},{15,18}}));
+        Assert.assertEquals(new int[][]{{1,18}}, this.leetCode150.merge(new int[][]{{1,4}, {2,6},{8,10},{1,18}}));
+        Assert.assertEquals(new int[][]{{1,18}}, this.leetCode150.merge(new int[][]{{1,4}, {2,6},{8,10},{1,18}}));
+    }
+
+    @Test
+    public void isValidTest() {
+        Assert.assertTrue(this.leetCode150.isValid("()[]{}"));
+        Assert.assertTrue(this.leetCode150.isValid("{([])}"));
+        Assert.assertFalse(this.leetCode150.isValid("()[{}"));
+    }
+
+    @Test
+    public void simplifyPathTest() {
+        Assert.assertEquals("/home/foo", this.leetCode150.simplifyPath("/home//foo/"));
+        Assert.assertEquals("/home/user/Pictures", this.leetCode150.simplifyPath("/home/user/Documents/../Pictures"));
+        Assert.assertEquals("/.../b/d", this.leetCode150.simplifyPath("/.../a/../b/c/../d/./"));
+        Assert.assertEquals("/", this.leetCode150.simplifyPath("/../"));
+        Assert.assertEquals("/home", this.leetCode150.simplifyPath("/home/"));
+        Assert.assertEquals("/chris/trial/new/again/chris/pop", this.leetCode150.simplifyPath("/home/../chris/trial/new//trial/../again/chris/pop/this/one/../../"));
+        Assert.assertEquals("/c", this.leetCode150.simplifyPath("/a/../../b/../c//.//"));
+        Assert.assertEquals("/", this.leetCode150.simplifyPath("/"));
+        Assert.assertEquals("/", this.leetCode150.simplifyPath("/home/../../.."));
+    }
+
+    @Test
+    public void evalRPNTest() {
+//        Assert.assertEquals(9, this.leetCode150.evalRPN(new String[]{"2","1","+","3","*"}));
+//        Assert.assertEquals(6, this.leetCode150.evalRPN(new String[]{"4","13","5","/","+"}));
+//        Assert.assertEquals(22, this.leetCode150.evalRPN(new String[]{"10","6","9","3","+","-11","*","/","*","17","+","5","+"}));
+//        Assert.assertEquals(20, this.leetCode150.evalRPN(new String[]{"4","6","+","4","6","+","+"}));
+//        Assert.assertEquals(18, this.leetCode150.evalRPN(new String[]{"18"}));
+        Assert.assertEquals(9, this.leetCode150.evalRPN(new String[]{"3","11","+","5","-"}));
+        Assert.assertEquals(-13, this.leetCode150.evalRPN(new String[]{"3","11","5","+","-"}));
+    }
+
+    @Test
     public void longestConsecutiveTest() {
         Assert.assertEquals(9, this.leetCode150.longestConsecutive(new int[]{0,3,7,2,5,8,4,6,0,1}));
         Assert.assertEquals(4, this.leetCode150.longestConsecutive(new int[]{100,4,200,1,3,2}));

@@ -1,7 +1,6 @@
 package com.chrisparsons;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 public class Leetcode {
 
