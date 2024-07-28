@@ -1378,7 +1378,8 @@ public class LeetCode150 {
      * 39. Combination Sum
      *
      *
-     * Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
+     * Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of
+     * candidates where the chosen numbers sum to target. You may return the combinations in any order.
      *
      * The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the
      * frequency
@@ -1419,11 +1420,78 @@ public class LeetCode150 {
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
 
+        List<List<Integer>> res = new ArrayList<>();
 
-        //TODO
-        return List.of(List.of(9));
+        Arrays.sort(candidates);
+        combinationSumBacktrack(candidates, target, res, new ArrayList<>(), 0, 0);
+
+        return res;
     }
 
+    private void combinationSumBacktrack(int[] candidates, int target, List<List<Integer>> res, List<Integer> tempList, int sum, int start) {
+
+
+        if(sum == target) {
+            res.add(new ArrayList<>(tempList));
+        }
+
+        if(sum < target) {
+
+            for (int i = start; i < candidates.length; i++) {
+
+                tempList.add(candidates[i]);
+                combinationSumBacktrack(candidates, target, res, tempList, sum + candidates[i], i);
+                tempList.remove(tempList.size()-1);
+            }
+        }
+
+    }
+
+
+    /**
+     *
+     * 79. Word Search
+     *
+     *
+     * Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+     *
+     * The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+     * Output: true
+     *
+     * Example 2:
+     *
+     * Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+     * Output: true
+     *
+     * Example 3:
+     *
+     * Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+     * Output: false
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     m == board.length
+     *     n = board[i].length
+     *     1 <= m, n <= 6
+     *     1 <= word.length <= 15
+     *     board and word consists of only lowercase and uppercase English letters.
+     *
+     *
+     *
+     * Follow up: Could you use search pruning to make your solution faster with a larger board?
+     */
+
+    public boolean exist(char[][] board, String word) {
+
+    }
 
     /**
      *

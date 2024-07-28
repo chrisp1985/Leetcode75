@@ -164,7 +164,19 @@ public class Leetcode150Tests {
 
     @Test
     public void combinationSumTest() {
-        this.leetCode150.combinationSum(); //TODO
+//        Assert.assertEquals(List.of(
+//                List.of(2,2,3),
+//                List.of(7)), this.leetCode150.combinationSum(new int[]{2,3,6,7}, 7));
+//
+//        Assert.assertEquals(List.of(
+//                List.of(2,2,2,2),
+//                List.of(2,3,3),
+//                List.of(3,5)), this.leetCode150.combinationSum(new int[]{2,3,5}, 8));
+
+        Assert.assertEquals(List.of(
+                List.of(8,3),
+                List.of(7,4),
+                List.of(4,4,3)), this.leetCode150.combinationSum(new int[]{8,7,4,3}, 11));
     }
 
     @Test
