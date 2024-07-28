@@ -1491,6 +1491,26 @@ public class LeetCode150 {
 
     public boolean exist(char[][] board, String word) {
 
+        //int column_length = board.length;
+        int row_length = board[0].length;
+
+        return existBacktrack(new ArrayList<>(), word, board, row_length);
+
+    }
+
+    private boolean existBacktrack(List<Character> charsFound, String word, char[][] board, int row) {
+
+        if(charsFound.size() == word.length()) {
+            return true;
+        }
+
+        for(int i=0; i < board.length; i++) {
+            charsFound.add(word.charAt(i));
+            existBacktrack(charsFound, word, board, row+1);
+            charsFound.remove(charsFound.size() - 1);
+        }
+
+        return false;
     }
 
     /**

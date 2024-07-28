@@ -164,14 +164,14 @@ public class Leetcode150Tests {
 
     @Test
     public void combinationSumTest() {
-//        Assert.assertEquals(List.of(
-//                List.of(2,2,3),
-//                List.of(7)), this.leetCode150.combinationSum(new int[]{2,3,6,7}, 7));
-//
-//        Assert.assertEquals(List.of(
-//                List.of(2,2,2,2),
-//                List.of(2,3,3),
-//                List.of(3,5)), this.leetCode150.combinationSum(new int[]{2,3,5}, 8));
+        Assert.assertEquals(List.of(
+                List.of(2,2,3),
+                List.of(7)), this.leetCode150.combinationSum(new int[]{2,3,6,7}, 7));
+
+        Assert.assertEquals(List.of(
+                List.of(2,2,2,2),
+                List.of(2,3,3),
+                List.of(3,5)), this.leetCode150.combinationSum(new int[]{2,3,5}, 8));
 
         Assert.assertEquals(List.of(
                 List.of(8,3),
@@ -189,6 +189,13 @@ public class Leetcode150Tests {
                 List.of(3,1,2),
                 List.of(3,2,1)),
                 this.leetCode150.permute(new int[] {1,2,3}));
+    }
+
+    @Test
+    public void existTest() {
+        Assert.assertTrue(this.leetCode150.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "ABCCED"));
+        Assert.assertTrue(this.leetCode150.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "SEE"));
+        Assert.assertFalse(this.leetCode150.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "ABCB"));
     }
 
     @Test
