@@ -106,6 +106,7 @@ public class Leetcode150Tests {
         Assert.assertTrue(this.leetCode150.canConstruct("aa", "aab"));
         Assert.assertFalse(this.leetCode150.canConstruct("aa", "ab"));
         Assert.assertTrue(this.leetCode150.canConstruct("aabbccl", "caabblc"));
+        Assert.assertTrue(this.leetCode150.canConstruct("az", "ab"));
     }
 
     @Test
@@ -159,6 +160,11 @@ public class Leetcode150Tests {
                 List.of(2,4),
                 List.of(3,4)),
                 this.leetCode150.combine(4, 2));
+    }
+
+    @Test
+    public void combinationSumTest() {
+        this.leetCode150.combinationSum(); //TODO
     }
 
     @Test

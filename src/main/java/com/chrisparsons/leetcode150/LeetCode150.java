@@ -647,7 +647,7 @@ public class LeetCode150 {
 
     public boolean canConstruct(String ransomNote, String magazine) {
 
-        int[] alphabetArray = new int[122];
+        int[] alphabetArray = new int[123];
 
         for(int i=0; i < magazine.length(); i++) {
             alphabetArray[magazine.charAt(i)]++;
@@ -1287,28 +1287,33 @@ public class LeetCode150 {
      *
      */
 
-    public List<List<Integer>> permute(int[] nums) {
-        //TODO
+    private List<Integer> arrayToList(int[] nums) {
 
-        List<List<Integer>> res = new ArrayList<>();
-
-        permuteBacktrack(res, new ArrayList<>(), nums, 0);
-
+        List<Integer> res = new ArrayList<>();
+        for(int i = 0; i < nums.length; i++) {
+            res.add(nums[i]);
+        }
         return res;
-
     }
 
-    private void permuteBacktrack(List<List<Integer>> res, List<Integer> integerList, int[] nums, int index) {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        permuteBacktrack(arrayToList(nums), new ArrayList<>(), res);
+        return res;
+    }
 
-        if(index == nums.length) {
-            res.add(integerList);
+    private void permuteBacktrack(List<Integer> nums, List<Integer> tempList, List<List<Integer>> res) {
+
+        if(tempList.size() == nums.size()) {
+            res.add(new ArrayList<>(tempList));
         }
 
         else {
-            for(int i = index; i < nums.length; i++) {
-                integerList.add(nums[i]);
-                permuteBacktrack(res, integerList, nums, index+1);
-                integerList.remove(integerList.size() -1);
+            for(int i = 0; i < nums.size(); i++) {
+                if(tempList.contains(nums.get(i))) continue;
+                tempList.add(nums.get(i));
+                permuteBacktrack(nums, tempList, res);
+                tempList.remove(tempList.size() -1);
             }
         }
 
@@ -1350,25 +1355,75 @@ public class LeetCode150 {
     public List<List<Integer>> combine(int n, int k) {
 
         List<List<Integer>> res = new ArrayList<>();
-        combineBacktrack(1, new ArrayList<>(), k, res, n);
+        combineBacktrack(res, new ArrayList<>(), n, k, 1);
         return res;
 
+    }
+
+    private void combineBacktrack(List<List<Integer>> res, List<Integer> currentList, int n, int k, int index) {
+        if (currentList.size() == k) {
+            res.add(new ArrayList<>(currentList));
+        }
+        for (int i = index; i <= n; i++) {
+            currentList.add(i);
+            combineBacktrack(res, currentList, n, k, i + 1);
+            currentList.remove(currentList.size() - 1);
+        }
+    }
+
+    /**
+     *
+     *
+     *
+     * 39. Combination Sum
+     *
+     *
+     * Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
+     *
+     * The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the
+     * frequency
+     * of at least one of the chosen numbers is different.
+     *
+     * The test cases are generated such that the number of unique combinations that sum up to target is less than 150 combinations for the given input.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: candidates = [2,3,6,7], target = 7
+     * Output: [[2,2,3],[7]]
+     * Explanation:
+     * 2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+     * 7 is a candidate, and 7 = 7.
+     * These are the only two combinations.
+     *
+     * Example 2:
+     *
+     * Input: candidates = [2,3,5], target = 8
+     * Output: [[2,2,2,2],[2,3,3],[3,5]]
+     *
+     * Example 3:
+     *
+     * Input: candidates = [2], target = 1
+     * Output: []
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= candidates.length <= 30
+     *     2 <= candidates[i] <= 40
+     *     All elements of candidates are distinct.
+     *     1 <= target <= 40
+     */
+
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+
+
         //TODO
-
+        return List.of(List.of(9));
     }
 
-    private void combineBacktrack(int index, List<Integer> currentList, int k, List<List<Integer>> res, int n) {
-        currentList.add(index);
-        if(currentList.size() == k) {
-            res.add(currentList);
-        }
-        else {
-            for(int i = index; i < n; i++) {
-                combineBacktrack(index+1, currentList, k, res, n);
-            }
-        }
-
-    }
 
     /**
      *
@@ -1457,62 +1512,6 @@ public class LeetCode150 {
         }
 
         return res;
-    }
-
-
-    /**
-     *
-     * 17. Letter Combinations of a Phone Number
-     *
-     *
-     * Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
-     *
-     * A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
-     *
-     *
-     *
-     * Example 1:
-     *
-     * Input: digits = "23"
-     * Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
-     *
-     * Example 2:
-     *
-     * Input: digits = ""
-     * Output: []
-     *
-     * Example 3:
-     *
-     * Input: digits = "2"
-     * Output: ["a","b","c"]
-     *
-     *
-     *
-     * Constraints:
-     *
-     *     0 <= digits.length <= 4
-     *     digits[i] is a digit in the range ['2', '9'].
-     *
-     *
-     *
-     */
-
-    public List<String> letterCombinations(String digits) {
-
-        Map<Integer, String[]> map = Map.of(
-                2, new String[]{"a","b","c"},
-                3, new String[]{"d","e","f"},
-                4, new String[]{"g","h","i"},
-                5, new String[]{"j","k","l"},
-                6, new String[]{"m","n","o"},
-                7, new String[]{"p","q","r","s"},
-                8, new String[]{"t","u","v"},
-                9, new String[]{"w","x","y","z"}
-        );
-
-        //TODO
-
-        return List.of("");
     }
 
     /**
