@@ -1491,26 +1491,341 @@ public class LeetCode150 {
 
     public boolean exist(char[][] board, String word) {
 
-        //int column_length = board.length;
         int row_length = board[0].length;
+        int column_length = board.length;
 
-        return existBacktrack(new ArrayList<>(), word, board, row_length);
+        Set<Map<Integer, Integer>> visited = new HashSet<>();
+
+        for(int i = 0; i < column_length; i++) {
+            for(int j=0; j < row_length; j++) {
+                if(existBacktrack(new ArrayList<>(), word, board, i, j, 0, visited)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
 
     }
 
-    private boolean existBacktrack(List<Character> charsFound, String word, char[][] board, int row) {
+    private boolean existBacktrack(List<Character> charsFound, String word, char[][] board, int row, int col, int count, Set<Map<Integer, Integer>> visited) {
 
         if(charsFound.size() == word.length()) {
             return true;
         }
 
-        for(int i=0; i < board.length; i++) {
-            charsFound.add(word.charAt(i));
-            existBacktrack(charsFound, word, board, row+1);
+        if(col > board[0].length -1 || row > board.length -1 || row < 0 || col < 0) {
+            return false;
+        }
+
+        if(count > word.length()) return false;
+
+        if(board[row][col] == word.charAt(count) && !visited.contains(Map.of(row, col))) {
+            charsFound.add(board[row][col]);
+            visited.add(Map.of(row, col));
+            if(existBacktrack(charsFound, word, board, row+1, col, count+1, visited)) { return true;}
+            if(existBacktrack(charsFound, word, board, row, col+1, count+1, visited)) { return true;}
+            if(existBacktrack(charsFound, word, board, row-1, col, count+1, visited)) { return true;}
+            if(existBacktrack(charsFound, word, board, row, col-1, count+1, visited)) { return true;}
+            visited.remove(Map.of(row, col));
             charsFound.remove(charsFound.size() - 1);
         }
 
+
         return false;
+    }
+
+    /**
+     * 35. Search Insert Position
+     *
+     * Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+     *
+     * You must write an algorithm with O(log n) runtime complexity.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [1,3,5,6], target = 5
+     * Output: 2
+     *
+     * Example 2:
+     *
+     * Input: nums = [1,3,5,6], target = 2
+     * Output: 1
+     *
+     * Example 3:
+     *
+     * Input: nums = [1,3,5,6], target = 7
+     * Output: 4
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= nums.length <= 104
+     *     -104 <= nums[i] <= 104
+     *     nums contains distinct values sorted in ascending order.
+     *     -104 <= target <= 104
+     *
+     */
+
+    public int searchInsert(int[] nums, int target) {
+
+        int l = 0;
+        int r = nums.length -1;
+        int m;
+
+        while (l <= r) {
+            m = l + (r-l) /2;
+
+            if(nums[m] == target) {
+                return m;
+            }
+
+            else if(target < nums[m]) {
+                r=m-1;
+            }
+
+            else {
+                l=m+1;
+            }
+
+        }
+
+        return l;
+
+    }
+
+    /**
+     *
+     * 33. Search in Rotated Sorted Array
+     *
+     *
+     * There is an integer array nums sorted in ascending order (with distinct values).
+     *
+     * Prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 and become [4,5,6,7,0,1,2].
+     *
+     * Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
+     *
+     * You must write an algorithm with O(log n) runtime complexity.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [4,5,6,7,0,1,2], target = 0
+     * Output: 4
+     *
+     * Example 2:
+     *
+     * Input: nums = [4,5,6,7,0,1,2], target = 3
+     * Output: -1
+     *
+     * Example 3:
+     *
+     * Input: nums = [1], target = 0
+     * Output: -1
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= nums.length <= 5000
+     *     -104 <= nums[i] <= 104
+     *     All values of nums are unique.
+     *     nums is an ascending array that is possibly rotated.
+     *     -104 <= target <= 104
+     *
+     *
+     */
+
+    public int search(int[] nums, int target) {
+
+        int l = 0;
+        int r = nums.length -1;
+
+        while (l <= r) {
+
+            int m = l + (r-l) /2;
+
+            if(target == nums[m]) {
+                return m;
+            }
+            if (nums[l] <= nums[m]) {
+                if (target >= nums[l] && target < nums[m]) {
+                    r = m - 1;
+                } else {
+                    l = m + 1;
+                }
+            }
+            else {
+                if (target <= nums[r] && target > nums[m]) {
+                    l = m + 1;
+                } else {
+                    r = m - 1;
+                }
+            }
+        }
+        return -1;
+
+    }
+
+    /**
+     *
+     * 135. Candy
+     *
+     * There are n children standing in a line. Each child is assigned a rating value given in the integer array ratings.
+     *
+     * You are giving candies to these children subjected to the following requirements:
+     *
+     *     Each child must have at least one candy.
+     *     Children with a higher rating get more candies than their neighbors.
+     *
+     * Return the minimum number of candies you need to have to distribute the candies to the children.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: ratings = [1,0,2]
+     * Output: 5
+     * Explanation: You can allocate to the first, second and third child with 2, 1, 2 candies respectively.
+     *
+     * Example 2:
+     *
+     * Input: ratings = [1,2,2]
+     * Output: 4
+     * Explanation: You can allocate to the first, second and third child with 1, 2, 1 candies respectively.
+     * The third child gets 1 candy because it satisfies the above two conditions.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     n == ratings.length
+     *     1 <= n <= 2 * 104
+     *     0 <= ratings[i] <= 2 * 104
+     *
+     */
+
+    public int candy(int[] ratings) {
+
+        int highest = 0;
+        for (int i = 0; i < ratings.length; i++) {
+            if (ratings[i] == 0) {
+                ratings[i]++;
+            }
+
+            highest = Math.max(highest, ratings[i]);
+
+            if (i != 0) {
+                if (i != ratings.length - 1 && (ratings[i] > ratings[i - 1] && ratings[i] > ratings[i + 1])) {
+                    ratings[i]++;
+                }
+                if(ratings[i-1] == ratings[i] && ratings[i] == highest) {
+                    ratings[i-1]--;
+                }
+            }
+
+
+            if (i == 0 && i != ratings.length - 1 && ratings[i] > ratings[i + 1]) {
+                ratings[i]++;
+            }
+        }
+        return Arrays.stream(ratings).sum();
+    }
+
+    /**
+     *
+     *
+     *
+     *
+     *
+     */
+    /**
+     * Your Trie object will be instantiated and called as such:
+     * Trie obj = new Trie();
+     * obj.insert(word);
+     * boolean param_2 = obj.search(word);
+     * boolean param_3 = obj.startsWith(prefix);
+     */
+
+    public static class Trie {
+
+        //TODO
+
+        public Trie() {
+
+        }
+//
+//        public void insert(String word) {
+//
+//
+//        }
+//
+//        public boolean search(String word) {
+//
+//        }
+//
+//        public boolean startsWith(String prefix) {
+//
+//        }
+    }
+
+    /**
+     *
+     * 198. House Robber
+     *
+     * You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+     *
+     * Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [1,2,3,1]
+     * Output: 4
+     * Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+     * Total amount you can rob = 1 + 3 = 4.
+     *
+     * Example 2:
+     *
+     * Input: nums = [2,7,9,3,1]
+     * Output: 12
+     * Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
+     * Total amount you can rob = 2 + 9 + 1 = 12.
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= nums.length <= 100
+     *     0 <= nums[i] <= 400
+
+     *
+     */
+
+    public int rob(int[] nums) {
+
+        if(nums.length==1) {
+            return nums[0];
+        }
+
+        int rob1 = nums[0];
+        int rob2 = nums[1];
+        int currValue = Math.max(rob1, rob2);
+
+        for(int i = 2; i < nums.length; i++) {
+
+            currValue = Math.max(rob1 + nums[i], rob2);
+            rob1 = rob2;
+            rob2 = currValue;
+
+        }
+
+        return currValue;
     }
 
     /**

@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class Leetcode150Tests {
 
@@ -196,6 +195,8 @@ public class Leetcode150Tests {
         Assert.assertTrue(this.leetCode150.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "ABCCED"));
         Assert.assertTrue(this.leetCode150.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "SEE"));
         Assert.assertFalse(this.leetCode150.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "ABCB"));
+        Assert.assertTrue(this.leetCode150.exist(new char[][]{{'A'}}, "A"));
+        Assert.assertTrue(this.leetCode150.exist(new char[][]{{'C','A','A'},{'A','A','A'},{'B','C','D'}}, "AAB"));
     }
 
     @Test
@@ -203,6 +204,50 @@ public class Leetcode150Tests {
         Assert.assertEquals(9, this.leetCode150.longestConsecutive(new int[]{0,3,7,2,5,8,4,6,0,1}));
         Assert.assertEquals(4, this.leetCode150.longestConsecutive(new int[]{100,4,200,1,3,2}));
         Assert.assertEquals(6, this.leetCode150.longestConsecutive(new int[]{12,100,4,7,10,200,1,3,2,8,11,9}));
+    }
+
+    @Test
+    public void searchInsertTest() {
+        Assert.assertEquals(2, this.leetCode150.searchInsert(new int[]{1,3,5,6}, 5));
+        Assert.assertEquals(1, this.leetCode150.searchInsert(new int[]{1,3,5,6}, 2));
+        Assert.assertEquals(4, this.leetCode150.searchInsert(new int[]{1,3,5,6}, 7));
+        Assert.assertEquals(0, this.leetCode150.searchInsert(new int[]{4,5,6,7}, 1));
+        Assert.assertEquals(0, this.leetCode150.searchInsert(new int[]{1}, 1));
+        Assert.assertEquals(1, this.leetCode150.searchInsert(new int[]{1}, 2));
+    }
+
+    @Test
+    public void searchTest() {
+        Assert.assertEquals(4, this.leetCode150.search(new int[]{4,5,6,7,0,1,2}, 0));
+        Assert.assertEquals(2, this.leetCode150.search(new int[]{6,7,0,1,2,4,5}, 0));
+        Assert.assertEquals(-1, this.leetCode150.search(new int[]{4,5,6,7,0,1,2}, 3));
+        Assert.assertEquals(-1, this.leetCode150.search(new int[]{1}, 0));
+        Assert.assertEquals(0, this.leetCode150.search(new int[]{1}, 1));
+        Assert.assertEquals(0, this.leetCode150.search(new int[]{5,1,3}, 5));
+    }
+
+    @Test
+    public void candyTest() {
+//        Assert.assertEquals(5, this.leetCode150.candy(new int[]{1,0,2}));
+//        Assert.assertEquals(4, this.leetCode150.candy(new int[]{1,2,2}));
+        Assert.assertEquals(4, this.leetCode150.candy(new int[]{0,1,2}));
+        Assert.assertEquals(7, this.leetCode150.candy(new int[]{5,0,2}));
+    }
+
+    @Test
+    public void trieTest() {
+
+        LeetCode150.Trie tree = new LeetCode150.Trie();
+
+    }
+
+    @Test
+    public void robTest() {
+//        Assert.assertEquals(4, this.leetCode150.rob(new int[]{1,2,3,1}));
+//        Assert.assertEquals(12, this.leetCode150.rob(new int[]{2,7,9,3,1}));
+//        Assert.assertEquals(1, this.leetCode150.rob(new int[]{1}));
+//        Assert.assertEquals(1, this.leetCode150.rob(new int[]{1,1}));
+        Assert.assertEquals(4, this.leetCode150.rob(new int[]{2,1,1,2}));
     }
 
     @Test

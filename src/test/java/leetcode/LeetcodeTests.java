@@ -48,6 +48,17 @@ public class LeetcodeTests {
     }
 
     @Test
+    public void subsetXORSumTest() {
+        Assert.assertEquals(28,this.leetcode.subsetXORSum(new int[]{2,5,6}));
+    }
+
+    @Test
+    public void fizzBuzzTest() {
+        List<String> res = this.leetcode.fizzBuzz(30);
+        System.out.println();
+    }
+
+    @Test
     public void binaryTreePathsTest() {
         TreeNode nodeRight2_2 = new TreeNode(5); // Level 3
         TreeNode nodeLeft_2 = new TreeNode(2, null, nodeRight2_2); // Level 2
