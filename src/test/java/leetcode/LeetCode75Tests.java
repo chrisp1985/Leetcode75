@@ -387,6 +387,37 @@ public class LeetCode75Tests {
 
     }
 
+    @Test
+    public void guessNumberTest() {
+        this.leetCode75.guessedNumberTarget = 5;
+        Assert.assertEquals(5, this.leetCode75.guessNumber(10));
+
+        this.leetCode75.guessedNumberTarget = 8;
+        Assert.assertEquals(8, this.leetCode75.guessNumber(9));
+
+        this.leetCode75.guessedNumberTarget = 9;
+        Assert.assertEquals(9, this.leetCode75.guessNumber(9));
+
+        this.leetCode75.guessedNumberTarget = 0;
+        Assert.assertEquals(0, this.leetCode75.guessNumber(5));
+
+        this.leetCode75.guessedNumberTarget = 1702766719;
+        Assert.assertEquals(1702766719, this.leetCode75.guessNumber(2126753390));
+    }
+
+    @Test
+    public void houseRobberTest() {
+        Assert.assertEquals(4, this.leetCode75.rob(new int[] {1,2,3,1}));
+        Assert.assertEquals(12, this.leetCode75.rob(new int[] {2,7,9,3,1}));
+        Assert.assertEquals(4, this.leetCode75.rob(new int[] {2,1,1,2}));
+    }
+
+    @Test
+    public void minCostClimbingStairsTest() {
+//        Assert.assertEquals(15, this.leetCode75.minCostClimbingStairs(new int[] {10,15,20}));
+//        Assert.assertEquals(6, this.leetCode75.minCostClimbingStairs(new int[] {1,100,1,1,1,100,1,1,100,1}));
+        Assert.assertEquals(1, this.leetCode75.minCostClimbingStairs(new int[] {1,100}));
+    }
 
     @Test
     public void recentCounterTest() {

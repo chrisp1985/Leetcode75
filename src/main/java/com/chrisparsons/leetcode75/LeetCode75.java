@@ -2,7 +2,6 @@ package com.chrisparsons.leetcode75;
 
 import com.chrisparsons.leetcode75.helpers.ListNode;
 import com.chrisparsons.leetcode75.helpers.TreeNode;
-import com.sun.source.tree.Tree;
 
 import java.util.*;
 
@@ -2458,37 +2457,121 @@ public class LeetCode75 {
      *			      1 if num is lower than the picked number
      *               otherwise return 0
      */
-//    int guess(int num) {
-//        int target = 1;
-//        if(num > target) {
-//            return -1;
-//        }
-//        if(num < target) {
-//            return 1;
-//        }
-//        return 0;
-//    }
-//
-//    public int guessNumber(int n) {
-//
-//        int l = 0;
-//        int r = n;
-//        int myguess = n;
-//
-//        while(guess(myguess) != 0) {
-//            myguess = (r + l) / 2;
-//            if(guess(myguess) == -1) {
-//                r=myguess;
-//            }
-//            else if(guess(myguess) == 1) {
-//                l=myguess;
-//            }
-//        }
-//
-//        return myguess;
-//
-//    }
 
+    public int guessedNumberTarget = 1;
+
+    int guess(int num) {
+        if(num > guessedNumberTarget) {
+            return -1;
+        }
+        if(num < guessedNumberTarget) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public int guessNumber(int n) {
+
+        int l = 0;
+        int r = n;
+        int myguess = n;
+
+        while(guess(myguess) != 0) {
+            myguess = l + (r - l) / 2;
+            if(guess(myguess) == -1) {
+                r=myguess;
+            }
+            else if(guess(myguess) == 1) {
+                l=myguess;
+            }
+        }
+
+        return myguess;
+
+    }
+
+    /**
+     *
+     * 198. House Robber
+     *
+     *
+     *
+     */
+
+    public int rob(int[] nums) {
+
+        int rob1 = 0;
+        int rob2 = 0;
+
+        for(int i = 0; i < nums.length; i++) {
+
+            var tmp = Math.max(rob1 + nums[i], rob2);
+            rob1 = rob2;
+            rob2 = tmp;
+
+        }
+
+        return rob2;
+    }
+
+
+    /**
+     *
+     * 746. Min Cost Climbing Stairs
+     *
+     *
+     * You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.
+     *
+     * You can either start from the step with index 0, or the step with index 1.
+     *
+     * Return the minimum cost to reach the top of the floor.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: cost = [10,15,20]
+     * Output: 15
+     * Explanation: You will start at index 1.
+     * - Pay 15 and climb two steps to reach the top.
+     * The total cost is 15.
+     *
+     * Example 2:
+     *
+     * Input: cost = [1,100,1,1,1,100,1,1,100,1]
+     * Output: 6
+     * Explanation: You will start at index 0.
+     * - Pay 1 and climb two steps to reach index 2.
+     * - Pay 1 and climb two steps to reach index 4.
+     * - Pay 1 and climb two steps to reach index 6.
+     * - Pay 1 and climb one step to reach index 7.
+     * - Pay 1 and climb two steps to reach index 9.
+     * - Pay 1 and climb one step to reach the top.
+     * The total cost is 6.
+     *
+     *
+     *
+     */
+
+    public int minCostClimbingStairs(int[] cost) {
+
+        int opt1 = cost[0];
+        int opt2 = cost[1];
+
+        if(cost.length == 2) {
+            return Math.min(opt1, opt2);
+        }
+
+        for(int i = 2; i < cost.length -1; i++) {
+
+            var tmp = Math.min(opt1 + cost[i], opt2 + cost[i]);
+            opt1 = opt2;
+            opt2 = tmp;
+
+        }
+
+        return Math.min(opt1 + cost[cost.length -1], opt2);
+    }
 
     /**
      *
