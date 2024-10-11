@@ -2574,9 +2574,7 @@ public class LeetCode75 {
     }
 
     /**
-     *
      * 2300. Successful Pairs of Spells and Potions
-     *
      *
      *
      * You are given two positive integer arrays spells and potions, of length n and m respectively, where spells[i] represents the strength of the ith spell and potions[j] represents the strength of the jth potion.
@@ -2606,30 +2604,86 @@ public class LeetCode75 {
      * - 1st spell: 1 * [8,5,8] = [8,5,8]. 0 pairs are successful.
      * - 2nd spell: 2 * [8,5,8] = [16,10,16]. 2 pairs are successful.
      * Thus, [2,0,2] is returned.
-     *
-     *
-     *
-     * Constraints:
-     *
-     *     n == spells.length
-     *     m == potions.length
-     *     1 <= n, m <= 105
-     *     1 <= spells[i], potions[i] <= 105
-     *     1 <= success <= 1010
-     *
-     *
-     *
      */
 
     public int[] successfulPairs(int[] spells, int[] potions, long success) {
 
-        //TODO
+        Arrays.sort(potions);
+        int[] res = new int[spells.length];
 
-        return new int[]{};
+        for(int i = 0; i < spells.length; i++) {
 
+            int l = 0;
+            int r = potions.length -1;
+
+            while (l <= r) {
+                int mid = l + (r-l) /2;
+
+                long result = (long) spells[i] * potions[mid];
+                if(result >= success) {
+
+                    r = mid -1;
+                }
+
+                else {
+                    l = mid + 1;
+                }
+            }
+            res[i] = potions.length - l;
+        }
+
+        return res;
     }
 
+    /**
+     *
+     * 162. Find Peak Element
+     *
+     * A peak element is an element that is strictly greater than its neighbors.
+     *
+     * Given a 0-indexed integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
+     *
+     * You may imagine that nums[-1] = nums[n] = -∞. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.
+     *
+     * You must write an algorithm that runs in O(log n) time.
+     */
 
+    public int findPeakElement(int[] nums) { // O(n)
+
+        int l = 0;
+        int r = nums.length;
+
+        if(nums.length ==1) {
+            return 0;
+        }
+
+        if(nums.length == 2) {
+            return Math.max(nums[0], nums[1]) == nums[0] ? 0 : 1;
+        }
+
+        while(l < r) {
+            int mid = l + (r-l) /2;
+
+            if(mid == 0) {
+                return Math.max(nums[0], nums[1]) == nums[0] ? 0 : 1;
+            }
+
+            if(mid == nums.length -1) {
+                return Math.max(nums[mid], nums[mid-1]) == nums[mid] ? mid : mid-1;
+            }
+
+            if(nums[mid-1] > nums[mid]) {
+                r = mid-1;
+            }
+            else if (nums[mid+1] > nums[mid]) {
+                l = mid +1;
+            }
+            else {
+                return mid;
+            }
+        }
+        return l;
+    }
 
     /**
      *
@@ -2752,6 +2806,195 @@ public class LeetCode75 {
 
         memo.put(n, trib(n-1, memo) + trib (n-2, memo) + trib (n-3, memo));
         return memo.get(n);
+    }
+
+    /**
+     *
+     * 435. Non-overlapping Intervals
+     *
+     * Given an array of intervals intervals where intervals[i] = [starti, endi], return the minimum number of intervals
+     * you need to remove to make the rest of the intervals non-overlapping.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: intervals = [[1,2],[2,3],[3,4],[1,3]]
+     * Output: 1
+     * Explanation: [1,3] can be removed and the rest of the intervals are non-overlapping.
+     *
+     * Example 2:
+     *
+     * Input: intervals = [[1,2],[1,2],[1,2]]
+     * Output: 2
+     * Explanation: You need to remove two [1,2] to make the rest of the intervals non-overlapping.
+     *
+     * Example 3:
+     *
+     * Input: intervals = [[1,2],[2,3]]
+     * Output: 0
+     * Explanation: You don't need to remove any of the intervals since they're already non-overlapping.
+     *
+     *
+     */
+
+    public int eraseOverlapIntervals2(int[][] intervals) {
+
+        //TODO
+
+        List<int[]> listOfIntervalsFound = new ArrayList<>();
+
+        for(int i = 0; i < intervals.length; i++) {
+
+            boolean found = false;
+
+            for(int j = 0; j < listOfIntervalsFound.size(); j++) {
+
+                if((intervals[i][0] > listOfIntervalsFound.get(j)[0] && intervals[i][1] < listOfIntervalsFound.get(j)[1]) // over the middle
+                        || (intervals[i][0] < listOfIntervalsFound.get(j)[0] && intervals[i][1] > listOfIntervalsFound.get(j)[0]) // over the left boundary
+                        || (intervals[i][0] < listOfIntervalsFound.get(j)[1] && intervals[i][1] > listOfIntervalsFound.get(j)[1]) // over the right boundary
+                        || (intervals[i][0] < listOfIntervalsFound.get(j)[0] && intervals[i][1] > listOfIntervalsFound.get(j)[1]) // enveloping
+                || (intervals[i][0] == listOfIntervalsFound.get(j)[0] && intervals[i][1] == listOfIntervalsFound.get(j)[1])) { // the same
+                    found = true;
+                    break;
+                }
+            }
+
+            if(!found) {
+                listOfIntervalsFound.add(intervals[i]);
+            }
+
+        }
+
+        return intervals.length - listOfIntervalsFound.size();
+    }
+
+
+    public int eraseOverlapIntervals(int[][] intervals) {
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[1]));
+
+        /**
+         * NOTE: Needs to be 1 so the smaller intervals take priority over one that's massive and engulfs the others.
+         *
+         * If it's a[0], it will mean that [1,100], [2,12], [12, 15] would be 1 valid interval rather than 2:
+         *  order: [1,100], [2,12], [12, 15]
+         * If it's a[1], it will mean that [1,100], [2,12], [12, 15] would be 2 valid intervals rather than 1.
+         *  order: [2,12], [12, 15], [1,100]
+         *
+          */
+
+        int prevInterval = 0;
+        List<int[]> overlappingIntervals = new ArrayList<>();
+
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] >= intervals[prevInterval][1]) {
+                prevInterval = i;
+                overlappingIntervals.add(intervals[i]);
+            }
+        }
+        return intervals.length - (overlappingIntervals.size() + 1); // Because we start at int=1
+    }
+
+    /**
+     *
+     * 452. Minimum Number of Arrows to Burst Balloons
+     *
+     *
+     * There are some spherical balloons taped onto a flat wall that represents the XY-plane. The balloons are represented as a 2D integer array points where points[i] = [xstart, xend] denotes a balloon whose horizontal diameter stretches between xstart and xend. You do not know the exact y-coordinates of the balloons.
+     *
+     * Arrows can be shot up directly vertically (in the positive y-direction) from different points along the x-axis. A balloon with xstart and xend is burst by an arrow shot at x if xstart <= x <= xend. There is no limit to the number of arrows that can be shot. A shot arrow keeps traveling up infinitely, bursting any balloons in its path.
+     *
+     * Given the array points, return the minimum number of arrows that must be shot to burst all balloons.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: points = [[10,16],[2,8],[1,6],[7,12]]
+     * Output: 2
+     * Explanation: The balloons can be burst by 2 arrows:
+     * - Shoot an arrow at x = 6, bursting the balloons [2,8] and [1,6].
+     * - Shoot an arrow at x = 11, bursting the balloons [10,16] and [7,12].
+     *
+     * Example 2:
+     *
+     * Input: points = [[1,2],[3,4],[5,6],[7,8]]
+     * Output: 4
+     * Explanation: One arrow needs to be shot for each balloon for a total of 4 arrows.
+     *
+     * Example 3:
+     *
+     * Input: points = [[1,2],[2,3],[3,4],[4,5]]
+     * Output: 2
+     * Explanation: The balloons can be burst by 2 arrows:
+     * - Shoot an arrow at x = 2, bursting the balloons [1,2] and [2,3].
+     * - Shoot an arrow at x = 4, bursting the balloons [3,4] and [4,5].
+     */
+
+    public int findMinArrowShots(int[][] points) {
+
+        Arrays.sort(points, Comparator.comparingInt(a -> a[1]));
+        int prev = points[0][1];
+        int arrowCount = points.length;
+
+        for (int i = 1; i < points.length; i++) {
+
+            if (points[i][0] <= prev) {
+                arrowCount--;
+                prev = Integer.MIN_VALUE;
+            } else {
+                prev = points[i][1];
+            }
+
+        }
+
+        return arrowCount;
+
+        // TODO
+    }
+
+
+    /**
+     *
+     * 338. Counting Bits
+     *
+     *
+     *
+     * Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: n = 2
+     * Output: [0,1,1]
+     * Explanation:
+     * 0 --> 0
+     * 1 --> 1
+     * 2 --> 10
+     *
+     * Example 2:
+     *
+     * Input: n = 5
+     * Output: [0,1,1,2,1,2]
+     * Explanation:
+     * 0 --> 0
+     * 1 --> 1
+     * 2 --> 10
+     * 3 --> 11
+     * 4 --> 100
+     * 5 --> 101
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     0 <= n <= 105
+     */
+
+    public int[] countBits(int n) {
+
+        return new int[] {};
     }
 
 }

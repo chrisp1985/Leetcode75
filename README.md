@@ -15,6 +15,42 @@ not achieve O1 time/space efficiency, they're practice.
 
 # Patterns
 
+## Prefix Sum
+TBD Description
+
+### Used For
+TBD Summary
+
+### Implementation Example
+```
+Code here.
+```
+
+## Intervals
+Sort the intervals, then check if the start of the current one is before the end of the previous one.
+
+### Used For
+2D arrays, consisting of an array of a, b where a is the start of the interval and b is the end.
+
+### Implementation Example
+```
+    public int eraseOverlapIntervals(int[][] intervals) {
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+
+        int prev = 0;
+        int count = 1;
+
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] >= intervals[prev][1]) {
+                prev = i;
+                count++;
+            }
+        }
+        return intervals.length - count;
+    }
+```
+
+
 ## Binary Search
 Set a left and right pointer, then set the middle. If the target is higher than the middle, shift the left pointer to the middle+1
 and reset the middle. If the target is lower than the middle, shift the right pointer to the middle-1 and reset the middle.
@@ -55,7 +91,20 @@ Sorted arrays only. The quickest way to find a target in a sorted array.
 Here, you're checking whether you've matched against a target. If the target is in the array, you can find its index with a handful
 of iterations. If it's not in the array, return -1 to show that it's not there.
 
-## Fast/Slow
+
+## Two Pointers
+TBD Description
+
+### Used For
+TBD Summary
+
+### Implementation Example
+```
+Code here.
+```
+
+
+## Fast/Slow Pointers
 Set a pointer to move through each element (`i++`) and a pointer to move through each 2 elements (`i+2`).
 ### Used For
 Iterating through a list you can only traverse one way (eg a linked list) to find the middle element. Checking if a linkedlist
@@ -82,6 +131,63 @@ Stuff like anagrams. Does X contain all elements of Y? Specifically with anagram
 So it's very easy to just ++ the value for an element. NOTE: You can also use Hashmap for this kind of thing.
 ### Implementation
 TODO
+
+
+## Sliding Window
+TBD Description
+
+### Used For
+TBD Summary
+
+### Implementation Example
+```
+Code here.
+```
+
+## Binary Search
+TBD Description
+
+### Used For
+TBD Summary
+
+### Implementation Example
+```
+Code here.
+```
+
+## Depth First Search (DFS) and Breadth First Search (BFS)
+TBD Description
+
+### Used For
+TBD Summary
+
+### Implementation Example
+```
+Code here.
+```
+
+## Matrices
+TBD Description
+
+### Used For
+TBD Summary
+
+### Implementation Example
+```
+Code here.
+```
+
+## Monotonic Stack
+TBD Description
+
+### Used For
+TBD Summary
+
+### Implementation Example
+```
+Code here.
+```
+
 
 ## Backtracking
 Checks all permutations of a set of elements.
