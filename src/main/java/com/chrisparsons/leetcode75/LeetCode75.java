@@ -1913,40 +1913,6 @@ public class LeetCode75 {
         return r_stack.size() > d_stack.size() ? "RADIANT" : "DIRE";
     }
 
-    public String predictPartyVictory2(String senate) {
-
-        char[] senateArray = senate.toCharArray();
-
-        int radiantCount = 0;
-        int direCount = 0;
-
-        // if left is different to right, remove right.
-        // if right is different to left, remove left.
-
-        for(int i = 0; i < senateArray.length; i++) {
-
-            if(i==0) {
-                if(senateArray[i] == 'R') {
-                    radiantCount++;
-                }
-                else {
-                    direCount++;
-                }
-            }
-            else if(senateArray[i] != senateArray[i-1]) {
-                radiantCount++;
-                direCount = Math.max(0, direCount-1);
-            }
-            else {
-                direCount++;
-                radiantCount = Math.max(0, radiantCount-1);
-            }
-        }
-
-        return direCount > radiantCount ? "Dire" : "Radiant";
-
-    }
-
     /**
      *
      * #####################################################################################
@@ -1957,8 +1923,8 @@ public class LeetCode75 {
 
     /**
      *
-     *
      * 2095. Delete the Middle Node of a Linked List
+     *
      *
      * You are given the head of a linked list. Delete the middle node, and return the head of the modified linked list.
      *
@@ -2401,6 +2367,800 @@ public class LeetCode75 {
 
     }
 
+    /**
+     *
+     * 1448. Count Good Nodes in Binary Tree
+     *
+     *
+     * Given a binary tree root, a node X in the tree is named good if in the path from root to X there are no nodes with a value greater than X.
+     *
+     * Return the number of good nodes in the binary tree.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: root = [3,1,4,3,null,1,5]
+     * Output: 4
+     * Explanation: Nodes in blue are good.
+     * Root Node (3) is always a good node.
+     * Node 4 -> (3,4) is the maximum value in the path starting from the root.
+     * Node 5 -> (3,4,5) is the maximum value in the path
+     * Node 3 -> (3,1,3) is the maximum value in the path.
+     *
+     * Example 2:
+     *
+     * Input: root = [3,3,null,4,2]
+     * Output: 3
+     * Explanation: Node 2 -> (3, 3, 2) is not good, because "3" is higher than it.
+     *
+     * Example 3:
+     *
+     * Input: root = [1]
+     * Output: 1
+     * Explanation: Root is considered as good.
+     *
+     */
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     *     int val;
+     *     TreeNode left;
+     *     TreeNode right;
+     *     TreeNode() {}
+     *     TreeNode(int val) { this.val = val; }
+     *     TreeNode(int val, TreeNode left, TreeNode right) {
+     *         this.val = val;
+     *         this.left = left;
+     *         this.right = right;
+     *     }
+     * }
+     */
+
+    public int goodNodes(TreeNode root) {
+
+        //TODO
+        return 0;
+    }
+
+    /**
+     * 437. Path Sum III
+     *
+     *
+     * Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values along the path equals targetSum.
+     *
+     * The path does not need to start or end at the root or a leaf, but it must go downwards (i.e., traveling only from parent nodes to child nodes).
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: root = [10,5,-3,3,2,null,11,3,-2,null,1], targetSum = 8
+     * Output: 3
+     * Explanation: The paths that sum to 8 are shown.
+     *
+     * Example 2:
+     *
+     * Input: root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
+     * Output: 3
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     The number of nodes in the tree is in the range [0, 1000].
+     *     -109 <= Node.val <= 109
+     *     -1000 <= targetSum <= 1000
+     *
+     */
+
+    public int pathSum(TreeNode root, int targetSum) {
+
+        //TODO
+        return 0;
+    }
+
+    /**
+     * 1372. Longest ZigZag Path in a Binary Tree
+     *
+     * You are given the root of a binary tree.
+     *
+     * A ZigZag path for a binary tree is defined as follow:
+     *
+     *     Choose any node in the binary tree and a direction (right or left).
+     *     If the current direction is right, move to the right child of the current node; otherwise, move to the left child.
+     *     Change the direction from right to left or from left to right.
+     *     Repeat the second and third steps until you can't move in the tree.
+     *
+     * Zigzag length is defined as the number of nodes visited - 1. (A single node has a length of 0).
+     *
+     * Return the longest ZigZag path contained in that tree.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: root = [1,null,1,1,1,null,null,1,1,null,1,null,null,null,1]
+     * Output: 3
+     * Explanation: Longest ZigZag path in blue nodes (right -> left -> right).
+     *
+     * Example 2:
+     *
+     * Input: root = [1,1,1,null,1,null,null,1,1,null,1]
+     * Output: 4
+     * Explanation: Longest ZigZag path in blue nodes (left -> right -> left -> right).
+     *
+     * Example 3:
+     *
+     * Input: root = [1]
+     * Output: 0
+     *
+     */
+
+    public int longestZigZag(TreeNode root) {
+
+        //TODO
+        return 0;
+
+    }
+
+    /**
+     * 236. Lowest Common Ancestor of a Binary Tree
+     *
+     *
+     * Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+     *
+     * According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+     * Output: 3
+     * Explanation: The LCA of nodes 5 and 1 is 3.
+     *
+     * Example 2:
+     *
+     * Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+     * Output: 5
+     * Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.
+     *
+     * Example 3:
+     *
+     * Input: root = [1,2], p = 1, q = 2
+     * Output: 1
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     The number of nodes in the tree is in the range [2, 105].
+     *     -109 <= Node.val <= 109
+     *     All Node.val are unique.
+     *     p != q
+     *     p and q will exist in the tree.
+     *
+     */
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+
+        //TODO
+        return new TreeNode();
+    }
+
+    /**
+     *
+     * ###########################################################################################
+     * #################################    BINARY TREE / BFS    #################################
+     * ###########################################################################################
+     *
+     */
+
+    /**
+     * 199. Binary Tree Right Side View
+     *
+     * Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: root = [1,2,3,null,5,null,4]
+     * Output: [1,3,4]
+     *
+     * Example 2:
+     *
+     * Input: root = [1,null,3]
+     * Output: [1,3]
+     *
+     * Example 3:
+     *
+     * Input: root = []
+     * Output: []
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     The number of nodes in the tree is in the range [0, 100].
+     *     -100 <= Node.val <= 100
+     *
+     */
+
+    public List<Integer> rightSideView(TreeNode root) {
+
+        //TODO
+        return List.of(1);
+    }
+
+    /**
+     * 1161. Maximum Level Sum of a Binary Tree
+     *
+     * Given the root of a binary tree, the level of its root is 1, the level of its children is 2, and so on.
+     *
+     * Return the smallest level x such that the sum of all the values of nodes at level x is maximal.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: root = [1,7,0,7,-8,null,null]
+     * Output: 2
+     * Explanation:
+     * Level 1 sum = 1.
+     * Level 2 sum = 7 + 0 = 7.
+     * Level 3 sum = 7 + -8 = -1.
+     * So we return the level with the maximum sum which is level 2.
+     *
+     * Example 2:
+     *
+     * Input: root = [989,null,10250,98693,-89388,null,null,null,-32127]
+     * Output: 2
+     *
+     *
+     */
+
+    public int maxLevelSum(TreeNode root) {
+
+        //TODO
+        return 0;
+
+    }
+
+
+    /**
+     *
+     * ###########################################################################################
+     * #################################    BINARY SEARCH TREE    ################################
+     * ###########################################################################################
+     *
+     */
+
+    /**
+     *
+     * 700. Search in a Binary Search Tree
+     *
+     * You are given the root of a binary search tree (BST) and an integer val.
+     *
+     * Find the node in the BST that the node's value equals val and return the subtree rooted with that node. If such a node does not exist, return null.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: root = [4,2,7,1,3], val = 2
+     * Output: [2,1,3]
+     *
+     * Example 2:
+     *
+     * Input: root = [4,2,7,1,3], val = 5
+     * Output: []
+     *
+     *
+     *
+     */
+
+    public TreeNode searchBST(TreeNode root, int val) {
+
+        //TODO
+        return new TreeNode();
+    }
+
+    /**
+     * 450. Delete Node in a BST
+     *
+     * Given a root node reference of a BST and a key, delete the node with the given key in the BST. Return the root node reference (possibly updated) of the BST.
+     *
+     * Basically, the deletion can be divided into two stages:
+     *
+     *     Search for a node to remove.
+     *     If the node is found, delete the node.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: root = [5,3,6,2,4,null,7], key = 3
+     * Output: [5,4,6,2,null,null,7]
+     * Explanation: Given key to delete is 3. So we find the node with value 3 and delete it.
+     * One valid answer is [5,4,6,2,null,null,7], shown in the above BST.
+     * Please notice that another valid answer is [5,2,6,null,4,null,7] and it's also accepted.
+     *
+     * Example 2:
+     *
+     * Input: root = [5,3,6,2,4,null,7], key = 0
+     * Output: [5,3,6,2,4,null,7]
+     * Explanation: The tree does not contain a node with value = 0.
+     *
+     * Example 3:
+     *
+     * Input: root = [], key = 0
+     * Output: []
+     */
+
+    public TreeNode deleteNode(TreeNode root, int key) {
+
+        //TODO
+        return new TreeNode();
+
+    }
+
+    /**
+     *
+     * ###########################################################################################
+     * #################################    GRAPHS DFS    ################################
+     * ###########################################################################################
+     *
+     */
+
+    /**
+     * 841. Keys and Rooms
+     *
+     * There are n rooms labeled from 0 to n - 1 and all the rooms are locked except for room 0. Your goal is to visit all the rooms. However, you cannot enter a locked room without having its key.
+     *
+     * When you visit a room, you may find a set of distinct keys in it. Each key has a number on it, denoting which room it unlocks, and you can take all of them with you to unlock the other rooms.
+     *
+     * Given an array rooms where rooms[i] is the set of keys that you can obtain if you visited room i, return true if you can visit all the rooms, or false otherwise.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: rooms = [[1],[2],[3],[]]
+     * Output: true
+     * Explanation:
+     * We visit room 0 and pick up key 1.
+     * We then visit room 1 and pick up key 2.
+     * We then visit room 2 and pick up key 3.
+     * We then visit room 3.
+     * Since we were able to visit every room, we return true.
+     *
+     * Example 2:
+     *
+     * Input: rooms = [[1,3],[3,0,1],[2],[0]]
+     * Output: false
+     * Explanation: We can not enter room number 2 since the only key that unlocks it is in that room.
+     *
+     *
+     */
+
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+
+        //TODO
+        return false;
+
+    }
+
+    /**
+     * 547. Number of Provinces
+     *
+     * There are n cities. Some of them are connected, while some are not. If city a is connected directly with city b, and city b is connected directly with city c, then city a is connected indirectly with city c.
+     *
+     * A province is a group of directly or indirectly connected cities and no other cities outside of the group.
+     *
+     * You are given an n x n matrix isConnected where isConnected[i][j] = 1 if the ith city and the jth city are directly connected, and isConnected[i][j] = 0 otherwise.
+     *
+     * Return the total number of provinces.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: isConnected = [[1,1,0],[1,1,0],[0,0,1]]
+     * Output: 2
+     *
+     * Example 2:
+     *
+     * Input: isConnected = [[1,0,0],[0,1,0],[0,0,1]]
+     * Output: 3
+     *
+     *
+     *
+     */
+
+    public int findCircleNum(int[][] isConnected) {
+
+        //TODO
+        return 0;
+    }
+
+    /**
+     * 1466. Reorder Routes to Make All Paths Lead to the City Zero
+     *
+     * There are n cities numbered from 0 to n - 1 and n - 1 roads such that there is only one way to travel between two different cities (this network form a tree). Last year, The ministry of transport decided to orient the roads in one direction because they are too narrow.
+     *
+     * Roads are represented by connections where connections[i] = [ai, bi] represents a road from city ai to city bi.
+     *
+     * This year, there will be a big event in the capital (city 0), and many people want to travel to this city.
+     *
+     * Your task consists of reorienting some roads such that each city can visit the city 0. Return the minimum number of edges changed.
+     *
+     * It's guaranteed that each city can reach city 0 after reorder.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: n = 6, connections = [[0,1],[1,3],[2,3],[4,0],[4,5]]
+     * Output: 3
+     * Explanation: Change the direction of edges show in red such that each node can reach the node 0 (capital).
+     *
+     * Example 2:
+     *
+     * Input: n = 5, connections = [[1,0],[1,2],[3,2],[3,4]]
+     * Output: 2
+     * Explanation: Change the direction of edges show in red such that each node can reach the node 0 (capital).
+     *
+     * Example 3:
+     *
+     * Input: n = 3, connections = [[1,0],[2,0]]
+     * Output: 0
+     *
+     */
+
+    public int minReorder(int n, int[][] connections) {
+
+        //TODO
+        return 0;
+    }
+
+    /**
+     * 399. Evaluate Division
+     *
+     * You are given an array of variable pairs equations and an array of real numbers values, where equations[i] = [Ai, Bi] and values[i] represent the equation Ai / Bi = values[i]. Each Ai or Bi is a string that represents a single variable.
+     *
+     * You are also given some queries, where queries[j] = [Cj, Dj] represents the jth query where you must find the answer for Cj / Dj = ?.
+     *
+     * Return the answers to all queries. If a single answer cannot be determined, return -1.0.
+     *
+     * Note: The input is always valid. You may assume that evaluating the queries will not result in division by zero and that there is no contradiction.
+     *
+     * Note: The variables that do not occur in the list of equations are undefined, so the answer cannot be determined for them.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: equations = [["a","b"],["b","c"]], values = [2.0,3.0], queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]
+     * Output: [6.00000,0.50000,-1.00000,1.00000,-1.00000]
+     * Explanation:
+     * Given: a / b = 2.0, b / c = 3.0
+     * queries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ?
+     * return: [6.0, 0.5, -1.0, 1.0, -1.0 ]
+     * note: x is undefined => -1.0
+     *
+     * Example 2:
+     *
+     * Input: equations = [["a","b"],["b","c"],["bc","cd"]], values = [1.5,2.5,5.0], queries = [["a","c"],["c","b"],["bc","cd"],["cd","bc"]]
+     * Output: [3.75000,0.40000,5.00000,0.20000]
+     *
+     * Example 3:
+     *
+     * Input: equations = [["a","b"]], values = [0.5], queries = [["a","b"],["b","a"],["a","c"],["x","y"]]
+     * Output: [0.50000,2.00000,-1.00000,-1.00000]
+     *
+     *
+     */
+
+    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+
+        //TODO
+        return new double[]{0.0};
+    }
+
+    /**
+     *
+     * ###########################################################################################
+     * #################################    GRAPHS BFS    ################################
+     * ###########################################################################################
+     *
+     */
+
+    /**
+     * 1926. Nearest Exit from Entrance in Maze
+     *
+     * You are given an m x n matrix maze (0-indexed) with empty cells (represented as '.') and walls (represented as '+'). You are also given the entrance of the maze, where entrance = [entrancerow, entrancecol] denotes the row and column of the cell you are initially standing at.
+     *
+     * In one step, you can move one cell up, down, left, or right. You cannot step into a cell with a wall, and you cannot step outside the maze. Your goal is to find the nearest exit from the entrance. An exit is defined as an empty cell that is at the border of the maze. The entrance does not count as an exit.
+     *
+     * Return the number of steps in the shortest path from the entrance to the nearest exit, or -1 if no such path exists.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: maze = [["+","+",".","+"],[".",".",".","+"],["+","+","+","."]], entrance = [1,2]
+     * Output: 1
+     * Explanation: There are 3 exits in this maze at [1,0], [0,2], and [2,3].
+     * Initially, you are at the entrance cell [1,2].
+     * - You can reach [1,0] by moving 2 steps left.
+     * - You can reach [0,2] by moving 1 step up.
+     * It is impossible to reach [2,3] from the entrance.
+     * Thus, the nearest exit is [0,2], which is 1 step away.
+     *
+     * Example 2:
+     *
+     * Input: maze = [["+","+","+"],[".",".","."],["+","+","+"]], entrance = [1,0]
+     * Output: 2
+     * Explanation: There is 1 exit in this maze at [1,2].
+     * [1,0] does not count as an exit since it is the entrance cell.
+     * Initially, you are at the entrance cell [1,0].
+     * - You can reach [1,2] by moving 2 steps right.
+     * Thus, the nearest exit is [1,2], which is 2 steps away.
+     *
+     * Example 3:
+     *
+     * Input: maze = [[".","+"]], entrance = [0,0]
+     * Output: -1
+     * Explanation: There are no exits in this maze.
+     */
+
+    public int nearestExit(char[][] maze, int[] entrance) {
+
+        //TODO
+        return 0;
+
+    }
+
+    /**
+     * 994. Rotting Oranges
+     *
+     * You are given an m x n grid where each cell can have one of three values:
+     *
+     *     0 representing an empty cell,
+     *     1 representing a fresh orange, or
+     *     2 representing a rotten orange.
+     *
+     * Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.
+     *
+     * Return the minimum number of minutes that must elapse until no cell has a fresh orange. If this is impossible, return -1.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: grid = [[2,1,1],[1,1,0],[0,1,1]]
+     * Output: 4
+     *
+     * Example 2:
+     *
+     * Input: grid = [[2,1,1],[0,1,1],[1,0,1]]
+     * Output: -1
+     * Explanation: The orange in the bottom left corner (row 2, column 0) is never rotten, because rotting only happens 4-directionally.
+     *
+     * Example 3:
+     *
+     * Input: grid = [[0,2]]
+     * Output: 0
+     * Explanation: Since there are already no fresh oranges at minute 0, the answer is just 0.
+     */
+
+    public int orangesRotting(int[][] grid) {
+
+        //TODO
+        return 0;
+    }
+
+    /**
+     *
+     * ###########################################################################################
+     * #################################    HEAP/PRIORITY QUEUE    ###############################
+     * ###########################################################################################
+     *
+     */
+
+    /**
+     *
+     * 215. Kth Largest Element in an Array
+     *
+     *
+     * Given an integer array nums and an integer k, return the kth largest element in the array.
+     *
+     * Note that it is the kth largest element in the sorted order, not the kth distinct element.
+     *
+     * Can you solve it without sorting?
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [3,2,1,5,6,4], k = 2
+     * Output: 5
+     *
+     * Example 2:
+     *
+     * Input: nums = [3,2,3,1,2,4,5,5,6], k = 4
+     * Output: 4
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= k <= nums.length <= 105
+     *     -104 <= nums[i] <= 104
+     *
+     *
+     *
+     */
+
+    public int findKthLargest(int[] nums, int k) {
+
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+
+        for(int i = 0; i < k; i++) {
+
+            queue.offer(nums[i]);
+
+        }
+
+        for(int j = k; j < nums.length; j++) {
+
+            if(nums[j] > queue.peek()) {
+
+                queue.remove();
+
+                queue.offer(nums[j]);
+
+            }
+
+        }
+
+        return queue.remove();
+
+    }
+
+    /**
+     * 2336. Smallest Number in Infinite Set
+     *
+     * You have a set which contains all positive integers [1, 2, 3, 4, 5, ...].
+     *
+     * Implement the SmallestInfiniteSet class:
+     *
+     *     SmallestInfiniteSet() Initializes the SmallestInfiniteSet object to contain all positive integers.
+     *     int popSmallest() Removes and returns the smallest integer contained in the infinite set.
+     *     void addBack(int num) Adds a positive integer num back into the infinite set, if it is not already in the infinite set.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input
+     * ["SmallestInfiniteSet", "addBack", "popSmallest", "popSmallest", "popSmallest", "addBack", "popSmallest", "popSmallest", "popSmallest"]
+     * [[], [2], [], [], [], [1], [], [], []]
+     * Output
+     * [null, null, 1, 2, 3, null, 1, 4, 5]
+     *
+     * Explanation
+     * SmallestInfiniteSet smallestInfiniteSet = new SmallestInfiniteSet();
+     * smallestInfiniteSet.addBack(2);    // 2 is already in the set, so no change is made.
+     * smallestInfiniteSet.popSmallest(); // return 1, since 1 is the smallest number, and remove it from the set.
+     * smallestInfiniteSet.popSmallest(); // return 2, and remove it from the set.
+     * smallestInfiniteSet.popSmallest(); // return 3, and remove it from the set.
+     * smallestInfiniteSet.addBack(1);    // 1 is added back to the set.
+     * smallestInfiniteSet.popSmallest(); // return 1, since 1 was added back to the set and
+     *                                    // is the smallest number, and remove it from the set.
+     * smallestInfiniteSet.popSmallest(); // return 4, and remove it from the set.
+     * smallestInfiniteSet.popSmallest(); // return 5, and remove it from the set.
+     */
+
+
+    /**
+     * 2542. Maximum Subsequence Score
+     *
+     * You are given two 0-indexed integer arrays nums1 and nums2 of equal length n and a positive integer k. You must choose a subsequence of indices from nums1 of length k.
+     *
+     * For chosen indices i0, i1, ..., ik - 1, your score is defined as:
+     *
+     *     The sum of the selected elements from nums1 multiplied with the minimum of the selected elements from nums2.
+     *     It can defined simply as: (nums1[i0] + nums1[i1] +...+ nums1[ik - 1]) * min(nums2[i0] , nums2[i1], ... ,nums2[ik - 1]).
+     *
+     * Return the maximum possible score.
+     *
+     * A subsequence of indices of an array is a set that can be derived from the set {0, 1, ..., n-1} by deleting some or no elements.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums1 = [1,3,3,2], nums2 = [2,1,3,4], k = 3
+     * Output: 12
+     * Explanation:
+     * The four possible subsequence scores are:
+     * - We choose the indices 0, 1, and 2 with score = (1+3+3) * min(2,1,3) = 7.
+     * - We choose the indices 0, 1, and 3 with score = (1+3+2) * min(2,1,4) = 6.
+     * - We choose the indices 0, 2, and 3 with score = (1+3+2) * min(2,3,4) = 12.
+     * - We choose the indices 1, 2, and 3 with score = (3+3+2) * min(1,3,4) = 8.
+     * Therefore, we return the max score, which is 12.
+     *
+     * Example 2:
+     *
+     * Input: nums1 = [4,2,3,1,1], nums2 = [7,5,10,9,6], k = 1
+     * Output: 30
+     * Explanation:
+     * Choosing index 2 is optimal: nums1[2] * nums2[2] = 3 * 10 = 30 is the maximum possible score.
+     */
+
+    public long maxScore(int[] nums1, int[] nums2, int k) {
+
+        //TODO
+        return 0L;
+    }
+
+    /**
+     *
+     * 2462. Total Cost to Hire K Workers
+     *
+     * You are given a 0-indexed integer array costs where costs[i] is the cost of hiring the ith worker.
+     *
+     * You are also given two integers k and candidates. We want to hire exactly k workers according to the following rules:
+     *
+     *     You will run k sessions and hire exactly one worker in each session.
+     *     In each hiring session, choose the worker with the lowest cost from either the first candidates workers or the last candidates workers. Break the tie by the smallest index.
+     *         For example, if costs = [3,2,7,7,1,2] and candidates = 2, then in the first hiring session, we will choose the 4th worker because they have the lowest cost [3,2,7,7,1,2].
+     *         In the second hiring session, we will choose 1st worker because they have the same lowest cost as 4th worker but they have the smallest index [3,2,7,7,2]. Please note that the indexing may be changed in the process.
+     *     If there are fewer than candidates workers remaining, choose the worker with the lowest cost among them. Break the tie by the smallest index.
+     *     A worker can only be chosen once.
+     *
+     * Return the total cost to hire exactly k workers.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: costs = [17,12,10,2,7,2,11,20,8], k = 3, candidates = 4
+     * Output: 11
+     * Explanation: We hire 3 workers in total. The total cost is initially 0.
+     * - In the first hiring round we choose the worker from [17,12,10,2,7,2,11,20,8]. The lowest cost is 2, and we break the tie by the smallest index, which is 3. The total cost = 0 + 2 = 2.
+     * - In the second hiring round we choose the worker from [17,12,10,7,2,11,20,8]. The lowest cost is 2 (index 4). The total cost = 2 + 2 = 4.
+     * - In the third hiring round we choose the worker from [17,12,10,7,11,20,8]. The lowest cost is 7 (index 3). The total cost = 4 + 7 = 11. Notice that the worker with index 3 was common in the first and last four workers.
+     * The total hiring cost is 11.
+     *
+     * Example 2:
+     *
+     * Input: costs = [1,2,4,1], k = 3, candidates = 3
+     * Output: 4
+     * Explanation: We hire 3 workers in total. The total cost is initially 0.
+     * - In the first hiring round we choose the worker from [1,2,4,1]. The lowest cost is 1, and we break the tie by the smallest index, which is 0. The total cost = 0 + 1 = 1. Notice that workers with index 1 and 2 are common in the first and last 3 workers.
+     * - In the second hiring round we choose the worker from [2,4,1]. The lowest cost is 1 (index 2). The total cost = 1 + 1 = 2.
+     * - In the third hiring round there are less than three candidates. We choose the worker from the remaining workers [2,4]. The lowest cost is 2 (index 0). The total cost = 2 + 2 = 4.
+     * The total hiring cost is 4.
+     */
+
+    public long totalCost(int[] costs, int k, int candidates) {
+
+        //TODO
+        return 0L;
+    }
+
+    /**
+     *
+     * ###########################################################################################
+     * #################################    BINARY SEARCH    ###############################
+     * ###########################################################################################
+     *
+     */
 
     /**
      *
@@ -2488,89 +3248,6 @@ public class LeetCode75 {
 
         return myguess;
 
-    }
-
-    /**
-     *
-     * 198. House Robber
-     *
-     *
-     *
-     */
-
-    public int rob(int[] nums) {
-
-        int rob1 = 0;
-        int rob2 = 0;
-
-        for(int i = 0; i < nums.length; i++) {
-
-            var tmp = Math.max(rob1 + nums[i], rob2);
-            rob1 = rob2;
-            rob2 = tmp;
-
-        }
-
-        return rob2;
-    }
-
-
-    /**
-     *
-     * 746. Min Cost Climbing Stairs
-     *
-     *
-     * You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.
-     *
-     * You can either start from the step with index 0, or the step with index 1.
-     *
-     * Return the minimum cost to reach the top of the floor.
-     *
-     *
-     *
-     * Example 1:
-     *
-     * Input: cost = [10,15,20]
-     * Output: 15
-     * Explanation: You will start at index 1.
-     * - Pay 15 and climb two steps to reach the top.
-     * The total cost is 15.
-     *
-     * Example 2:
-     *
-     * Input: cost = [1,100,1,1,1,100,1,1,100,1]
-     * Output: 6
-     * Explanation: You will start at index 0.
-     * - Pay 1 and climb two steps to reach index 2.
-     * - Pay 1 and climb two steps to reach index 4.
-     * - Pay 1 and climb two steps to reach index 6.
-     * - Pay 1 and climb one step to reach index 7.
-     * - Pay 1 and climb two steps to reach index 9.
-     * - Pay 1 and climb one step to reach the top.
-     * The total cost is 6.
-     *
-     *
-     *
-     */
-
-    public int minCostClimbingStairs(int[] cost) {
-
-        int opt1 = cost[0];
-        int opt2 = cost[1];
-
-        if(cost.length == 2) {
-            return Math.min(opt1, opt2);
-        }
-
-        for(int i = 2; i < cost.length -1; i++) {
-
-            var tmp = Math.min(opt1 + cost[i], opt2 + cost[i]);
-            opt1 = opt2;
-            opt2 = tmp;
-
-        }
-
-        return Math.min(opt1 + cost[cost.length -1], opt2);
     }
 
     /**
@@ -2686,78 +3363,70 @@ public class LeetCode75 {
     }
 
     /**
+     * 875. Koko Eating Bananas
      *
-     * 215. Kth Largest Element in an Array
+     * Koko loves to eat bananas. There are n piles of bananas, the ith pile has piles[i] bananas. The guards have gone and will come back in h hours.
      *
+     * Koko can decide her bananas-per-hour eating speed of k. Each hour, she chooses some pile of bananas and eats k bananas from that pile.
+     * If the pile has less than k bananas, she eats all of them instead and will not eat any more bananas during this hour.
      *
-     * Given an integer array nums and an integer k, return the kth largest element in the array.
+     * Koko likes to eat slowly but still wants to finish eating all the bananas before the guards return.
      *
-     * Note that it is the kth largest element in the sorted order, not the kth distinct element.
-     *
-     * Can you solve it without sorting?
+     * Return the minimum integer k such that she can eat all the bananas within h hours.
      *
      *
      *
      * Example 1:
      *
-     * Input: nums = [3,2,1,5,6,4], k = 2
-     * Output: 5
+     * Input: piles = [3,6,7,11], h = 8
+     * Output: 4
      *
      * Example 2:
      *
-     * Input: nums = [3,2,3,1,2,4,5,5,6], k = 4
-     * Output: 4
+     * Input: piles = [30,11,23,4,20], h = 5
+     * Output: 30
      *
+     * Example 3:
      *
-     *
-     * Constraints:
-     *
-     *     1 <= k <= nums.length <= 105
-     *     -104 <= nums[i] <= 104
-     *
-     *
-     *
+     * Input: piles = [30,11,23,4,20], h = 6
+     * Output: 23
      */
 
-    public int findKthLargest(int[] nums, int k) {
+    public int minEatingSpeed(int[] piles, int h) {
+        Arrays.sort(piles);
+        int k = 0;
 
-      PriorityQueue<Integer> queue = new PriorityQueue<>();
+        int l = 1;
+        int r = piles[piles.length-1];
+        int res = r;
 
-      for(int i = 0; i < k; i++) {
+        while(l <= r) {
+            long hoursNeeded = 0;
+            k = l + (r-l) /2;
+            for(int i = 0; i < piles.length; i++) {
 
-          queue.offer(nums[i]);
+                hoursNeeded += (long) Math.ceil((double) piles[i] / k);
 
-      }
-
-      for(int j = k; j < nums.length; j++) {
-
-        if(nums[j] > queue.peek()) {
-
-            queue.remove();
-
-            queue.offer(nums[j]);
-
+            }
+            if(hoursNeeded <= h) {
+                res = Math.min(res, k);
+                r = k-1;
+            }
+            else {
+                l = k+1;
+            }
         }
 
-      }
-
-      return queue.remove();
-
+        return res;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     *
+     * ###########################################################################################
+     * ###################################    BACKTRACKING    ####################################
+     * ###########################################################################################
+     *
+     */
 
     /**
      *
@@ -2807,6 +3476,507 @@ public class LeetCode75 {
         memo.put(n, trib(n-1, memo) + trib (n-2, memo) + trib (n-3, memo));
         return memo.get(n);
     }
+
+    /**
+     *
+     * 746. Min Cost Climbing Stairs
+     *
+     *
+     * You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.
+     *
+     * You can either start from the step with index 0, or the step with index 1.
+     *
+     * Return the minimum cost to reach the top of the floor.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: cost = [10,15,20]
+     * Output: 15
+     * Explanation: You will start at index 1.
+     * - Pay 15 and climb two steps to reach the top.
+     * The total cost is 15.
+     *
+     * Example 2:
+     *
+     * Input: cost = [1,100,1,1,1,100,1,1,100,1]
+     * Output: 6
+     * Explanation: You will start at index 0.
+     * - Pay 1 and climb two steps to reach index 2.
+     * - Pay 1 and climb two steps to reach index 4.
+     * - Pay 1 and climb two steps to reach index 6.
+     * - Pay 1 and climb one step to reach index 7.
+     * - Pay 1 and climb two steps to reach index 9.
+     * - Pay 1 and climb one step to reach the top.
+     * The total cost is 6.
+     *
+     *
+     *
+     */
+
+    public int minCostClimbingStairs(int[] cost) {
+
+        int opt1 = cost[0];
+        int opt2 = cost[1];
+
+        if(cost.length == 2) {
+            return Math.min(opt1, opt2);
+        }
+
+        for(int i = 2; i < cost.length -1; i++) {
+
+            var tmp = Math.min(opt1 + cost[i], opt2 + cost[i]);
+            opt1 = opt2;
+            opt2 = tmp;
+
+        }
+
+        return Math.min(opt1 + cost[cost.length -1], opt2);
+    }
+
+    /**
+     * 198. House Robber
+     *
+     * You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+     *
+     * Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [1,2,3,1]
+     * Output: 4
+     * Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+     * Total amount you can rob = 1 + 3 = 4.
+     *
+     * Example 2:
+     *
+     * Input: nums = [2,7,9,3,1]
+     * Output: 12
+     * Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
+     * Total amount you can rob = 2 + 9 + 1 = 12.
+     *
+     */
+
+    public int rob(int[] nums) {
+
+        int rob1 = 0;
+        int rob2 = 0;
+
+        for(int i = 0; i < nums.length; i++) {
+
+            var tmp = Math.max(rob1 + nums[i], rob2);
+            rob1 = rob2;
+            rob2 = tmp;
+
+        }
+
+        return rob2;
+    }
+
+    /**
+     * 790. Domino and Tromino Tiling
+     *
+     * You have two types of tiles: a 2 x 1 domino shape and a tromino shape. You may rotate these shapes.
+     *
+     * Given an integer n, return the number of ways to tile an 2 x n board. Since the answer may be very large, return it modulo 109 + 7.
+     *
+     * In a tiling, every square must be covered by a tile. Two tilings are different if and only if there are two 4-directionally adjacent cells on the board such that exactly one of the tilings has both squares occupied by a tile.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: n = 3
+     * Output: 5
+     * Explanation: The five different ways are show above.
+     *
+     * Example 2:
+     *
+     * Input: n = 1
+     * Output: 1
+     *
+     */
+
+    public int numTilings(int n) {
+
+        //TODO
+        return 0;
+
+    }
+
+    /**
+     *
+     * ###########################################################################################
+     * ##############################    DP MULTIDIMENSIONAL    ##################################
+     * ###########################################################################################
+     *
+     */
+
+    /**
+     * 62. Unique Paths
+     *
+     * There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.
+     *
+     * Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
+     *
+     * The test cases are generated so that the answer will be less than or equal to 2 * 109.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: m = 3, n = 7
+     * Output: 28
+     *
+     * Example 2:
+     *
+     * Input: m = 3, n = 2
+     * Output: 3
+     * Explanation: From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+     * 1. Right -> Down -> Down
+     * 2. Down -> Down -> Right
+     * 3. Down -> Right -> Down
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     1 <= m, n <= 100
+     */
+
+    public int uniquePaths(int m, int n) {
+
+        //TODO
+        return 0;
+
+    }
+
+
+    /**
+     * 1143. Longest Common Subsequence
+     *
+     * Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0.
+     *
+     * A subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without
+     * changing the relative order of the remaining characters.
+     *
+     *     For example, "ace" is a subsequence of "abcde".
+     *
+     * A common subsequence of two strings is a subsequence that is common to both strings.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: text1 = "abcde", text2 = "ace"
+     * Output: 3
+     * Explanation: The longest common subsequence is "ace" and its length is 3.
+     *
+     * Example 2:
+     *
+     * Input: text1 = "abc", text2 = "abc"
+     * Output: 3
+     * Explanation: The longest common subsequence is "abc" and its length is 3.
+     *
+     * Example 3:
+     *
+     * Input: text1 = "abc", text2 = "def"
+     * Output: 0
+     * Explanation: There is no such common subsequence, so the result is 0.
+     */
+
+    public int longestCommonSubsequence(String text1, String text2) {
+
+        int count = 0;
+
+        String shortStr = text1.length() > text2.length() ? text2 : text1;
+        String longStr = text1.length() > text2.length() ? text1 : text2;
+
+        for(int i=0; i < longStr.length(); i++) {
+            if(longStr.charAt(i) == shortStr.charAt(count)) {
+                count++;
+            }
+
+            if(count == text2.length()) {
+                return count;
+            }
+        }
+
+        return count;
+
+        //TODO
+
+    }
+
+    /**
+     * 714. Best Time to Buy and Sell Stock with Transaction Fee
+     *
+     * You are given an array prices where prices[i] is the price of a given stock on the ith day, and an integer fee representing a transaction fee.
+     *
+     * Find the maximum profit you can achieve. You may complete as many transactions as you like, but you need to pay the transaction fee for each transaction.
+     *
+     * Note:
+     *
+     *     You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
+     *     The transaction fee is only charged once for each stock purchase and sale.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: prices = [1,3,2,8,4,9], fee = 2
+     * Output: 8
+     * Explanation: The maximum profit can be achieved by:
+     * - Buying at prices[0] = 1
+     * - Selling at prices[3] = 8
+     * - Buying at prices[4] = 4
+     * - Selling at prices[5] = 9
+     * The total profit is ((8 - 1) - 2) + ((9 - 4) - 2) = 8.
+     *
+     * Example 2:
+     *
+     * Input: prices = [1,3,7,5,10,3], fee = 3
+     * Output: 6
+     */
+
+    public int maxProfit(int[] prices, int fee) {
+
+        //TODO
+        return 0;
+
+    }
+
+    /**
+     * 72. Edit Distance
+     *
+     * Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2.
+     *
+     * You have the following three operations permitted on a word:
+     *
+     *     Insert a character
+     *     Delete a character
+     *     Replace a character
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: word1 = "horse", word2 = "ros"
+     * Output: 3
+     * Explanation:
+     * horse -> rorse (replace 'h' with 'r')
+     * rorse -> rose (remove 'r')
+     * rose -> ros (remove 'e')
+     *
+     * Example 2:
+     *
+     * Input: word1 = "intention", word2 = "execution"
+     * Output: 5
+     * Explanation:
+     * intention -> inention (remove 't')
+     * inention -> enention (replace 'i' with 'e')
+     * enention -> exention (replace 'n' with 'x')
+     * exention -> exection (replace 'n' with 'c')
+     * exection -> execution (insert 'u')
+     */
+
+    public int minDistance(String word1, String word2) {
+
+        //TODO
+        return 0;
+
+    }
+
+    /**
+     *
+     * ###########################################################################################
+     * ##############################    BIT MANIPULATION    ##################################
+     * ###########################################################################################
+     *
+     */
+
+    /**
+     * 338. Counting Bits
+     *
+     * Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: n = 2
+     * Output: [0,1,1]
+     * Explanation:
+     * 0 --> 0
+     * 1 --> 1
+     * 2 --> 10
+     *
+     * Example 2:
+     *
+     * Input: n = 5
+     * Output: [0,1,1,2,1,2]
+     * Explanation:
+     * 0 --> 0
+     * 1 --> 1
+     * 2 --> 10
+     * 3 --> 11
+     * 4 --> 100
+     * 5 --> 101
+     */
+
+    public int[] countBits(int n) {
+
+        //TODO
+        return new int[]{0};
+    }
+
+    /**
+     * 136. Single Number
+     *
+     * Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+     *
+     * You must implement a solution with a linear runtime complexity and use only constant extra space.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [2,2,1]
+     * Output: 1
+     *
+     * Example 2:
+     *
+     * Input: nums = [4,1,2,1,2]
+     * Output: 4
+     *
+     * Example 3:
+     *
+     * Input: nums = [1]
+     * Output: 1
+     */
+
+    public int singleNumber(int[] nums) {
+
+        //TODO
+        return 0;
+
+    }
+
+    /**
+     * 1318. Minimum Flips to Make a OR b Equal to c
+     *
+     * Given 3 positives numbers a, b and c. Return the minimum flips required in some bits of a and b to make ( a OR b == c ). (bitwise OR operation).
+     * Flip operation consists of change any single bit 1 to 0 or change the bit 0 to 1 in their binary representation.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: a = 2, b = 6, c = 5
+     * Output: 3
+     * Explanation: After flips a = 1 , b = 4 , c = 5 such that (a OR b == c)
+     *
+     * Example 2:
+     *
+     * Input: a = 4, b = 2, c = 7
+     * Output: 1
+     *
+     * Example 3:
+     *
+     * Input: a = 1, b = 2, c = 3
+     * Output: 0
+     */
+
+    public int minFlips(int a, int b, int c) {
+
+        //TODO
+        return 0;
+
+    }
+
+    /**
+     *
+     * ###########################################################################################
+     * ##############################    TRIE    ##################################
+     * ###########################################################################################
+     *
+     */
+
+    /**
+     * 208. Implement Trie (Prefix Tree)
+     *
+     * A trie (pronounced as "try") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker.
+     *
+     * Implement the Trie class:
+     *
+     *     Trie() Initializes the trie object.
+     *     void insert(String word) Inserts the string word into the trie.
+     *     boolean search(String word) Returns true if the string word is in the trie (i.e., was inserted before), and false otherwise.
+     *     boolean startsWith(String prefix) Returns true if there is a previously inserted string word that has the prefix prefix, and false otherwise.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input
+     * ["Trie", "insert", "search", "search", "startsWith", "insert", "search"]
+     * [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+     * Output
+     * [null, null, true, false, true, null, true]
+     *
+     * Explanation
+     * Trie trie = new Trie();
+     * trie.insert("apple");
+     * trie.search("apple");   // return True
+     * trie.search("app");     // return False
+     * trie.startsWith("app"); // return True
+     * trie.insert("app");
+     * trie.search("app");     // return True
+     */
+
+
+    /**
+     * 1268. Search Suggestions System
+     *
+     * You are given an array of strings products and a string searchWord.
+     *
+     * Design a system that suggests at most three product names from products after each character of searchWord is typed. Suggested products should have common prefix with searchWord. If there are more than three products with a common prefix return the three lexicographically minimums products.
+     *
+     * Return a list of lists of the suggested products after each character of searchWord is typed.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: products = ["mobile","mouse","moneypot","monitor","mousepad"], searchWord = "mouse"
+     * Output: [["mobile","moneypot","monitor"],["mobile","moneypot","monitor"],["mouse","mousepad"],["mouse","mousepad"],["mouse","mousepad"]]
+     * Explanation: products sorted lexicographically = ["mobile","moneypot","monitor","mouse","mousepad"].
+     * After typing m and mo all products match and we show user ["mobile","moneypot","monitor"].
+     * After typing mou, mous and mouse the system suggests ["mouse","mousepad"].
+     *
+     * Example 2:
+     *
+     * Input: products = ["havana"], searchWord = "havana"
+     * Output: [["havana"],["havana"],["havana"],["havana"],["havana"],["havana"]]
+     * Explanation: The only word "havana" will be always suggested while typing the search word.
+     */
+
+    public List<List<String>> suggestedProducts(String[] products, String searchWord) {
+
+        //TODO
+        return List.of(List.of(""));
+    }
+
+    /**
+     *
+     * ###########################################################################################
+     * ##############################    INTERVALS    ##################################
+     * ###########################################################################################
+     *
+     */
 
     /**
      *
@@ -2933,7 +4103,7 @@ public class LeetCode75 {
 
     public int findMinArrowShots(int[][] points) {
 
-        Arrays.sort(points, Comparator.comparingInt(a -> a[1]));
+        Arrays.sort(points, Comparator.comparingInt(a -> a[0]));
         int prev = points[0][1];
         int arrowCount = points.length;
 
@@ -2941,7 +4111,7 @@ public class LeetCode75 {
 
             if (points[i][0] <= prev) {
                 arrowCount--;
-                prev = Integer.MIN_VALUE;
+                prev = Math.min(points[i][1], prev);
             } else {
                 prev = points[i][1];
             }
@@ -2949,52 +4119,81 @@ public class LeetCode75 {
         }
 
         return arrowCount;
-
-        // TODO
     }
-
 
     /**
      *
-     * 338. Counting Bits
+     * ###########################################################################################
+     * ##############################    MONOTONIC STACK    ##################################
+     * ###########################################################################################
      *
+     */
+
+    /**
+     * 739. Daily Temperatures
      *
-     *
-     * Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.
+     * Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.
      *
      *
      *
      * Example 1:
      *
-     * Input: n = 2
-     * Output: [0,1,1]
-     * Explanation:
-     * 0 --> 0
-     * 1 --> 1
-     * 2 --> 10
+     * Input: temperatures = [73,74,75,71,69,72,76,73]
+     * Output: [1,1,4,2,1,1,0,0]
      *
      * Example 2:
      *
-     * Input: n = 5
-     * Output: [0,1,1,2,1,2]
-     * Explanation:
-     * 0 --> 0
-     * 1 --> 1
-     * 2 --> 10
-     * 3 --> 11
-     * 4 --> 100
-     * 5 --> 101
+     * Input: temperatures = [30,40,50,60]
+     * Output: [1,1,1,0]
      *
+     * Example 3:
      *
-     *
-     * Constraints:
-     *
-     *     0 <= n <= 105
+     * Input: temperatures = [30,60,90]
+     * Output: [1,1,0]
      */
 
-    public int[] countBits(int n) {
+    public int[] dailyTemperatures(int[] temperatures) {
 
-        return new int[] {};
+        //TODO
+        return new int[]{0};
     }
+
+    /**
+     * 901. Online Stock Span
+     *
+     * Design an algorithm that collects daily price quotes for some stock and returns the span of that stock's price for the current day.
+     *
+     * The span of the stock's price in one day is the maximum number of consecutive days (starting from that day and going backward) for which the stock price was less than or equal to the price of that day.
+     *
+     *     For example, if the prices of the stock in the last four days is [7,2,1,2] and the price of the stock today is 2, then the span of today is 4 because starting from today, the price of the stock was less than or equal 2 for 4 consecutive days.
+     *     Also, if the prices of the stock in the last four days is [7,34,1,2] and the price of the stock today is 8, then the span of today is 3 because starting from today, the price of the stock was less than or equal 8 for 3 consecutive days.
+     *
+     * Implement the StockSpanner class:
+     *
+     *     StockSpanner() Initializes the object of the class.
+     *     int next(int price) Returns the span of the stock's price given that today's price is price.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input
+     * ["StockSpanner", "next", "next", "next", "next", "next", "next", "next"]
+     * [[], [100], [80], [60], [70], [60], [75], [85]]
+     * Output
+     * [null, 1, 1, 1, 2, 1, 4, 6]
+     *
+     * Explanation
+     * StockSpanner stockSpanner = new StockSpanner();
+     * stockSpanner.next(100); // return 1
+     * stockSpanner.next(80);  // return 1
+     * stockSpanner.next(60);  // return 1
+     * stockSpanner.next(70);  // return 2
+     * stockSpanner.next(60);  // return 1
+     * stockSpanner.next(75);  // return 4, because the last 4 prices (including today's price of 75) were less than or equal to today's price.
+     * stockSpanner.next(85);  // return 6
+     */
+
+    // Needs new class.
 
 }

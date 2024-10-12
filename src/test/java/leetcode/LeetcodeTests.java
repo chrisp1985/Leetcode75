@@ -47,6 +47,7 @@ public class LeetcodeTests {
         //Assert.assertEquals(1981, this.leetcode.reverse(9646324351));
     }
 
+
     @Test
     public void subsetXORSumTest() {
         Assert.assertEquals(28,this.leetcode.subsetXORSum(new int[]{2,5,6}));
@@ -72,5 +73,18 @@ public class LeetcodeTests {
         Assert.assertEquals(3, this.leetcode.search(new int[] {-1,0,2,4,6,8}, 4));
         Assert.assertEquals(-1, this.leetcode.search(new int[] {-1,0,2,4,6,8}, 3));
         Assert.assertEquals(4, this.leetcode.search(new int[] {-1,0,3,5,9,12}, 9));
+    }
+
+    /*
+        HARD PROBLEMS
+     */
+
+    @Test
+    public void longestObstacleCourseAtEachPositionTest() {
+        Assert.assertArrayEquals(new int[]{1,2,3,3}, this.leetcode.longestObstacleCourseAtEachPosition(new int[]{1,2,3,2}));
+        Assert.assertArrayEquals(new int[]{1,2,1}, this.leetcode.longestObstacleCourseAtEachPosition(new int[]{2,2,1}));
+        Assert.assertArrayEquals(new int[]{1,1,2,3,2,2}, this.leetcode.longestObstacleCourseAtEachPosition(new int[]{3,1,5,6,4,2}));
+        Assert.assertArrayEquals(new int[]{1}, this.leetcode.longestObstacleCourseAtEachPosition(new int[]{1}));
+        Assert.assertArrayEquals(new int[]{1,2}, this.leetcode.longestObstacleCourseAtEachPosition(new int[]{1,2}));
     }
 }
