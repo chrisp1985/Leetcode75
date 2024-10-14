@@ -665,6 +665,101 @@ public class LeetCode150 {
 
     /**
      *
+     * 228. Summary Ranges
+     *
+     * You are given a sorted unique integer array nums.
+     *
+     * A range [a,b] is the set of all integers from a to b (inclusive).
+     *
+     * Return the smallest sorted list of ranges that cover all the numbers in the array exactly.
+     * That is, each element of nums is covered by exactly one of the ranges, and there is no integer x such that x is
+     * in one of the ranges but not in nums.
+     *
+     * Each range [a,b] in the list should be output as:
+     *
+     *     "a->b" if a != b
+     *     "a" if a == b
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [0,1,2,4,5,7]
+     * Output: ["0->2","4->5","7"]
+     * Explanation: The ranges are:
+     * [0,2] --> "0->2"
+     * [4,5] --> "4->5"
+     * [7,7] --> "7"
+     *
+     * Example 2:
+     *
+     * Input: nums = [0,2,3,4,6,8,9]
+     * Output: ["0","2->4","6","8->9"]
+     * Explanation: The ranges are:
+     * [0,0] --> "0"
+     * [2,4] --> "2->4"
+     * [6,6] --> "6"
+     * [8,9] --> "8->9"
+     */
+
+    public List<String> summaryRanges(int[] nums) {
+
+        if(nums.length == 0) {
+            return List.of();
+        }
+
+        if(nums.length == 1) {
+            return List.of(String.valueOf(nums[0]));
+        }
+
+        List<String> strArray = new ArrayList<>();
+        List<Integer> intArray = new ArrayList<>();
+        intArray.add(nums[0]);
+
+        for(int i = 1; i < nums.length; i++) {
+
+            if(nums[i] != intArray.get(intArray.size()-1) + 1) {
+
+                if(intArray.size() ==1) {
+
+                    strArray.add(String.valueOf(intArray.get(0)));
+
+                }
+
+                else {
+
+                    strArray.add(intArray.get(0) + "->" + intArray.get(intArray.size() - 1));
+
+                }
+
+                intArray = new ArrayList<>();
+
+            }
+
+            intArray.add(nums[i]);
+
+        }
+
+        if(!intArray.isEmpty()) {
+            if(intArray.size() ==1) {
+
+                strArray.add(String.valueOf(intArray.get(0)));
+
+            }
+
+            else {
+
+                strArray.add(intArray.get(0) + "->" + intArray.get(intArray.size() - 1));
+
+            }
+        }
+
+        return strArray;
+
+    }
+
+    /**
+     *
      * 56. Merge Intervals
      *
      *
@@ -721,6 +816,71 @@ public class LeetCode150 {
         return listOfIntervals.toArray(new int[0][]);
 
     }
+
+    /**
+     * 57. Insert Interval
+     *
+     * You are given an array of non-overlapping intervals intervals where intervals[i] = [starti, endi] represent the
+     * start and the end of the ith interval and intervals is sorted in ascending order by starti. You are also given an
+     * interval newInterval = [start, end] that represents the start and end of another interval.
+     *
+     * Insert newInterval into intervals such that intervals is still sorted in ascending order by starti and intervals
+     * still does not have any overlapping intervals (merge overlapping intervals if necessary).
+     *
+     * Return intervals after the insertion.
+     *
+     * Note that you don't need to modify intervals in-place. You can make a new array and return it.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
+     * Output: [[1,5],[6,9]]
+     *
+     * Example 2:
+     *
+     * Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+     * Output: [[1,2],[3,10],[12,16]]
+     * Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+     *
+     */
+
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+
+        if(intervals.length == 0) {
+            return new int[][] {newInterval};
+        }
+
+        List<int[]> listToReturn = new ArrayList<>();
+        int start = newInterval[0];
+        int end = newInterval[newInterval.length-1];
+
+        for(int i=0; i < intervals.length; i++) {
+
+            if(intervals[i][1] < newInterval[0]) {
+                listToReturn.add(intervals[i]);
+            }
+            else if(intervals[i][0] > newInterval[1]) {
+                listToReturn.add(intervals[i]);
+            }
+            else {
+                start = Math.min(start, intervals[i][0]);
+                end = Math.max(end, intervals[i][1]);
+            }
+
+        }
+
+        listToReturn.add(new int[]{start, end});
+
+        int[][] arrayList = listToReturn.toArray(new int[][]{});
+
+        Arrays.sort(arrayList, Comparator.comparingInt(a -> a[0]));
+
+        return arrayList;
+
+    }
+
 
     /**
      *
@@ -1673,6 +1833,97 @@ public class LeetCode150 {
 
     /**
      *
+     * 34. Find First and Last Position of Element in Sorted Array
+     *
+     *
+     * Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
+     *
+     * If target is not found in the array, return [-1, -1].
+     *
+     * You must write an algorithm with O(log n) runtime complexity.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: nums = [5,7,7,8,8,10], target = 8
+     * Output: [3,4]
+     *
+     * Example 2:
+     *
+     * Input: nums = [5,7,7,8,8,10], target = 6
+     * Output: [-1,-1]
+     *
+     * Example 3:
+     *
+     * Input: nums = [], target = 0
+     * Output: [-1,-1]
+     */
+
+    public int[] searchRange(int[] nums, int target) {
+
+        if(nums.length==0) {
+            return new int[]{-1,-1};
+        }
+
+        List<Integer> res = new ArrayList<>();
+        int l = 0;
+
+        int r = nums.length-1;
+        int targetIndex = Integer.MIN_VALUE;
+
+        while (l <= r && targetIndex == Integer.MIN_VALUE) {
+
+            int mid = l + (r-l) /2;
+
+            if(nums[mid] == target) {
+
+                targetIndex = mid;
+                res.add(mid);
+
+            }
+            else if(nums[mid] > target) {
+
+                r = mid - 1;
+
+            }
+            else {
+                l = mid + 1;
+            }
+
+        }
+
+
+        if(targetIndex != Integer.MIN_VALUE) {
+
+            int left = targetIndex;
+
+            // Search left.
+            while(left-1 > -1 && nums[left-1] == target) {
+                res.add(left-1);
+                left--;
+            }
+
+            // Search right.
+
+            int right = targetIndex;
+            while(right+1 < nums.length && nums[right+1] == target) {
+                res.add(right+1);
+                right++;
+            }
+        }
+
+        if(res.isEmpty()) {
+            res.add(-1);
+        }
+        res.sort(Comparator.comparingInt(a -> a));
+
+        return new int[]{res.get(0), res.get(res.size()-1)};
+
+    }
+
+    /**
+     *
      * 135. Candy
      *
      * There are n children standing in a line. Each child is assigned a rating value given in the integer array ratings.
@@ -1709,31 +1960,71 @@ public class LeetCode150 {
      *
      */
 
-    public int candy(int[] ratings) {
+    public int candy2(int[] ratings) {
 
-        int highest = 0;
-        for (int i = 0; i < ratings.length; i++) {
-            if (ratings[i] == 0) {
-                ratings[i]++;
-            }
-
-            highest = Math.max(highest, ratings[i]);
-
-            if (i != 0) {
-                if (i != ratings.length - 1 && (ratings[i] > ratings[i - 1] && ratings[i] > ratings[i + 1])) {
-                    ratings[i]++;
-                }
-                if(ratings[i-1] == ratings[i] && ratings[i] == highest) {
-                    ratings[i-1]--;
-                }
-            }
-
-
-            if (i == 0 && i != ratings.length - 1 && ratings[i] > ratings[i + 1]) {
-                ratings[i]++;
-            }
+        if(ratings.length == 1) {
+            return 1;
         }
-        return Arrays.stream(ratings).sum();
+
+        int[] leftCandies = new int[ratings.length];
+        int[] rightCandies = new int[ratings.length];
+
+        int res = 0;
+
+        for (int i = 0; i < ratings.length; i++) {
+
+            // Add an initial candy.
+            leftCandies[i] +=1;
+            rightCandies[i] +=1;
+
+        }
+
+        for (int i = 1; i < ratings.length; i++) {
+
+            if(ratings[i] > ratings[i-1]) {
+                leftCandies[i] = leftCandies[i-1] + 1;
+            }
+
+        }
+
+        for (int i = ratings.length-2; i > -1; i--) {
+
+            if(ratings[i] > ratings[i+1]) {
+                rightCandies[i] = rightCandies[i+1] +1;
+            }
+
+        }
+
+        for(int i = 0; i < ratings.length; i++) {
+
+            res += Math.max(leftCandies[i], rightCandies[i]);
+
+        }
+
+        return res;
+    }
+
+    public int candy(int[] ratings) {
+        final int n = ratings.length;
+
+        int ans = 0;
+        int[] l = new int[n];
+        int[] r = new int[n];
+        Arrays.fill(l, 1);
+        Arrays.fill(r, 1);
+
+        for (int i = 1; i < n; ++i)
+            if (ratings[i] > ratings[i - 1])
+                l[i] = l[i - 1] + 1;
+
+        for (int i = n - 2; i >= 0; --i)
+            if (ratings[i] > ratings[i + 1])
+                r[i] = r[i + 1] + 1;
+
+        for (int i = 0; i < n; ++i)
+            ans += Math.max(l[i], r[i]);
+
+        return ans;
     }
 
     /**
@@ -2484,6 +2775,70 @@ public class LeetCode150 {
 
         return totalSum >= 0 ? index : -1;
 
+    }
+
+    /**
+     * 42. Trapping Rain Water
+     *
+     * Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+     * Output: 6
+     * Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+     *
+     * Example 2:
+     *
+     * Input: height = [4,2,0,3,2,5]
+     * Output: 9
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     n == height.length
+     *     1 <= n <= 2 * 104
+     *     0 <= height[i] <= 105
+     */
+
+    public int trap(int[] height) {
+
+        int water = 0;
+
+        int maxL = 0;
+        int maxR = 0;
+
+        int[] maxLArr = new int[height.length];
+        int[] maxRArr = new int[height.length];
+
+        // Go forward setting max height.
+        for(int i=0; i < height.length; i++) {
+
+            maxL = Math.max(maxL, height[i]);
+            maxLArr[i] = maxL;
+
+        }
+
+        // Go backwards setting max height.
+        for(int i=height.length-1; i > -1; i--) {
+
+            maxR = Math.max(maxR, height[i]);
+            maxRArr[i] = maxR;
+
+        }
+
+        // Iterate over nums finding minimum height - nums[i]
+        for(int i=0; i < height.length; i++) {
+
+            water+= Math.min(maxLArr[i], maxRArr[i]) - height[i];
+
+        }
+
+
+        return water;
     }
 
     /**

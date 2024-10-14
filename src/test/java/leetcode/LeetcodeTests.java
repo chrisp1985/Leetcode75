@@ -87,4 +87,14 @@ public class LeetcodeTests {
         Assert.assertArrayEquals(new int[]{1}, this.leetcode.longestObstacleCourseAtEachPosition(new int[]{1}));
         Assert.assertArrayEquals(new int[]{1,2}, this.leetcode.longestObstacleCourseAtEachPosition(new int[]{1,2}));
     }
+
+    @Test
+    public void maxScoreWordsTest() {
+
+
+        Assert.assertEquals(23, this.leetcode.maxScoreWords(
+                new String[]{"dog","cat","dad","good"},
+                new char[] {'a','a','c','d','d','d','g','o','o'},
+                new int[] {1,0,9,5,0,0,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0}));
+    }
 }

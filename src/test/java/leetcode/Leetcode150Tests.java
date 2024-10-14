@@ -93,11 +93,29 @@ public class Leetcode150Tests {
     }
 
     @Test
+    public void summaryRangesTest() {
+        Assert.assertEquals(List.of("0->2","4->5","7"), this.leetCode150.summaryRanges(new int[] {0,1,2,4,5,7}));
+        Assert.assertEquals(List.of("0","2->4","6","8->9"), this.leetCode150.summaryRanges(new int[] {0,2,3,4,6,8,9}));
+    }
+
+    @Test
     public void mergeTest() {
         Assert.assertEquals(new int[][]{{1,6}, {8,10}, {15,18}}, this.leetCode150.merge(new int[][]{{1,3}, {2,6},{8,10},{15,18}}));
         Assert.assertEquals(new int[][]{{1,18}}, this.leetCode150.merge(new int[][]{{1,18}, {2,6},{8,10},{15,18}}));
         Assert.assertEquals(new int[][]{{1,18}}, this.leetCode150.merge(new int[][]{{1,4}, {2,6},{8,10},{1,18}}));
         Assert.assertEquals(new int[][]{{1,18}}, this.leetCode150.merge(new int[][]{{1,4}, {2,6},{8,10},{1,18}}));
+    }
+
+    @Test
+    public void insertTest() {
+        Assert.assertArrayEquals(new int[][]{{1,5},{6,9}}, this.leetCode150.insert(new int[][]{{1,3},{6,9}}, new int[]{2,5}));
+//        Assert.assertArrayEquals(new int[][]{{1,2},{3,10},{12,16},{19,20}}, this.leetCode150.insert(new int[][]{{1,2},{3,5},{6,7},{8,10},{12,16},{19,20}}, new int[]{4,8}));
+        Assert.assertArrayEquals(new int[][]{{1,3},{6,13}}, this.leetCode150.insert(new int[][]{{1,3},{6,9}}, new int[]{9,13})); // Interval at end, overlapping.
+        Assert.assertArrayEquals(new int[][]{{0,3},{6,9}}, this.leetCode150.insert(new int[][]{{1,3},{6,9}}, new int[]{0,1})); // Interval at beginning, overlapping.
+        Assert.assertArrayEquals(new int[][]{{1,3},{6,9},{10,13}}, this.leetCode150.insert(new int[][]{{1,3},{6,9}}, new int[]{10,13})); // Interval at end, not overlapping.
+        Assert.assertArrayEquals(new int[][]{{0,1},{2,3},{6,9}}, this.leetCode150.insert(new int[][]{{2,3},{6,9}}, new int[]{0,1})); // Interval at beginning, not overlapping.
+        Assert.assertArrayEquals(new int[][]{{1,2},{3,10},{12,16}}, this.leetCode150.insert(new int[][]{{1,2},{3,5},{6,7},{8,10},{12,16}}, new int[]{4,8})); // TestCase
+
     }
 
     @Test
@@ -227,11 +245,42 @@ public class Leetcode150Tests {
     }
 
     @Test
+    public void searchRangeTest() {
+        Assert.assertArrayEquals(new int[]{3,4}, this.leetCode150.searchRange(new int[]{5,7,7,8,8,10}, 8));
+        Assert.assertArrayEquals(new int[]{-1,-1}, this.leetCode150.searchRange(new int[]{5,7,7,8,8,10}, 6));
+        Assert.assertArrayEquals(new int[]{-1,-1}, this.leetCode150.searchRange(new int[]{}, 0));
+        Assert.assertArrayEquals(new int[]{0,0}, this.leetCode150.searchRange(new int[]{1}, 1));
+        Assert.assertArrayEquals(new int[]{0,0}, this.leetCode150.searchRange(new int[]{1,2,3,4,5,6,7,8,9}, 1));
+        Assert.assertArrayEquals(new int[]{8,8}, this.leetCode150.searchRange(new int[]{1,2,3,4,5,6,7,8,9}, 9));
+        Assert.assertArrayEquals(new int[]{5,8}, this.leetCode150.searchRange(new int[]{0,1,2,3,4,5,5,5,5}, 5));
+        Assert.assertArrayEquals(new int[]{-1,-1}, this.leetCode150.searchRange(new int[]{2,2}, 3));
+        Assert.assertArrayEquals(new int[]{0,1}, this.leetCode150.searchRange(new int[]{1,1,2}, 1));
+
+    }
+
+    @Test
+    public void trapTest() {
+        Assert.assertEquals(6, this.leetCode150.trap(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
+        Assert.assertEquals(9, this.leetCode150.trap(new int[]{4,2,0,3,2,5}));
+    }
+
+    @Test
+    public void createTenThousandIntegers() {
+        StringBuilder builder = new StringBuilder();
+        for(int i=0; i < 10000; i++) {
+            builder.append(i).append(",");
+        }
+        System.out.println();
+    }
+
+    @Test
     public void candyTest() {
-//        Assert.assertEquals(5, this.leetCode150.candy(new int[]{1,0,2}));
-//        Assert.assertEquals(4, this.leetCode150.candy(new int[]{1,2,2}));
-        Assert.assertEquals(4, this.leetCode150.candy(new int[]{0,1,2}));
-        Assert.assertEquals(7, this.leetCode150.candy(new int[]{5,0,2}));
+        Assert.assertEquals(5, this.leetCode150.candy(new int[]{1,0,2}));
+        Assert.assertEquals(4, this.leetCode150.candy(new int[]{1,2,2}));
+        Assert.assertEquals(6, this.leetCode150.candy(new int[]{0,1,2}));
+        Assert.assertEquals(7, this.leetCode150.candy(new int[]{1,3,2,2,1}));
+        Assert.assertEquals(13, this.leetCode150.candy(new int[]{1,2,87,87,87,2,1}));
+
     }
 
     @Test
