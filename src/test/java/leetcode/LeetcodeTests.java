@@ -2,6 +2,7 @@ package leetcode;
 
 import com.chrisparsons.Leetcode;
 import com.chrisparsons.leetcode150.helpers.TreeNode;
+import com.chrisparsons.leetcode75.helpers.ListNode;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -75,6 +76,31 @@ public class LeetcodeTests {
         Assert.assertEquals(4, this.leetcode.search(new int[] {-1,0,3,5,9,12}, 9));
     }
 
+    @Test
+    public void insertGreatestCommonDivisorsTest() {
+        ListNode node4 = new ListNode(3, null);
+        ListNode node3 = new ListNode(10, node4);
+        ListNode node2 = new ListNode(6, node3);
+        ListNode nodeHead = new ListNode(18, node2);
+
+        ListNode newNode7 = new ListNode(3, null);
+        ListNode newNode6 = new ListNode(1, newNode7);
+        ListNode newNode5 = new ListNode(10, newNode6);
+        ListNode newNode4 = new ListNode(2, newNode5);
+        ListNode newNode3 = new ListNode(6, newNode4);
+        ListNode newNode2 = new ListNode(6, newNode3);
+        ListNode newNodeHead = new ListNode(18, newNode2);
+
+//        Assert.assertEquals(newNodeHead,
+//                this.leetcode.insertGreatestCommonDivisors(nodeHead));
+
+        nodeHead = new ListNode(7, null);
+        newNodeHead = new ListNode(7, null);
+
+        Assert.assertEquals(newNodeHead,
+                this.leetcode.insertGreatestCommonDivisors(nodeHead));
+    }
+
     /*
         HARD PROBLEMS
      */
@@ -91,10 +117,55 @@ public class LeetcodeTests {
     @Test
     public void maxScoreWordsTest() {
 
-
         Assert.assertEquals(23, this.leetcode.maxScoreWords(
                 new String[]{"dog","cat","dad","good"},
                 new char[] {'a','a','c','d','d','d','g','o','o'},
                 new int[] {1,0,9,5,0,0,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0}));
+
+        Assert.assertEquals(27, this.leetcode.maxScoreWords(
+                new String[]{"xxxz","ax","bx","cx"},
+                new char[] {'z','a','b','c','x','x','x'},
+                new int[] {4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,10}));
+
+        Assert.assertEquals(0, this.leetcode.maxScoreWords(
+                new String[]{"leetcode"},
+                new char[] {'l','e','t','c','o','d'},
+                new int[] {0,0,1,1,1,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0,0,0,0,0,0}));
+    }
+
+    @Test
+    public void addTwoNumbersTest() {
+        ListNode node3 = new ListNode(3, null);
+        ListNode node2 = new ListNode(4, node3);
+        ListNode nodeHead = new ListNode(2, node2);
+
+        ListNode altNode3 = new ListNode(4, null);
+        ListNode altNode2 = new ListNode(6, altNode3);
+        ListNode altNodeHead = new ListNode(5, altNode2);
+
+        ListNode resNode3 = new ListNode(8, null);
+        ListNode resNode2 = new ListNode(0, resNode3);
+        ListNode resNodeHead = new ListNode(7, resNode2);
+
+        Assert.assertEquals(resNodeHead, this.leetcode.addTwoNumbers(nodeHead, altNodeHead));
+    }
+
+    @Test
+    public void nQueensTest() {
+
+        Assert.assertEquals(
+                List.of(
+                        List.of(".Q..","...Q","Q...","..Q."),
+                        List.of("..Q.","Q...","...Q",".Q..")
+                ),
+                this.leetcode.solveNQueens(4));
+
+        Assert.assertEquals(
+                List.of(
+                        List.of("Q")
+                ),
+                this.leetcode.solveNQueens(1));
+
+
     }
 }

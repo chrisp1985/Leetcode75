@@ -313,6 +313,99 @@ public class Leetcode {
 
     }
 
+    /**
+     * 51. N-Queens
+     *
+     * The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.
+     *
+     * Given an integer n, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.
+     *
+     * Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space, respectively.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: n = 4
+     * Output: [[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+     * Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above
+     *
+     * Example 2:
+     *
+     * Input: n = 1
+     * Output: [["Q"]]
+     *
+     */
+
+    public List<List<String>> solveNQueens(int n) {
+
+        // TODO
+
+        return List.of(List.of(""));
+
+    }
+
+    /**
+     * 2807. Insert Greatest Common Divisors in Linked List
+     *
+     * Given the head of a linked list head, in which each node contains an integer value.
+     *
+     * Between every pair of adjacent nodes, insert a new node with a value equal to the greatest common divisor of them.
+     *
+     * Return the linked list after insertion.
+     *
+     * The greatest common divisor of two numbers is the largest positive integer that evenly divides both numbers.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: head = [18,6,10,3]
+     * Output: [18,6,6,2,10,1,3]
+     * Explanation: The 1st diagram denotes the initial linked list and the 2nd diagram denotes the linked list after inserting the new nodes (nodes in blue are the inserted nodes).
+     * - We insert the greatest common divisor of 18 and 6 = 6 between the 1st and the 2nd nodes.
+     * - We insert the greatest common divisor of 6 and 10 = 2 between the 2nd and the 3rd nodes.
+     * - We insert the greatest common divisor of 10 and 3 = 1 between the 3rd and the 4th nodes.
+     * There are no more adjacent nodes, so we return the linked list.
+     *
+     * Example 2:
+     *
+     * Input: head = [7]
+     * Output: [7]
+     * Explanation: The 1st diagram denotes the initial linked list and the 2nd diagram denotes the linked list after inserting the new nodes.
+     * There are no pairs of adjacent nodes, so we return the initial linked list.
+     */
+
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+
+        // While highest node % lowest node != 0, keep going.
+
+        ListNode node = head;
+        while(node.next!=null) {
+
+            int divisor = getDivisor(node, node.next);
+
+            // Create the new node
+            ListNode newNode = new ListNode();
+            newNode.val = divisor;
+
+            // Set new head.next
+            newNode.next = node.next;
+            node.next = newNode;
+            node = newNode.next;
+
+        }
+
+        return head;
+    }
+
+    private int getDivisor(ListNode a, ListNode b) {
+        int divisor = Math.min(a.val,b.val);
+        while(a.val % divisor != 0 || b.val % divisor != 0) {
+            divisor--;
+        }
+        return divisor;
+    }
 
     /**
      *
@@ -507,8 +600,88 @@ public class Leetcode {
     }
 
     /**
+     * 2. Add Two Numbers
+     *
+     * <MEDIUM>
+     *
+     * You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+     *
+     * You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+     *
+     *
+     *
+     * Example 1:
+     *
+     * Input: l1 = [2,4,3], l2 = [5,6,4]
+     * Output: [7,0,8]
+     * Explanation: 342 + 465 = 807.
+     *
+     * Example 2:
+     *
+     * Input: l1 = [0], l2 = [0]
+     * Output: [0]
+     *
+     * Example 3:
+     *
+     * Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+     * Output: [8,9,9,9,0,0,0,1]
+     *
+     *
+     *
+     * Constraints:
+     *
+     *     The number of nodes in each linked list is in the range [1, 100].
+     *     0 <= Node.val <= 9
+     *     It is guaranteed that the list represents a number that does not have leading zeros.
+     */
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+
+        // Get Sum 1
+        Stack<Integer> sumStack = new Stack<>();
+        while(l1!=null) {
+            sumStack.push(l1.val);
+            l1 = l1.next;
+        }
+
+        StringBuilder sum1Str = new StringBuilder();
+        while(!sumStack.isEmpty()) {
+            sum1Str.append(sumStack.pop());
+        }
+
+        // Get Sum 2
+        while(l2!=null) {
+            sumStack.push(l2.val);
+            l2 = l2.next;
+        }
+
+        StringBuilder sum2Str = new StringBuilder();
+        while(!sumStack.isEmpty()) {
+            sum2Str.append(sumStack.pop());
+        }
+
+        // Add them
+        int total = Integer.parseInt(sum1Str.toString()) + Integer.parseInt(sum2Str.toString());
+
+        // Turn to String
+        String totalStr = String.valueOf(total);
+
+        // Convert to Nodes.
+        ListNode newNode = new ListNode();
+        for(char strChar : totalStr.toCharArray()) {
+            newNode.val = Integer.valueOf(strChar);
+            newNode.next
+        }
+
+
+        return newNode;
+    }
+
+    /**
      *
      * 1255. Maximum Score Words Formed by Letters
+     *
+     * <HARD>
      *
      * Given a list of words, list of  single letters (might be repeating) and score of every character.
      *
@@ -544,44 +717,51 @@ public class Leetcode {
      * Letter "e" can only be used once.
      */
 
-    public int maxScoreWords(String[] words, char[] letters, int[] score) {
+    public int maxScoreWords(String[] words, char[] letters, int[] score) { // TODO
 
-        char[] alphabet = new char[] {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        char[] alphabet = new char[] {
+                'a', 'b', 'c', 'd', 'e', 'f', 'g',
+                'h', 'i', 'j', 'k', 'l', 'm', 'n',
+                'o', 'p', 'q', 'r', 's', 't', 'u',
+                'v', 'w', 'x', 'y', 'z'};
 
-        HashMap<Character, Integer> alphabetCount = new HashMap<>();
-
+        HashMap<Character, Integer> alphaMap = new HashMap<>();
         for(int i = 0; i < alphabet.length; i++) {
-            alphabetCount.put(alphabet[i], 0);
+            alphaMap.put(alphabet[i], i);
         }
 
-        for (char letter : letters) {
-            alphabetCount.put(letter, alphabetCount.get(letter) + 1);
-        }
-
-        HashMap<Character, Integer> characterScoresMap = new HashMap<>();
-        for(int i = 0; i < alphabet.length; i++) {
-            characterScoresMap.put(alphabet[i], score[i]);
-        }
+        int[] alphaFindings = new int[] { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 
         int maxSum = 0;
 
-        for(String word : words) {
-            int localCount = 0;
-            for(char arrChar : word.toCharArray()) {
 
-                if(alphabetCount.get(arrChar) > 0) {
-                    localCount += characterScoresMap.get(arrChar);
-                    alphabetCount.put(arrChar, alphabetCount.get(arrChar)-1);
-                }
-                else {
-                    break;
-                }
 
-            }
 
-            maxSum = Math.max(maxSum, localCount);
 
-        }
+
+
+//        for(String word : words) {
+//            int localSum = 0;
+//            boolean incompleteWord = false;
+//            for(int i = 0; i < letters.length; i++) {
+//                int index = alphaMap.get(letters[i]);
+//                alphaFindings[index] ++;
+//                localSum++;
+//            }
+//
+//            for(Character wordChar : word.toCharArray()) {
+//                if(alphaFindings[alphaMap.get(wordChar)] > 0) {
+//                    alphaFindings[alphaMap.get(wordChar)]--;
+//                }
+//                else {
+//                    incompleteWord =true;
+//                }
+//            }
+//
+//            if(!incompleteWord) {
+//                maxSum = Math.max(maxSum, localSum);
+//            }
+//        }
 
         return maxSum;
     }
