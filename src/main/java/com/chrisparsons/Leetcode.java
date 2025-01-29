@@ -637,41 +637,41 @@ public class Leetcode {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
-        // Get Sum 1
-        Stack<Integer> sumStack = new Stack<>();
+        ListNode newNode = new ListNode();
+
+        // Add them.
+
+        int remainder = 0;
+        while(l1!=null && l2!=null) {
+            int newVal = l1.val + l2.val + remainder;
+            remainder = newVal >= 10 ? Math.floorMod(newVal, 10): 0; // TODO: Not correct
+            newVal = newVal >= 10 ? 0 : newVal;
+            newNode.val = newVal;
+            newNode.next = new ListNode();
+            newNode = newNode.next;
+            l1 = l1.next;
+            l2 = l2.next;
+        }
         while(l1!=null) {
-            sumStack.push(l1.val);
+            int newVal = l1.val + remainder;
+            remainder = newVal >= 10 ? Math.floorMod(newVal, 10) : 0;
+            newVal = newVal >= 10 ? 0 : newVal;
+            newNode.val = newVal;
+            newNode.next = new ListNode();
+            newNode = newNode.next;
             l1 = l1.next;
         }
-
-        StringBuilder sum1Str = new StringBuilder();
-        while(!sumStack.isEmpty()) {
-            sum1Str.append(sumStack.pop());
-        }
-
-        // Get Sum 2
         while(l2!=null) {
-            sumStack.push(l2.val);
+            int newVal = l2.val + remainder;
+            remainder = newVal >= 10 ? Math.floorMod(newVal, 10) : 0;
+            newVal = newVal >= 10 ? 0 : newVal;
+            newNode.val = newVal;
+            newNode.next = new ListNode();
+            newNode = newNode.next;
             l2 = l2.next;
         }
 
-        StringBuilder sum2Str = new StringBuilder();
-        while(!sumStack.isEmpty()) {
-            sum2Str.append(sumStack.pop());
-        }
-
-        // Add them
-        int total = Integer.parseInt(sum1Str.toString()) + Integer.parseInt(sum2Str.toString());
-
-        // Turn to String
-        String totalStr = String.valueOf(total);
-
-        // Convert to Nodes.
-        ListNode newNode = new ListNode();
-        for(char strChar : totalStr.toCharArray()) {
-            newNode.val = Integer.valueOf(strChar);
-            newNode.next
-        }
+        // Flip them.
 
 
         return newNode;
